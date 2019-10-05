@@ -1,0 +1,42 @@
+prototype jeu 2D
+
+CONTEXTE : 
+
+    - rocket raccoon s'echappe du laboratoire dans lequel il a été conçu 
+    - rocket se bas contre des ennemis 
+    - rocket evolue dans le niveau suivant
+    _ recuperer la pierre de la realite dans l'espoir de la controler
+    - but ultime de terminer tous les niveaux = s'echapper du laboratoire
+
+BACKGROUND :
+    - lablaboratoire 
+NIVEAU :
+    - plus les niveaux augmentent plus les ennemis sont difficiles a battre :
+        niveau 1 = simple scientifique 
+        niveau 2 =  agents de sécurité 
+    - nouvelle armes chaque niveau
+    - chaque fin de niveau : direction vers un escalier 
+
+DEPLACEMENT :
+    - position fixe du personnage --> image de fond qui se deplace 
+    - peut se deplacer vers la droite : fleche de droite ou "d"
+    - peut sauter : fleche du haut ou "z" 
+    
+
+GESTION DE TOUCHE 
+    - fleche de droite --> deplacement vers la droite 
+    - fleche du haut --> sauter 
+    - touche z --> sauter
+    - touche s --> 
+    - touche q -->
+    - touche d --> deplacer droite 
+    - barre d'espace --> tirer
+
+
+
+Objet : 
+    - Munition
+    - fusille
+    - pierre de la realite (rouge)
+    - 
+    
