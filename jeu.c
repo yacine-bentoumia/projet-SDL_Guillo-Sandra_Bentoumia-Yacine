@@ -1,7 +1,6 @@
-#include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
+
+#include "fenetreDuJeu.h"
+
 
 
 
@@ -9,34 +8,32 @@ int main(int argc, char *argv[])
 {
   SDL_Window* fenetre; // Déclaration de la fenêtre
   SDL_Event evenements; // Événements liés à la fenêtre
-  bool terminer = false;
-  if(SDL_Init(SDL_INIT_VIDEO) < 0) // Initialisation de la SDL
-    {
-      printf("Erreur d’initialisation de la SDL: %s",SDL_GetError());
-      SDL_Quit();
-      return EXIT_FAILURE;
-    }
 
-  
+  bool terminer = false;
   // Créer la fenêtre
-  fenetre = SDL_CreateWindow("Fenetre SDL", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 1346, 830, SDL_WINDOW_RESIZABLE);
+  fenetre = fenetreDuJeu();
   if(fenetre == NULL) // En cas d’erreur
     {
       printf("Erreur de la creation d’une fenetre: %s",SDL_GetError());
       SDL_Quit();
       return EXIT_FAILURE;
     }
+    //initialisation de l'image de fond
+    SDL_Renderer* ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
+    SDL_Texture* fond = charger_image("raccoon.bmp", ecran ); //charger l'image de fond
+  
 
 
 
-  // Créer un contexte de rendu (renderer) pour l’image
-  // SDL_Renderer* SDL_CreateRenderer(SDL_Window* window, int index, Uint32 flags) ;
+  
 
-  //SDL_Renderer* ecran;
-  //ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
+  
   // Boucle principale
   while(!terminer)
   {
+    SDL_RenderClear(ecran);
+    SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
+    SDL_RenderPresent(ecran);
     while( SDL_PollEvent( &evenements ) )
     switch(evenements.type)
     {
