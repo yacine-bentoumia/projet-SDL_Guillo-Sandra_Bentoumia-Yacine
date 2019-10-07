@@ -19,7 +19,7 @@ SDL_Window* fenetreDuJeu()
 {
   SDL_Window* fenetre; // Déclaration de la fenêtre
   
-  // Créer la fenêtre
+  // Créer la fenêtre 1346 * 830
   fenetre = SDL_CreateWindow("THE RACCOON", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 1346, 830, SDL_WINDOW_RESIZABLE);
   if(fenetre == NULL) // En cas d’erreur
     {

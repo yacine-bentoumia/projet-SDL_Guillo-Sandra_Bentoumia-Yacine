@@ -7,7 +7,7 @@ CONTEXTE :
 
     - rocket raccoon cherche à s'echapper du laboratoire dans lequel il a été conçu 
     - rocket se bas contre des ennemis 
-    - chaque passage à niveau, le personnage monte un escalier qui montre la fin du niveau 
+    - chaque passage à niveau, le personnage trouve un ascenceur qui montre la fin du niveau 
     - rocket evolue dans le niveau suivant
     - recuperer la pierre de la realite dans l'espoir de la controler
     - but ultime de terminer tous les niveaux = s'echapper du laboratoire
@@ -19,7 +19,7 @@ NIVEAU :
     - plus les niveaux augmentent plus les ennemis sont difficiles a battre :
         niveau 1 = simple scientifique 
         niveau 2 =  agents de sécurité ...
-    - chaque fin de niveau : direction vers un escalier 
+    - chaque fin de niveau : direction vers un ascenceur
 
 DEPLACEMENT :
     - position fixe du personnage --> image de fond qui se deplace 
