@@ -1,4 +1,5 @@
 #include "gestionDesTouches.h"
+#include "constante.h"
 
 void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer){
     

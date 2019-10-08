@@ -1,4 +1,5 @@
 #include "finDeJeu.h"
+#include "constante.h"
 
 void gameOver(const char* nomfichier, SDL_Renderer* renderer){
     
