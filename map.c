@@ -76,12 +76,13 @@ void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_T
     //printf(" h,w : %d,%d \n" ,h,w);
     pos.h = dest.h ;
     pos.w = dest.w ;
+    
 
     for (int i = 0 ; i < LARGEUR_MAP ; i++){ 
         for (int j = 0 ; j < HAUTEUR_MAP ; j++) {
             pos.x = (i * dest.w) ;
             pos.y = (j * dest.h)  ;
-            int champ = map[(i+j*LARGEUR_MAP) ]; 
+            int champ = map[(i+j*LARGEUR_TABLEAU) ]; 
             switch(champ) 
             {
                 case 0 :

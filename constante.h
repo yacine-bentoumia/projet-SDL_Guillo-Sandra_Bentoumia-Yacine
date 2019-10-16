@@ -8,6 +8,8 @@
         #define HAUTEUR_FENETRE     900
         #define SURFACE_MAP         2925
         #define HAUTEUR_MAP         45
-        #define LARGEUR_MAP         65
+        #define LARGEUR_MAP         25
+        #define LARGEUR_TABLEAU     65
+        #define HAUTEUR_TABLEAU     45
 
 #endif
