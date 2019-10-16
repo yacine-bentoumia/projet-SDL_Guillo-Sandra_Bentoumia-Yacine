@@ -32,3 +32,5 @@ SDL_Window* fenetreDuJeu()
   return fenetre;
 
 }
+
+

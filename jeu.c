@@ -30,12 +30,16 @@ int main(int argc, char *argv[])
   
   // Boucle principale
 
-
+  int w = 0 ;
+  int h = 0 ;
   while(!terminer)
   {
+    SDL_GetWindowSize(fenetre , &w , &h);
+    //printf("%d,%d \n",w,h);
     SDL_RenderClear(ecran);
     SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
-    carteDuJeu (ecran, sol, ciel, trou, obstacle) ;
+    
+    carteDuJeu (ecran, sol, ciel, trou, obstacle, w, h) ;
     SDL_RenderPresent(ecran); 
     if (SDL_PollEvent(&evenements)){ 
       gestionTouche(evenements, ecran ,&terminer);
