@@ -1,5 +1,4 @@
 #include "fenetreDuJeu.h"
-#include "constante.h"
 
 
 
@@ -20,13 +19,14 @@ SDL_Window* fenetreDuJeu()
 {
   SDL_Window* fenetre; // Déclaration de la fenêtre
   
-  // Créer la fenêtre 1346 * 830
+  // Créer la fenêtre 1300 * 900
   fenetre = SDL_CreateWindow("THE RACCOON", SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, LARGEUR_FENETRE, HAUTEUR_FENETRE, SDL_WINDOW_RESIZABLE);
   if(fenetre == NULL) // En cas d’erreur
     {
       printf("Erreur de la creation d’une fenetre: %s",SDL_GetError());
       SDL_Quit();
-      return EXIT_FAILURE;
+      //return EXIT_FAILURE;
+      
     }
 
   return fenetre;
