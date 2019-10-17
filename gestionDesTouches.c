@@ -26,7 +26,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 *terminer = true ;
                break ;
             case SDLK_RIGHT :
-                if(*debut<40){
+            if(*debut<LARGEUR_TABLEAU - LARGEUR_MAP){
                     *debut += 1;
                 }
                 break;
