@@ -5,4 +5,4 @@
 #include <stdbool.h>
 #include "finDeJeu.h"
 
-void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool * terminer) ;
+void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool * terminer,int *debut) ;

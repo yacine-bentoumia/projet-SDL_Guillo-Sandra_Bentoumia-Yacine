@@ -51,13 +51,14 @@
     
     
 
-void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, int w, int h){
+void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, int w, int h,int debut){
 
 
     SDL_Rect dest, pos ;
     dest.x = 0 ;
     dest.y = 0 ;
-    
+
+
     //hauteur d'une case
     if(h % HAUTEUR_MAP==0){
         dest.h = (h / HAUTEUR_MAP) ; // h = hauteur_fenetre
@@ -82,7 +83,7 @@ void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_T
         for (int j = 0 ; j < HAUTEUR_MAP ; j++) {
             pos.x = (i * dest.w) ;
             pos.y = (j * dest.h)  ;
-            int champ = map[(i+j*LARGEUR_TABLEAU) ]; 
+            int champ = map[((i+debut)+j*LARGEUR_TABLEAU) ]; 
             switch(champ) 
             {
                 case 0 :

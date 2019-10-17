@@ -1,7 +1,7 @@
 #include "gestionDesTouches.h"
 #include "constante.h"
 
-void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer){
+void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debut){
     
         switch(evenements.type)
         {
@@ -24,7 +24,13 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer){
             case SDLK_SPACE : //touche barre d'espace
                 win("winner.bmp", ecran);
                 *terminer = true ;
-        }       break ;
+               break ;
+            case SDLK_RIGHT :
+                if(*debut<40){
+                    *debut += 1;
+                }
+                break;
+        }
 
         }
 
