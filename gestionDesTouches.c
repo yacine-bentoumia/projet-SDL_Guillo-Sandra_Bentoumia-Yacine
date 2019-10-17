@@ -31,7 +31,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 }
                 break;
             case SDLK_LEFT :
-            if(*debut >= 0){
+            if(*debut > 0){
                 *debut -= 1;
             }
         }
