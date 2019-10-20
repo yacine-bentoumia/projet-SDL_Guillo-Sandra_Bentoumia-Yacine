@@ -13,6 +13,18 @@ SDL_Texture* charger_image (const char* nomfichier, SDL_Renderer*renderer){
 }
 
 
+SDL_Texture *charger_image_transparente(const char* nomfichier, SDL_Renderer* renderer, Uint8 r, Uint8 g, Uint8 b){
+  SDL_Surface* surface =  SDL_LoadBMP(nomfichier) ; 
+  // Récupérer la valeur (RGB) du pixel au format donné.
+  Uint32 key = SDL_MapRGB(surface->format, r, g, b);
+  // Définir la couleur (pixel transparent) dans une surface.
+  SDL_SetColorKey(surface, SDL_TRUE, key) ;
+  SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface) ;
+  return texture;
+
+}
+
+
 
 
 SDL_Window* fenetreDuJeu()

@@ -4,6 +4,7 @@
 #include "gestionDesTouches.h"
 #include "constante.h"
 #include "map.h"
+#include "personnage.h"
 
 
 
@@ -19,32 +20,30 @@ int main(int argc, char *argv[])
   // Créer la fenêtre
   fenetre = fenetreDuJeu();
   
-    //initialisation de l'image de fond
-    SDL_Renderer* ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
-    SDL_Texture* fond = charger_image("raccoon.bmp", ecran ); //charger l'image de fond
+  //initialisation de l'image du menu
+  SDL_Renderer* ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
+  SDL_Texture* fond = charger_image("raccoon.bmp", ecran ); //charger l'image de fond
   
   SDL_Texture* sol = charger_image ("sol.bmp", ecran);
   SDL_Texture* ciel = charger_image ("ciel.bmp", ecran);
   SDL_Texture* trou = charger_image ("trou.bmp", ecran);
   SDL_Texture* obstacle = charger_image ("obstacle.bmp", ecran);
-  
+  SDL_Texture* perso = charger_image_transparente("mario.bmp", ecran, 0, 115, 0);
   // Boucle principale
 
   int w = 0 ;
   int h = 0 ;
-  int debut = 0;
+  int debut = 0; // colonne a partir de laquelle on affiche la map
   while(!terminer)
   {
-    /*
-    if(debut<40){
-      debut++;
-    }*/
+   
     SDL_GetWindowSize(fenetre , &w , &h);
     //printf("%d,%d \n",w,h);
     SDL_RenderClear(ecran);
     SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
     
-    carteDuJeu (ecran, sol, ciel, trou, obstacle, w, h,debut) ;
+    carteDuJeu (ecran, sol, ciel, trou, obstacle, w, h,debut) ; // affiche la map
+    personnage_jeu(ecran ,h, w, 0 , 0,  perso) ;
     SDL_RenderPresent(ecran); 
     if (SDL_PollEvent(&evenements)){ 
       gestionTouche(evenements, ecran ,&terminer,&debut);

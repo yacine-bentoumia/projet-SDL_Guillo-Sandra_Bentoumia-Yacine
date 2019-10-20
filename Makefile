@@ -4,7 +4,7 @@ LIBS =
 LDFLAGS = `sdl2-config --cflags --libs`
 INCLUDES =
 EXEC = jeu
-SRC = jeu.c fenetreDuJeu.c finDeJeu.c gestionDesTouches.c map.c
+SRC = jeu.c fenetreDuJeu.c finDeJeu.c gestionDesTouches.c map.c personnage.c
 OBJ = $(SRC:.c=.o)
 
 all: $(EXEC)

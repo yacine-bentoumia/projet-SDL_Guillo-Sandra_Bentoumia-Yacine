@@ -11,5 +11,10 @@
         #define LARGEUR_MAP         25
         #define LARGEUR_TABLEAU     65
         #define HAUTEUR_TABLEAU     45
+        #define LARGEUR_SPRITE      284
+        #define HAUTEUR_SPRITE      256
+        #define NB_CASE_LARGEUR     6
+        #define NB_CASE_HAUTEUR     4
+        #define NB_CASE_PERSO       24 
 
 #endif
