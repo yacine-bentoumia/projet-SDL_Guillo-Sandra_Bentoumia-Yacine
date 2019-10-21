@@ -3,7 +3,7 @@
 
 
 
-void personnage_jeu(SDL_Renderer* ecran ,int h, int w, int positionX , int positionY,  SDL_Texture* perso){
+void personnage_jeu(SDL_Renderer* ecran ,int h, int w, int positionX , int positionY,  SDL_Texture* perso, int numSprite){
 
     SDL_Rect  position ;
     SDL_Rect* sprite = sprite_personnage();
@@ -16,8 +16,8 @@ void personnage_jeu(SDL_Renderer* ecran ,int h, int w, int positionX , int posit
     position.h = (h / HAUTEUR_MAP)*3 ;
     position.w = w / LARGEUR_MAP ;
     
-    int err = SDL_RenderCopy(ecran, perso, &sprite[10], &position) ;
-    printf("%d \n",err);
+    int err = SDL_RenderCopy(ecran, perso, &sprite[numSprite % NB_CASE_PERSO], &position) ;
+    //printf("%d \n",err);
       
 }
 
