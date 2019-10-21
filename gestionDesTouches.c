@@ -28,20 +28,29 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
             case SDLK_RIGHT :
             if(*debut<LARGEUR_TABLEAU - LARGEUR_MAP){
                     *debut += 1;
-                    printf("%d\n",*numSprite);
-                    if ((*numSprite < 11)&&(*numSprite > 7)) {
-                        printf("coucou\n");
+                    //printf("%d\n",*numSprite);
+                    if ((*numSprite < 11)&&(*numSprite > 8)) {
+                        //printf("coucou\n");
                         *numSprite += 1 ;
                     } 
                     else {
-                        *numSprite = 8 ;
+                        *numSprite = 9 ;
                     }
                 }
                 break;
             case SDLK_LEFT :
-            if(*debut > 0){
-                *debut -= 1;
-            }
+                if(*debut > 0){
+                    *debut -= 1;
+                   // printf("%d\n",*numSprite);
+                   if ((*numSprite < 23) && (*numSprite > 20)){
+                       *numSprite += 1 ;
+                   }
+                   else {
+                       *numSprite = 21 ;
+                   }
+                }
+
+                break;
         }
 
         }
