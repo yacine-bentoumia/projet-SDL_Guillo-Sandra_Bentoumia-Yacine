@@ -51,7 +51,7 @@
     
     
 
-void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, int w, int h,int debut){
+void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, int w, int h,int debutX, int debutY){
 
     // position initiale de 
     SDL_Rect dest, pos ;
@@ -84,7 +84,7 @@ void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_T
             //position initiale
             pos.x = (i * dest.w) ;
             pos.y = (j * dest.h)  ;
-            int champ = map[((i+debut)+j*LARGEUR_TABLEAU) ]; 
+            int champ = map[((i+debutX)+j*LARGEUR_TABLEAU) ]; 
             switch(champ) 
             {
                 case 0 :

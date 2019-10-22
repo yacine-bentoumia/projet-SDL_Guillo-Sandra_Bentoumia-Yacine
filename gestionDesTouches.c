@@ -1,7 +1,7 @@
 #include "gestionDesTouches.h"
 #include "constante.h"
 
-void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debut, int *numSprite){
+void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,int *debutY, int *numSprite){
     
         switch(evenements.type)
         {
@@ -26,8 +26,8 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 *terminer = true ;
                break ;
             case SDLK_RIGHT :
-            if(*debut<LARGEUR_TABLEAU - LARGEUR_MAP){
-                    *debut += 1;
+            if(*debutX < LARGEUR_TABLEAU - LARGEUR_MAP){
+                    *debutX += 1;
                     //printf("%d\n",*numSprite);
                     if ((*numSprite < 11)&&(*numSprite > 8)) {
                         //printf("coucou\n");
@@ -39,8 +39,8 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 }
                 break;
             case SDLK_LEFT :
-                if(*debut > 0){
-                    *debut -= 1;
+                if(*debutX > 0){
+                    *debutX -= 1;
                    // printf("%d\n",*numSprite);
                    if ((*numSprite < 23) && (*numSprite > 20)){
                        *numSprite += 1 ;
@@ -51,6 +51,9 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 }
 
                 break;
+            
+                
+                
         }
 
         }

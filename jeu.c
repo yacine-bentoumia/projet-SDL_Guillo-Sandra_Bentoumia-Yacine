@@ -33,8 +33,10 @@ int main(int argc, char *argv[])
 
   int w = 0 ;
   int h = 0 ;
-  int debut = 0; // colonne a partir de laquelle on affiche la map
+  int debutX = 0; // colonne a partir de laquelle on affiche la map
+  int debutY = 0 ;// ligne a partir de laquelle on affiche la map
   int numSprite = 10 ;
+  SDL_Rect* sprite = sprite_personnage();
   while(!terminer)
   {
    
@@ -43,15 +45,16 @@ int main(int argc, char *argv[])
     SDL_RenderClear(ecran);
     SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
     
-    carteDuJeu (ecran, sol, ciel, trou, obstacle, w, h, debut) ; // affiche la map
-    personnage_jeu(ecran ,h, w, 0 , 0,  perso, numSprite) ;
+    carteDuJeu (ecran, sol, ciel, trou, obstacle, w, h, debutX, debutY) ; // affiche la map
+    personnage_jeu(ecran ,h, w, 0 , 0,  perso, numSprite,sprite) ;
     SDL_RenderPresent(ecran); 
     if (SDL_PollEvent(&evenements)){ 
-      gestionTouche(evenements, ecran ,&terminer,&debut, &numSprite);
+      gestionTouche(evenements, ecran ,&terminer,&debutX,&debutY, &numSprite);
     }
     //SDL_Delay(1000);
 }
 // Quitter SDL
+free(sprite);
 SDL_DestroyWindow(fenetre);
 SDL_Quit();
 return 0;

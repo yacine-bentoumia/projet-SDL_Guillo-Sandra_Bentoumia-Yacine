@@ -3,10 +3,10 @@
 
 
 
-void personnage_jeu(SDL_Renderer* ecran ,int h, int w, int positionX , int positionY,  SDL_Texture* perso, int numSprite){
+void personnage_jeu(SDL_Renderer* ecran ,int h, int w, int positionX , int positionY,  SDL_Texture* perso, int numSprite,SDL_Rect* sprite){
 
     SDL_Rect  position ;
-    SDL_Rect* sprite = sprite_personnage();
+    //SDL_Rect* sprite = sprite_personnage();
 
  
     position.x = 0 ;
