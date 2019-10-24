@@ -1,5 +1,8 @@
 #include "personnage.h"
 #include "constante.h"
+#include "map.h"
+#include "fenetreDuJeu.h"
+#include "finDeJeu.h"
 
 
 
@@ -9,8 +12,9 @@ void personnage_jeu(SDL_Renderer* ecran ,int h, int w, int positionX , int posit
     //SDL_Rect* sprite = sprite_personnage();
 
  
-    position.x = 0 ;
-    position.y =  h - 5*(h/HAUTEUR_MAP);
+    position.x = positionX * largeur_une_case(w); ;
+    //hauteur_case = ;
+    position.y = positionY * hauteur_une_case(h) ;
     
 
     position.h = (h / HAUTEUR_MAP)*3 ;
@@ -49,3 +53,32 @@ SDL_Rect* sprite_personnage(){
     return sprite ;
 
 }
+
+void deplacement_sur_map (int* debutX, int direction){
+    //printf("%d\n",*debutX);
+    if(*debutX+(direction) <= LARGEUR_TABLEAU - LARGEUR_MAP && *debutX +(direction)>= 0){
+        *debutX = *debutX+direction ;
+    }
+
+
+    // rajouter la gestion de la position initial du perso
+    //for (int i=0 ; i < LARGEUR_MAP ; i++){  //ne pas commencer a zero mais a la position x du perso
+        //for (int j = 0 ; j < HAUTEUR_MAP ; j++){ //ne pas commencer a zero mais a la position y du perso -1 => pour avoir la case en dessous du perso
+            /*if (map[i+1] == 0 && map[j+1] == 3){ 
+                *numSprite +=1 ;
+            }
+            else if(map[i+1] == 0 && map[j+1] == 1){ // map[i+1] != 0
+                *terminer = true; //il faudrait creer une animation en plus avec l'ajout de la graviter => plus tard
+        }
+         //gerer le fait que le personnage est sur Nb_case_perso donc    
+
+*/
+        
+
+    
+}
+/*
+void collision(){
+
+}
+*/

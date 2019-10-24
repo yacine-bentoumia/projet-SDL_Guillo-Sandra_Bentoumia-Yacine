@@ -36,6 +36,8 @@ int main(int argc, char *argv[])
   int debutX = 0; // colonne a partir de laquelle on affiche la map
   int debutY = 0 ;// ligne a partir de laquelle on affiche la map
   int numSprite = 10 ;
+  int positionX = 1;
+  int positionY = HAUTEUR_TABLEAU - 5;// * hauteur_une_case(h);
   SDL_Rect* sprite = sprite_personnage();
   while(!terminer)
   {
@@ -46,7 +48,7 @@ int main(int argc, char *argv[])
     SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
     
     carteDuJeu (ecran, sol, ciel, trou, obstacle, w, h, debutX, debutY) ; // affiche la map
-    personnage_jeu(ecran ,h, w, 0 , 0,  perso, numSprite,sprite) ;
+    personnage_jeu(ecran ,h, w, positionX , positionY,  perso, numSprite,sprite) ;
     SDL_RenderPresent(ecran); 
     if (SDL_PollEvent(&evenements)){ 
       gestionTouche(evenements, ecran ,&terminer,&debutX,&debutY, &numSprite);

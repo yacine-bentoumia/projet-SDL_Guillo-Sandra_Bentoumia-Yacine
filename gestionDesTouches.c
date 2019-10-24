@@ -1,5 +1,6 @@
 #include "gestionDesTouches.h"
 #include "constante.h"
+#include "personnage.h"
 
 void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,int *debutY, int *numSprite){
     
@@ -24,10 +25,10 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
             case SDLK_SPACE : //touche barre d'espace
                 win("winner.bmp", ecran);
                 *terminer = true ;
-               break ;
-            case SDLK_RIGHT :
-            if(*debutX < LARGEUR_TABLEAU - LARGEUR_MAP){
-                    *debutX += 1;
+                break ;
+            case SDLK_RIGHT : // touche fleche droite
+                deplacement_sur_map (debutX, 1);
+
                     //printf("%d\n",*numSprite);
                     if ((*numSprite < 11)&&(*numSprite > 8)) {
                         //printf("coucou\n");
@@ -36,11 +37,10 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     else {
                         *numSprite = 9 ;
                     }
-                }
+                
                 break;
-            case SDLK_LEFT :
-                if(*debutX > 0){
-                    *debutX -= 1;
+            case SDLK_LEFT : // touche fleche gauche
+                deplacement_sur_map (debutX, (-1));
                    // printf("%d\n",*numSprite);
                    if ((*numSprite < 23) && (*numSprite > 20)){
                        *numSprite += 1 ;
@@ -48,7 +48,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                    else {
                        *numSprite = 21 ;
                    }
-                }
+                
 
                 break;
             
