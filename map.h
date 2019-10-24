@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, int w , int h,int debutX ,int debutY);
+void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, int w , int h, int debutX ,int debutY);
 
 int hauteur_une_case(int h) ;
 

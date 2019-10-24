@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     personnage_jeu(ecran ,h, w, positionX , positionY,  perso, numSprite,sprite) ;
     SDL_RenderPresent(ecran); 
     if (SDL_PollEvent(&evenements)){ 
-      gestionTouche(evenements, ecran ,&terminer,&debutX,&debutY, &numSprite);
+      gestionTouche(evenements, ecran ,&terminer,&debutX,&debutY, &numSprite,&positionX, &positionY);
     }
     //SDL_Delay(1000);
 }

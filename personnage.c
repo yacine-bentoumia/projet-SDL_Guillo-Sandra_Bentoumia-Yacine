@@ -11,8 +11,8 @@ void personnage_jeu(SDL_Renderer* ecran ,int h, int w, int positionX , int posit
     SDL_Rect  position ;
     //SDL_Rect* sprite = sprite_personnage();
 
- 
-    position.x = positionX * largeur_une_case(w); ;
+    
+    position.x = 1*largeur_une_case(w);//positionX * largeur_une_case(w); ;
     //hauteur_case = ;
     position.y = positionY * hauteur_une_case(h) ;
     
@@ -54,10 +54,11 @@ SDL_Rect* sprite_personnage(){
 
 }
 
-void deplacement_sur_map (int* debutX, int direction){
+void deplacement_sur_map (int* debutX, int direction, int* positionX , int* positionY){
     //printf("%d\n",*debutX);
     if(*debutX+(direction) <= LARGEUR_TABLEAU - LARGEUR_MAP && *debutX +(direction)>= 0){
         *debutX = *debutX+direction ;
+        *positionX += direction ;
     }
 
 
