@@ -6,13 +6,13 @@
 
 
 
-void personnage_jeu(SDL_Renderer* ecran ,int h, int w, int positionX , int positionY,  SDL_Texture* perso, int numSprite,SDL_Rect* sprite){
+void personnage_jeu(SDL_Renderer* ecran ,int h, int w, int positionX , int positionY,  SDL_Texture* perso, int numSprite,SDL_Rect* sprite,int affichage_position_x){
 
     SDL_Rect  position ;
     //SDL_Rect* sprite = sprite_personnage();
 
     
-    position.x = 1*largeur_une_case(w);//positionX * largeur_une_case(w); ;
+    position.x = affichage_position_x*largeur_une_case(w);//positionX * largeur_une_case(w); ;
     //hauteur_case = ;
     position.y = positionY * hauteur_une_case(h) ;
     
@@ -54,14 +54,27 @@ SDL_Rect* sprite_personnage(){
 
 }
 
-void deplacement_sur_map (int* debutX, int direction, int* positionX , int* positionY){
+void deplacement_sur_map (int* debutX, int direction, int* positionX , int* positionY,int * affichage_position_x,int w){
     //printf("%d\n",*debutX);
-    if(*debutX+(direction) <= LARGEUR_TABLEAU - LARGEUR_MAP && *debutX +(direction)>= 0){
-        *debutX = *debutX+direction ;
+    
+    if(direction > 0 && *positionX<LARGEUR_TABLEAU-1 || direction < 0 && *positionX > 0 ){
         *positionX += direction ;
     }
+    if(*debutX+(direction) <= LARGEUR_TABLEAU - LARGEUR_MAP && *debutX +(direction)>= 0){
+        *debutX = *debutX+direction ;
 
+        
+    }else{
 
+       
+        if(*affichage_position_x < LARGEUR_MAP-1 && direction > 0 || direction < 0 && *affichage_position_x>0){
+            *affichage_position_x +=direction;
+           
+        }
+            
+    }
+
+    printf("%d\n",*positionX);
     // rajouter la gestion de la position initial du perso
     //for (int i=0 ; i < LARGEUR_MAP ; i++){  //ne pas commencer a zero mais a la position x du perso
         //for (int j = 0 ; j < HAUTEUR_MAP ; j++){ //ne pas commencer a zero mais a la position y du perso -1 => pour avoir la case en dessous du perso
