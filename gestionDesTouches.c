@@ -27,7 +27,16 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
             case SDLK_RIGHT : // touche fleche droite
                 if (!collision(map,1 ,*positionX, *positionY)){
                     deplacement_sur_map (debutX, 1 , positionX ,  positionY,affichage_position_x);
+                    
                 }
+                //SDL_Delay(1000);
+                
+                if(trou(map, *positionX, *positionY)){
+                    
+                    gameOver("gameOver.bmp", ecran);
+                    *terminer = true ;
+                }
+
                 if ((*numSprite < 11)&&(*numSprite > 8)) {
                     *numSprite += 1 ;
                 } 

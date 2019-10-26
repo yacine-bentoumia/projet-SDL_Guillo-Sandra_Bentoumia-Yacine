@@ -16,3 +16,5 @@ SDL_Rect* sprite_personnage() ;
 void deplacement_sur_map (int* debutX, int direction , int* positionX , int* positionY,int * affichage_position_x) ;
 
 bool collision(int* map,int direction ,int positionX, int positionY);
+
+bool trou(int* map, int positionX, int positionY);

@@ -82,4 +82,10 @@ bool collision(int* map, int direction, int positionX, int positionY){
     return condition1 || condition2 || condition3 ;
 }
 
+// gerer lorsque le personnage atteint un trou
+bool trou(int* map, int positionX, int positionY){
+   
+    return map[positionX + (positionY + 3)* LARGEUR_TABLEAU] == 1 ;
+}
+
 

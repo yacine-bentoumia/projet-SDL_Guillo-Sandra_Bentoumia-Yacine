@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
   
   SDL_Texture* sol = charger_image ("sol.bmp", ecran);
   SDL_Texture* ciel = charger_image ("ciel.bmp", ecran);
-  SDL_Texture* trou = charger_image ("trou.bmp", ecran);
+  SDL_Texture* troux = charger_image ("trou.bmp", ecran);
   SDL_Texture* obstacle = charger_image ("obstacle.bmp", ecran);
   SDL_Texture* perso = charger_image_transparente("mario.bmp", ecran, 0, 115, 0);
   // Boucle principale
@@ -95,13 +95,19 @@ int main(int argc, char *argv[])
     SDL_RenderClear(ecran);
     SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
     
-    carteDuJeu (ecran, sol, ciel, trou, obstacle, w, h, debutX, debutY,map) ; // affiche la map
+    carteDuJeu (ecran, sol, ciel, troux, obstacle, w, h, debutX, debutY,map) ; // affiche la map
     personnage_jeu(ecran ,h, w, positionY,  perso, numSprite,sprite, affichage_position_x) ;
+/*
+if(trou(map, positionX, positionY)){
+                    SDL_Delay(1000);
+                    gameOver("gameOver.bmp", ecran);
+                    terminer = true ;
+                }*/
     SDL_RenderPresent(ecran); 
     if (SDL_PollEvent(&evenements)){ 
       gestionTouche(evenements, ecran ,&terminer,&debutX,&debutY, &numSprite,&positionX, &positionY,&affichage_position_x , map);
     }
-    //SDL_Delay(1000);
+    //
 }
 // Quitter SDL
 free(sprite);
