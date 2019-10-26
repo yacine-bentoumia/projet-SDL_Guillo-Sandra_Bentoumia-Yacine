@@ -2,7 +2,7 @@
 #include "constante.h"
 #include "personnage.h"
 
-void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,int *debutY, int *numSprite , int* positionX , int* positionY,int * affichage_position_x, int w){
+void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,int *debutY, int *numSprite , int* positionX , int* positionY,int * affichage_position_x, int w, int* map){
 
         switch(evenements.type)
         {
@@ -27,8 +27,10 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 *terminer = true ;
                 break ;
             case SDLK_RIGHT : // touche fleche droite
-                
-                deplacement_sur_map (debutX, 1 , positionX ,  positionY,affichage_position_x, w);
+                if (!collision(map,1 ,*positionX, *positionY)){
+                    deplacement_sur_map (debutX, 1 , positionX ,  positionY,affichage_position_x, w);
+                }
+                //deplacement_sur_map (debutX, 1 , positionX ,  positionY,affichage_position_x, w);
 
                     //printf("%d\n",*numSprite);
                     if ((*numSprite < 11)&&(*numSprite > 8)) {
@@ -41,7 +43,9 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 
                 break;
             case SDLK_LEFT : // touche fleche gauche
-                deplacement_sur_map (debutX, (-1), positionX , positionY,affichage_position_x, w);
+                if (!collision(map,-1 ,*positionX, *positionY)){
+                    deplacement_sur_map (debutX, (-1), positionX , positionY,affichage_position_x, w);
+                }
                    // printf("%d\n",*numSprite);
                    if ((*numSprite < 23) && (*numSprite > 20)){
                        *numSprite += 1 ;

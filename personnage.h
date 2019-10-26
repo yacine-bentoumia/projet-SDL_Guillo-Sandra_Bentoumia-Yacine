@@ -10,3 +10,5 @@ void personnage_jeu(SDL_Renderer* ecran ,int h, int w , int positionX , int posi
 SDL_Rect* sprite_personnage() ;
 
 void deplacement_sur_map (int* debutX, int direction , int* positionX , int* positionY,int * affichage_position_x,int w) ;
+
+bool collision(int* map,int direction ,int positionX, int positionY);

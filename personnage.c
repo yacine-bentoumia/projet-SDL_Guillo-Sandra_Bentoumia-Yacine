@@ -74,7 +74,7 @@ void deplacement_sur_map (int* debutX, int direction, int* positionX , int* posi
             
     }
 
-    printf("%d\n",*positionX);
+    //printf("%d\n",*positionX);
     // rajouter la gestion de la position initial du perso
     //for (int i=0 ; i < LARGEUR_MAP ; i++){  //ne pas commencer a zero mais a la position x du perso
         //for (int j = 0 ; j < HAUTEUR_MAP ; j++){ //ne pas commencer a zero mais a la position y du perso -1 => pour avoir la case en dessous du perso
@@ -91,8 +91,14 @@ void deplacement_sur_map (int* debutX, int direction, int* positionX , int* posi
 
     
 }
-/*
-void collision(){
 
+bool collision(int* map, int direction, int positionX, int positionY){
+   
+    //bool condition1 = direction == 1;
+    bool condition1 = map[(positionX + direction) + positionY * LARGEUR_TABLEAU] == 2 ; //position de x1 +1 == 2
+    bool condition2 = map[(positionX + direction) + (positionY + 1) * LARGEUR_TABLEAU] == 2 ; // position de x2 +1 ==2
+    bool condition3 = map[(positionX + direction) + (positionY + 2) * LARGEUR_TABLEAU] == 2 ;//position de x3 +1 == 2
+    return condition1 || condition2 || condition3 ;
 }
-*/
+
+//int champ = map[((i+debutX)+j*LARGEUR_TABLEAU) ]; 
