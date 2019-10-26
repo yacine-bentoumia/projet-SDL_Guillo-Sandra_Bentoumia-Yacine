@@ -48,6 +48,11 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 if (!collision(map,-1 ,*positionX, *positionY)){
                     deplacement_sur_map (debutX, (-1), positionX , positionY,affichage_position_x);
                 }
+                if(trou(map, *positionX, *positionY)){
+                    
+                    gameOver("gameOver.bmp", ecran);
+                    *terminer = true ;
+                }
                    
                 if ((*numSprite < 23) && (*numSprite > 20)){
                     *numSprite += 1 ;
