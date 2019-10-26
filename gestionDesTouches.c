@@ -1,8 +1,6 @@
 #include "gestionDesTouches.h"
-#include "constante.h"
-#include "personnage.h"
 
-void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,int *debutY, int *numSprite , int* positionX , int* positionY,int * affichage_position_x, int w, int* map){
+void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,int *debutY, int *numSprite , int* positionX , int* positionY,int * affichage_position_x, int* map){
 
         switch(evenements.type)
         {
@@ -28,35 +26,28 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 break ;
             case SDLK_RIGHT : // touche fleche droite
                 if (!collision(map,1 ,*positionX, *positionY)){
-                    deplacement_sur_map (debutX, 1 , positionX ,  positionY,affichage_position_x, w);
+                    deplacement_sur_map (debutX, 1 , positionX ,  positionY,affichage_position_x);
                 }
-                //deplacement_sur_map (debutX, 1 , positionX ,  positionY,affichage_position_x, w);
-
-                    //printf("%d\n",*numSprite);
-                    if ((*numSprite < 11)&&(*numSprite > 8)) {
-                        //printf("coucou\n");
-                        *numSprite += 1 ;
-                    } 
-                    else {
-                        *numSprite = 9 ;
-                    }
-                
+                if ((*numSprite < 11)&&(*numSprite > 8)) {
+                    *numSprite += 1 ;
+                } 
+                else {
+                    *numSprite = 9 ;
+                }
                 break;
             case SDLK_LEFT : // touche fleche gauche
                 if (!collision(map,-1 ,*positionX, *positionY)){
-                    deplacement_sur_map (debutX, (-1), positionX , positionY,affichage_position_x, w);
+                    deplacement_sur_map (debutX, (-1), positionX , positionY,affichage_position_x);
                 }
-                   // printf("%d\n",*numSprite);
-                   if ((*numSprite < 23) && (*numSprite > 20)){
-                       *numSprite += 1 ;
-                   }
-                   else {
-                       *numSprite = 21 ;
-                   }
-                
-
+                   
+                if ((*numSprite < 23) && (*numSprite > 20)){
+                    *numSprite += 1 ;
+                }
+                else {
+                    *numSprite = 21 ;
+                }      
                 break;
-            
+         
                 
                 
         }

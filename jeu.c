@@ -92,15 +92,14 @@ int main(int argc, char *argv[])
   {
    
     SDL_GetWindowSize(fenetre , &w , &h);
-    //printf("%d,%d \n",w,h);
     SDL_RenderClear(ecran);
     SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
     
     carteDuJeu (ecran, sol, ciel, trou, obstacle, w, h, debutX, debutY,map) ; // affiche la map
-    personnage_jeu(ecran ,h, w, positionX , positionY,  perso, numSprite,sprite, affichage_position_x) ;
+    personnage_jeu(ecran ,h, w, positionY,  perso, numSprite,sprite, affichage_position_x) ;
     SDL_RenderPresent(ecran); 
     if (SDL_PollEvent(&evenements)){ 
-      gestionTouche(evenements, ecran ,&terminer,&debutX,&debutY, &numSprite,&positionX, &positionY,&affichage_position_x ,w, map);
+      gestionTouche(evenements, ecran ,&terminer,&debutX,&debutY, &numSprite,&positionX, &positionY,&affichage_position_x , map);
     }
     //SDL_Delay(1000);
 }

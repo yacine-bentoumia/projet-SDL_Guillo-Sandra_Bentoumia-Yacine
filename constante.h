@@ -1,6 +1,6 @@
 
 
-// defintion de toute les constantes
+// definition de toutes les constantes
 #ifndef DEF_CONSTANTE
 #define DEF_CONSTANTE
 
