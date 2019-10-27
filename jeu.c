@@ -97,12 +97,6 @@ int main(int argc, char *argv[])
     
     carteDuJeu (ecran, sol, ciel, troux, obstacle, w, h, debutX, debutY,map) ; // affiche la map
     personnage_jeu(ecran ,h, w, positionY,  perso, numSprite,sprite, affichage_position_x) ;
-/*
-if(trou(map, positionX, positionY)){
-                    SDL_Delay(1000);
-                    gameOver("gameOver.bmp", ecran);
-                    terminer = true ;
-                }*/
     SDL_RenderPresent(ecran); 
     if (SDL_PollEvent(&evenements)){ 
       gestionTouche(evenements, ecran ,&terminer,&debutX,&debutY, &numSprite,&positionX, &positionY,&affichage_position_x , map);
@@ -111,6 +105,12 @@ if(trou(map, positionX, positionY)){
 }
 // Quitter SDL
 free(sprite);
+SDL_DestroyTexture(fond); 
+SDL_DestroyTexture(ciel) ;
+SDL_DestroyTexture(sol) ;
+SDL_DestroyTexture(troux) ;
+SDL_DestroyTexture(obstacle) ;
+SDL_DestroyTexture(perso) ;
 SDL_DestroyWindow(fenetre);
 SDL_Quit();
 return 0;
