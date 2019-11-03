@@ -1,8 +1,7 @@
 #include "gestionDesTouches.h"
-#include "constante.h"
 
-void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,int *debutY, int *numSprite){
-    
+void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,int *debutY, int *numSprite , int* positionX , int* positionY,int * affichage_position_x, int* map){
+
         switch(evenements.type)
         {
             case SDL_QUIT:
@@ -24,34 +23,45 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
             case SDLK_SPACE : //touche barre d'espace
                 win("winner.bmp", ecran);
                 *terminer = true ;
-               break ;
-            case SDLK_RIGHT :
-            if(*debutX < LARGEUR_TABLEAU - LARGEUR_MAP){
-                    *debutX += 1;
-                    //printf("%d\n",*numSprite);
-                    if ((*numSprite < 11)&&(*numSprite > 8)) {
-                        //printf("coucou\n");
-                        *numSprite += 1 ;
-                    } 
-                    else {
-                        *numSprite = 9 ;
-                    }
+                break ;
+            case SDLK_RIGHT : // touche fleche droite
+                if (!collision(map,1 ,*positionX, *positionY)){
+                    deplacement_sur_map (debutX, 1 , positionX ,  positionY,affichage_position_x);
+                    
                 }
-                break;
-            case SDLK_LEFT :
-                if(*debutX > 0){
-                    *debutX -= 1;
-                   // printf("%d\n",*numSprite);
-                   if ((*numSprite < 23) && (*numSprite > 20)){
-                       *numSprite += 1 ;
-                   }
-                   else {
-                       *numSprite = 21 ;
-                   }
+                //SDL_Delay(1000);
+                
+                if(trou(map, *positionX, *positionY)){
+                    
+                    gameOver("gameOver.bmp", ecran);
+                    *terminer = true ;
                 }
 
+                if ((*numSprite < 11)&&(*numSprite > 8)) {
+                    *numSprite += 1 ;
+                } 
+                else {
+                    *numSprite = 9 ;
+                }
                 break;
-            
+            case SDLK_LEFT : // touche fleche gauche
+                if (!collision(map,-1 ,*positionX, *positionY)){
+                    deplacement_sur_map (debutX, (-1), positionX , positionY,affichage_position_x);
+                }
+                if(trou(map, *positionX, *positionY)){
+                    
+                    gameOver("gameOver.bmp", ecran);
+                    *terminer = true ;
+                }
+                   
+                if ((*numSprite < 23) && (*numSprite > 20)){
+                    *numSprite += 1 ;
+                }
+                else {
+                    *numSprite = 21 ;
+                }      
+                break;
+         
                 
                 
         }

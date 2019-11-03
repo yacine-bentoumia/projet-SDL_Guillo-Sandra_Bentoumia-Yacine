@@ -1,23 +1,24 @@
 #include "personnage.h"
-#include "constante.h"
 
 
 
-void personnage_jeu(SDL_Renderer* ecran ,int h, int w, int positionX , int positionY,  SDL_Texture* perso, int numSprite,SDL_Rect* sprite){
+
+void personnage_jeu(SDL_Renderer* ecran ,int h, int w , int positionY,  SDL_Texture* perso, int numSprite,SDL_Rect* sprite,int affichage_position_x){
 
     SDL_Rect  position ;
     //SDL_Rect* sprite = sprite_personnage();
 
- 
-    position.x = 0 ;
-    position.y =  h - 5*(h/HAUTEUR_MAP);
+    
+    position.x = affichage_position_x*largeur_une_case(w);
+   
+    position.y = positionY * hauteur_une_case(h) ;
     
 
     position.h = (h / HAUTEUR_MAP)*3 ;
     position.w = w / LARGEUR_MAP ;
     
-    int err = SDL_RenderCopy(ecran, perso, &sprite[numSprite], &position) ;
-    //printf("%d \n",err);
+    SDL_RenderCopy(ecran, perso, &sprite[numSprite], &position) ;
+    
       
 }
 
@@ -49,3 +50,42 @@ SDL_Rect* sprite_personnage(){
     return sprite ;
 
 }
+
+void deplacement_sur_map (int* debutX, int direction, int* positionX , int* positionY,int * affichage_position_x){
+    
+    if(((direction > 0) && (*positionX<LARGEUR_TABLEAU-1)) || (direction < 0 && *positionX > 0 )){
+        *positionX += direction ;
+    }
+    if(*debutX+(direction) <= LARGEUR_TABLEAU - LARGEUR_MAP && *debutX +(direction)>= 0){
+        *debutX = *debutX+direction ;
+
+        
+    }else{
+
+       
+        if((*affichage_position_x < LARGEUR_MAP-1 && direction > 0) ||( direction < 0 && *affichage_position_x>0)){
+            *affichage_position_x +=direction;
+           
+        }
+            
+    }   
+
+    
+}
+
+bool collision(int* map, int direction, int positionX, int positionY){
+   
+    //bool condition1 = direction == 1;
+    bool condition1 = map[(positionX + direction) + positionY * LARGEUR_TABLEAU] == 2 ; //position de x1 +1 == 2
+    bool condition2 = map[(positionX + direction) + (positionY + 1) * LARGEUR_TABLEAU] == 2 ; // position de x2 +1 ==2
+    bool condition3 = map[(positionX + direction) + (positionY + 2) * LARGEUR_TABLEAU] == 2 ;//position de x3 +1 == 2
+    return condition1 || condition2 || condition3 ;
+}
+
+// gerer lorsque le personnage atteint un trou
+bool trou(int* map, int positionX, int positionY){
+   
+    return map[positionX + (positionY + 3)* LARGEUR_TABLEAU] == 1 ;
+}
+
+
