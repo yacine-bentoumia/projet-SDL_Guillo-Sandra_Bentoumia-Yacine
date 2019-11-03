@@ -9,3 +9,4 @@ COMPILATION : make
 
 EXECUTER : ./jeu 
 
+animations: https://www.developpez.net/forums/d807646/applications/developpement-2d-3d-jeux/api-graphiques/sdl/animation-sprites/
