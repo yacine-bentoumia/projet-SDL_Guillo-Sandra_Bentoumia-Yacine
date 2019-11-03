@@ -1,20 +1,33 @@
+// defintion de toute les constantes
+#ifndef CONSTANTE_H
+#define CONSTANTE_H
+
+#define LARGEUR_FENETRE 1300
+#define HAUTEUR_FENETRE 900
+#define SURFACE_MAP 2925
+#define HAUTEUR_MAP 45
+#define LARGEUR_MAP 25
+#define LARGEUR_TABLEAU 65
+#define HAUTEUR_TABLEAU 45
+#define LARGEUR_SPRITE 284
+#define HAUTEUR_SPRITE 256
+#define NB_CASE_LARGEUR 6
+#define NB_CASE_HAUTEUR 4
+#define NB_CASE_PERSO 24
+
+#define LARGEUR_RACCOON 50
+#define HAUTEUR_RACCOON 30
+#define TAILLE_PAS 1
+#define NB_SPRITES_RACCOON 5
 
 
-// definition de toutes les constantes
-#ifndef DEF_CONSTANTE
-#define DEF_CONSTANTE
 
-        #define LARGEUR_FENETRE     1300
-        #define HAUTEUR_FENETRE     900
-        #define SURFACE_MAP         2925
-        #define HAUTEUR_MAP         45
-        #define LARGEUR_MAP         25
-        #define LARGEUR_TABLEAU     65
-        #define HAUTEUR_TABLEAU     45
-        #define LARGEUR_SPRITE      284
-        #define HAUTEUR_SPRITE      256
-        #define NB_CASE_LARGEUR     6
-        #define NB_CASE_HAUTEUR     4
-        #define NB_CASE_PERSO       24 
+
+
+
+#define VITESSE_BALLE 1
+
+#define LARGEUR_CHAT 100
+#define HAUTEUR_CHAT 100
 
 #endif
