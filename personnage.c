@@ -68,14 +68,33 @@ void deplacement_sur_map (int* debutX, int direction, int* positionX , int* posi
            
         }
             
-    }   
+    }       
+}
 
+//fonction du saut du personnage 
+void saut (int direction, int* positionX, int* positionY, int h){
+    
+    int temp = *positionY;
+   for (int i = 0 ; i < (5) ; i++){
+        printf("%d\n", *positionY) ;
+
+        if ((*positionY < HAUTEUR_MAP-1) && (*positionY >= 0)){
+            *positionY += direction ;
+            SDL_Delay(1000) ;
+        }
+
+   }
+    
+    
     
 }
 
+
+
+
 bool collision(int* map, int direction, int positionX, int positionY){
    
-    //bool condition1 = direction == 1;
+    //ajouter la colision au niveau de la tete 
     bool condition1 = map[(positionX + direction) + positionY * LARGEUR_TABLEAU] == 2 ; //position de x1 +1 == 2
     bool condition2 = map[(positionX + direction) + (positionY + 1) * LARGEUR_TABLEAU] == 2 ; // position de x2 +1 ==2
     bool condition3 = map[(positionX + direction) + (positionY + 2) * LARGEUR_TABLEAU] == 2 ;//position de x3 +1 == 2

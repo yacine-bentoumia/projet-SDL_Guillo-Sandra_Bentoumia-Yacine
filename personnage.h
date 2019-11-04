@@ -18,3 +18,5 @@ void deplacement_sur_map (int* debutX, int direction , int* positionX , int* pos
 bool collision(int* map,int direction ,int positionX, int positionY);
 
 bool trou(int* map, int positionX, int positionY);
+
+void saut (int direction, int* positionX, int* positionY, int h);
