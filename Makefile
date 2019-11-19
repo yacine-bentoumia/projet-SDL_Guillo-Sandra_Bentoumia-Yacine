@@ -1,7 +1,7 @@
 CC = gcc
-CFLAGS = -W -Wall -ansi -std=c99 -g
+CFLAGS = -W -Wall -ansi -std=c99 -g `sdl2-config --cflags`
 LIBS =
-LDFLAGS = `sdl2-config --cflags --libs`
+LDFLAGS = `sdl2-config --libs`
 INCLUDES =
 EXEC = jeu
 SRC = jeu.c fenetreDuJeu.c finDeJeu.c gestionDesTouches.c map.c personnage.c
