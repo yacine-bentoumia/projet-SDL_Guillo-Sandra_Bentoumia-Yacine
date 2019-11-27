@@ -9,7 +9,7 @@
 
 
 
-void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, int w , int h, int debutX ,int debutY,int *map);
+void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, int w, int h,int debutX, int debutY,int* map);
 
 int hauteur_une_case(int h) ;
 
