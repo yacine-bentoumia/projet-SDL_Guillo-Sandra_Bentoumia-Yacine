@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <math.h>
 #include "constante.h"
 #include "map.h"
 #include "fenetreDuJeu.h"
@@ -20,8 +21,8 @@ bool collision(int* map,int direction ,int positionX, int positionY);
 //void gravite(int vitesse,  int *positionY);
 void gravite(int *map, int vitesse, int *positionX, int direction, int *positionY);
 
-bool sol (int *map, int direction , int positionX, int positionY);
+bool collision_pied(int *map, int direction , int positionX, int positionY);
 
 bool trou(int* map, int positionX, int positionY);
 
-void saut (int *map, int direction, int vitesse, int* positionX, int* positionY, int h);
+void saut (int *map, int direction, int vitesse, int* positionX, int* positionY, int* h);

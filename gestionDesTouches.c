@@ -62,8 +62,8 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 }      
                 break;
             case SDLK_UP : //fleche du haut
-               
-                    saut(map, -1 , 1, positionX, positionY, h);
+                
+                saut(map, -1 , 5, positionX, positionY, h);
                     
                 break ;
          

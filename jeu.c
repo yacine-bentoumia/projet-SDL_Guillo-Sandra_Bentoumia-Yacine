@@ -98,8 +98,15 @@ int main(int argc, char *argv[])
     carteDuJeu (ecran, sol, ciel, troux, obstacle, w, h, debutX, debutY,map) ; // affiche la map
     personnage_jeu(ecran ,h, w, positionY,  perso, numSprite,sprite, affichage_position_x) ;
     SDL_RenderPresent(ecran); 
+    //printf("%d\n",positionY);
+    if (!collision_pied(map, 1 , positionX, positionY)){
+      //printf("103\n");
+       gravite(map, 2, &positionX, 1 , &positionY);//int *map, int vitesse, int *positionX, int direction, int *positionY
+       //printf("106\n");
+    }
+  
     if (SDL_PollEvent(&evenements)){ 
-      gestionTouche(evenements, ecran ,&terminer,&debutX,&debutY, &numSprite,&positionX, &positionY,&affichage_position_x , map, h);
+      gestionTouche(evenements, ecran ,&terminer,&debutX,&debutY, &numSprite,&positionX, &positionY,&affichage_position_x , map, &h);
     }
     //
 }
