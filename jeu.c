@@ -48,8 +48,8 @@ int map[SURFACE_MAP]  = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,
                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-                     0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,
-                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,
+                     0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,
+                     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,
                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,2,2,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                      0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                      0,0,0,0,0,2,2,0,0,0,0,2,2,2,2,2,2,2,0,0,0,0,2,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -82,8 +82,8 @@ int main(int argc, char *argv[])
   //SDL_Texture *perso = charger_image_transparente("rocket.bmp", ecran, 0, 137, 84);
 
   //SDL_Texture *balle1 = charger_image_transparente("balle1.bmp", ecran, 0, 128, 255);
-  //SDL_Texture *tour4 = charger_image("tour4.bmp", ecran);
-  //SDL_Texture *tour5 = charger_image("tour5.bmp", ecran);
+  SDL_Texture *tour4 = charger_image("tour4.bmp", ecran);
+  SDL_Texture *tour5 = charger_image("tour5.bmp", ecran);
 
   //SDL_Texture *scientifique = charger_image_transparente("scientifique.bmp", ecran, 255, 0, 0);
 
@@ -110,11 +110,11 @@ int main(int argc, char *argv[])
     SDL_RenderClear(ecran);
     SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
 
-    carteDuJeu (ecran, sol, ciel, troux, obstacle, w, h, debutX, debutY,map) ; // affiche la map
+    carteDuJeu (ecran, sol, ciel, troux, obstacle, w, h, debutX, debutY,map,tour4,tour5) ; // affiche la map
     personnage_jeu(ecran ,h, w, positionY,  perso, numSprite,sprite, affichage_position_x) ;
 
- //emplacement_balle1(ecran, balle1, image_balle1, map);
-   // stf(ecran, scientifique, image_scientifique, NB_SPRITE_STF);
+    //emplacement_balle1(ecran, balle1, image_balle1, map);
+    //stf(ecran, scientifique, image_scientifique, NB_SPRITE_STF);
 
     SDL_RenderPresent(ecran); 
     //printf("%d\n",positionY);
