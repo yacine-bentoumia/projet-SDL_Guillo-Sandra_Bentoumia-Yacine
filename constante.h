@@ -22,8 +22,9 @@
     #define NB_CASE_HAUTEUR             4  // personnage
     #define NB_CASE_PERSO               24  //personnage
 
-    #define NB_SPRITE_STF               8
-    #define LARGEUR_STF                 32  //largeur du sprite de scientifique
+    #define NB_SPRITE_STF               8   // nombre de sprites par lignes du scientifique
+    #define TAILLE_STF                  55  //32  //taille du sprite de scientifique
+    #define LARGEUR_STF2                27
 
 
     #define NB_CASE_TOURELLE            1
