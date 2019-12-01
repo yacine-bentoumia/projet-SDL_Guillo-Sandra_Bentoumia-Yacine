@@ -57,6 +57,8 @@ int main(int argc, char *argv[])
   int positionY = HAUTEUR_TABLEAU - 5; // * hauteur_une_case(h);
   int affichage_position_x = 1;
   SDL_Rect *sprite = sprite_personnage();
+  int temps_debut = 0 ;
+  int temps_fin = 0; 
 
   
   // definition de l'ennemi
@@ -78,7 +80,7 @@ int main(int argc, char *argv[])
 
   while (!terminer)
   {
-
+    temps_debut = SDL_GetTicks();
     SDL_GetWindowSize(fenetre, &w, &h);
     SDL_RenderClear(ecran);
     SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
@@ -115,6 +117,10 @@ int main(int argc, char *argv[])
        // pos_stf.x -= 20;
       
 
+    }
+    temps_fin = SDL_GetTicks();
+    if(temps_fin - temps_debut < 30){
+      SDL_Delay(30-(temps_fin - temps_debut));
     }
     //
   }
