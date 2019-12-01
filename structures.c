@@ -264,11 +264,11 @@ void animer_ennemi(ennemi e, SDL_Renderer *ecran)
 /*
 typedef struct Personnage chat1;
 typedef struct Personnage chat2;
-*/
 
-/*
-void afficher(SDL_Renderer *ecran, SDL_Event evenements, ennemi e) /*, SDL_Rect sprite, SDL_Rect emplacement)*/
-/*{
+
+
+void afficher(SDL_Renderer *ecran, SDL_Event evenements, ennemi e) // SDL_Rect sprite, SDL_Rect emplacement)
+{
 
     
     e.sprite = sprite(evenements, r);
@@ -285,9 +285,9 @@ void afficher(SDL_Renderer *ecran, SDL_Event evenements, ennemi e) /*, SDL_Rect 
     SDL_RenderCopy(ecran, e.image, &e.sprite, &e.emplacement_sprite);
 }
 
-*/
 
-/*
+
+
 SDL_Rect sprite(SDL_Event evenements, ennemi e)
 {
 
@@ -297,9 +297,9 @@ SDL_Rect sprite(SDL_Event evenements, ennemi e)
 
     //SDL_Event evenements;
 
-    /*if (evenements.type == SDL_KEYDOWN)
-    {*/
-/*
+    if (evenements.type == SDL_KEYDOWN)
+    {
+
     const Uint8 *etat_touche = SDL_GetKeyboardState(NULL);
 
     switch (evenements.type)
@@ -319,11 +319,11 @@ SDL_Rect sprite(SDL_Event evenements, ennemi e)
 
     return e.sprite;
 }
-*/
-/*void afficher_balle(SDL_Renderer *ecran, SDL_Texture *balle, bool afficher) /*, SDL_Rect sprite, SDL_Rect emplacement)*/
+
+void afficher_balle(SDL_Renderer *ecran, SDL_Texture *balle, bool afficher) , SDL_Rect sprite, SDL_Rect emplacement)
 //{
 
-/* SDL_Rect position_balle;
+    SDL_Rect position_balle;
     SDL_Rect image = sprite();
 
     position_balle.x = 100;
@@ -347,12 +347,12 @@ SDL_Rect sprite(SDL_Event evenements, ennemi e)
             while (position_balle.x < 1346 && temps_actuel - temps_precedent > 20)
             {
 
-                /* if (activer_anim == true)
+                if (activer_anim == true)
                 printf("true\n");
             else
-                printf("false\n");*/
+                printf("false\n");
 
-/*   position_balle.x += VITESSE_BALLE;
+   position_balle.x += VITESSE_BALLE;
 
                 // printf("%d\n", sprite);
 

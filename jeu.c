@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
   SDL_Texture *tour7 = charger_image("tour7.bmp", ecran);
   SDL_Texture *tour8 = charger_image("tour8.bmp", ecran);
 
-  SDL_Texture *scientifique = charger_image_transparente("scientifique.bmp", ecran, 255, 0, 0);
+ // SDL_Texture *scientifique = charger_image_transparente("scientifique.bmp", ecran, 255, 0, 0);
 
   // Boucle principale
 
@@ -63,20 +63,20 @@ int main(int argc, char *argv[])
   
   // definition de l'ennemi
 
-  ennemi scientist;
+  //ennemi scientist;
 
-  scientist = definir_vie(scientist, 200);
+  //scientist = definir_vie(scientist, 200);
   //printf("vie : %u\n", lire_vie(scientist));
 
-  scientist = definir_vitesse(scientist, -10);
+  //scientist = definir_vitesse(scientist, -10);
   //printf("vitesse : %d\n", lire_vitesse(scientist));
 
-  scientist = definir_image(scientist, scientifique);
+  //scientist = definir_image(scientist, scientifique);
   //scientist = definir_sprite(scientist, image_stf);
   //scientist = definir_emplacement_sprite(scientist, pos_stf);
 
-  scientist = definir_sprite_stf(scientist);
-  scientist = definir_emplacement_stf(scientist);
+  //scientist = definir_sprite_stf(scientist);
+  //scientist = definir_emplacement_stf(scientist);
 
   while (!terminer)
   {
@@ -91,14 +91,20 @@ int main(int argc, char *argv[])
     personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x);
     //emplacement_balle1(ecran, balle1, image_balle1, map);
 
-    afficher_personnage(scientist, ecran);
+    //afficher_personnage(scientist, ecran);
 
     //animer_ennemi(scientist, ecran);
 
 
     if (!collision_pied(map, 1 , positionX, positionY)){
+      if (!trou(map, positionX, positionY)){
+        gravite(map, 2, &positionX, 1 , &positionY);//int *map, int vitesse, int *positionX, int direction, int *positionY
+      }
+      else {
+        gameOver("gameOver.bmp", ecran);
+      }
       //printf("103\n");
-       gravite(map, 2, &positionX, 1 , &positionY);//int *map, int vitesse, int *positionX, int direction, int *positionY
+       //gravite(map, 2, &positionX, 1 , &positionY);//int *map, int vitesse, int *positionX, int direction, int *positionY
        //printf("106\n");
     }
 

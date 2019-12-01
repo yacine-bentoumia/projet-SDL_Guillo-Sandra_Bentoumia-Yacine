@@ -62,8 +62,16 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 }      
                 break;
             case SDLK_UP : //fleche du haut
-                
+            if (!collision_tete(map, -1 , *positionX, *positionY)){
                 saut(map, -1 , 10, positionX, positionY, h);
+            }
+            if(trou(map, *positionX, *positionY)){
+                    
+                gameOver("gameOver.bmp", ecran);
+                *terminer = true ;
+            }
+                
+            
                     
                 break ;
          

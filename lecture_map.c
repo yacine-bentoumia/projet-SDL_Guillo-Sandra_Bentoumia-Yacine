@@ -36,7 +36,7 @@ int *lire_fichier(const char *nomFichier)
 
     int entier;
 
-    int cpt = 0;
+    //int cpt = 0;
 
     int *tab = malloc(SURFACE_MAP * sizeof(int));
 
@@ -60,7 +60,7 @@ int *lire_fichier(const char *nomFichier)
             {
                 entier = c - '0'; // on convertit le caractère lu en entier interprétable
                 tab[i] = entier;
-                cpt++;
+                //cpt++;
             }
             else
             {

@@ -83,7 +83,7 @@ void saut(int *map, int direction, int vitesse, int *positionX, int *positionY, 
     if ((*positionY + (direction*vitesse) < HAUTEUR_MAP - 1) && (*positionY + (direction*vitesse) > 0))//ne sort pas du tableau + (direction*vitesse)
     {
         {
-            printf("saut\n") ;
+            //printf("saut\n") ;
 
             //temps_actuel = SDL_GetTicks();     
 
@@ -92,9 +92,9 @@ void saut(int *map, int direction, int vitesse, int *positionX, int *positionY, 
 
                 //gravite(map, vitesse, positionX, direction, positionY);//int *map, int vitesse, int *positionX, int direction, int *positionY
                 //*positionY -= 1; 
-                printf("posY, %d\n", *positionY);
+                //printf("posY, %d\n", *positionY);
                 *positionY -= 1 * vitesse ;
-                printf("nouvposY, %d\n", *positionY);
+                //printf("nouvposY, %d\n", *positionY);
 
                 
                 //temps_precedent = temps_actuel;
@@ -113,7 +113,7 @@ void gravite(int *map, int vitesse, int *positionX, int direction, int *position
     //if(!collision_pied(map,direction, *positionX, *positionY)){
        // printf("coucou\n"); 
        if ((*positionY + (direction) < HAUTEUR_MAP - 1) && (*positionY + (direction) > 0)){
-            printf("posY gravite : %d\n",*positionY);
+            //printf("posY gravite : %d\n",*positionY);
             *positionY += direction ;//* vitesse ;
 
        }
@@ -146,6 +146,21 @@ bool collision_pied(int *map, int direction , int positionX, int positionY){
     //printf ("collision pied %d\n", condition_sol || condition_bloc);
         
     return (condition_sol || condition_bloc) ;
+}
+
+bool collision_tete(int *map, int direction , int positionX, int positionY){
+    bool collision = false;
+    //printf("direction %d\n",direction);
+    for (int i= 0 ; i<20 ; i++){
+        
+        if (!collision){
+            collision = map[(positionX) + (positionY - i)*LARGEUR_TABLEAU] == 2;
+        }
+        //printf("%d\n",collision);
+        
+    }
+    
+    return collision ;
 }
 
 // gerer lorsque le personnage atteint un trou
