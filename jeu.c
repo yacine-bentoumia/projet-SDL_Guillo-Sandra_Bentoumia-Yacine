@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
 
     if (!collision_pied(map, positionX, positionY)){
       if (!trou(map, positionX, positionY)){
-        gravite(map, 2, &positionX, 1 , &positionY);//int *map, int vitesse, int *positionX, int direction, int *positionY
+        gravite(1 , &positionY);//int *map, int vitesse, int *positionX, int direction, int *positionY
       }
       else {
         gameOver("gameOver.bmp", ecran);
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
     SDL_RenderPresent(ecran);
     if (SDL_PollEvent(&evenements))
     {
-      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x, map, h);
+      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x, map);
 
       //decalage_stf(ecran, scientifique, &image_stf, &pos_stf);
 

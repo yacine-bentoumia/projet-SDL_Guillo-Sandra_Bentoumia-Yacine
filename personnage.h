@@ -19,7 +19,7 @@ void deplacement_sur_map (int* debutX, int direction , int* positionX , int * af
 bool collision(int *map, int direction ,int positionX, int positionY);
 
 //void gravite(int vitesse,  int *positionY);
-void gravite(int *map, int vitesse, int *positionX, int direction, int *positionY);
+void gravite(int direction, int *positionY);
 
 bool collision_pied(int *map,  int positionX, int positionY);
 
@@ -27,4 +27,4 @@ bool collision_tete(int *map, int positionX, int positionY);
 
 bool trou(int* map, int positionX, int positionY);
 
-void saut (int direction, int vitesse, int* positionX, int* positionY, int* h);
+void saut (int direction, int vitesse, int* positionY);

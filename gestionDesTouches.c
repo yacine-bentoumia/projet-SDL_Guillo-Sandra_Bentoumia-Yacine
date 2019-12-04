@@ -1,6 +1,6 @@
 #include "gestionDesTouches.h"
 
-void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,  int *numSprite , int* positionX , int* positionY,int * affichage_position_x, int* map, int* h){
+void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,  int *numSprite , int* positionX , int* positionY,int * affichage_position_x, int* map){
 
         switch(evenements.type)
         {
@@ -63,7 +63,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 break;
             case SDLK_UP : //fleche du haut
             if (!collision_tete(map, *positionX, *positionY)){
-                saut(-1 , 10, positionX, positionY, h);
+                saut(-1 , 10, positionY);
             }
             if(trou(map, *positionX, *positionY)){
                     

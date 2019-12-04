@@ -67,10 +67,8 @@ void deplacement_sur_map(int *debutX, int direction, int *positionX, int *affich
 }
 
 //fonction du saut du personnage
-void saut(int direction, int vitesse, int *positionX, int *positionY, int* h)
-{
-
-   
+void saut(int direction, int vitesse, int *positionY)
+{ 
 
     if ((*positionY + (direction*vitesse) < HAUTEUR_MAP - 1) && (*positionY + (direction*vitesse) > 0))//ne sort pas du tableau + (direction*vitesse)
     {         
@@ -81,18 +79,15 @@ void saut(int direction, int vitesse, int *positionX, int *positionY, int* h)
 }
 
 
-void gravite(int *map, int vitesse, int *positionX, int direction, int *positionY){//(int* map, int direction, int vitesse, int *positionX, int *positionY
-     //printf("gravite\n");
-    //if(!collision_pied(map,direction, *positionX, *positionY)){
-       // printf("coucou\n"); 
+void gravite( int direction, int *positionY){//(int* map, int direction, int vitesse, int *positionX, int *positionY
+   
        if ((*positionY + (direction) < HAUTEUR_MAP - 1) && (*positionY + (direction) > 0)){
-            //printf("posY gravite : %d\n",*positionY);
+           
             *positionY += direction ;//* vitesse ;
 
        }
-       
-       //printf("fin_gravite\n");
-    //}
+
+    
 }
 
 
