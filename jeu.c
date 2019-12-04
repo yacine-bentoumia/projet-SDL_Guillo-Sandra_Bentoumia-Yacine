@@ -37,12 +37,12 @@ int main(int argc, char *argv[])
 
   //SDL_Texture *perso = charger_image_transparente("rocket.bmp", ecran, 0, 137, 84);
 
-  SDL_Texture *balle1 = charger_image_transparente("balle1.bmp", ecran, 0, 128, 255);
+  //SDL_Texture *balle1 = charger_image_transparente("balle1.bmp", ecran, 0, 128, 255);
   SDL_Texture *tour4 = charger_image("tour4.bmp", ecran);
   SDL_Texture *tour5 = charger_image("tour5.bmp", ecran);
-  SDL_Texture *tour6 = charger_image("tour6.bmp", ecran);
-  SDL_Texture *tour7 = charger_image("tour7.bmp", ecran);
-  SDL_Texture *tour8 = charger_image("tour8.bmp", ecran);
+  //SDL_Texture *tour6 = charger_image("tour6.bmp", ecran);
+  //SDL_Texture *tour7 = charger_image("tour7.bmp", ecran);
+  //SDL_Texture *tour8 = charger_image("tour8.bmp", ecran);
 
  // SDL_Texture *scientifique = charger_image_transparente("scientifique.bmp", ecran, 255, 0, 0);
 
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
   int w = 0;
   int h = 0;
   int debutX = 0; // colonne a partir de laquelle on affiche la map
-  int debutY = 0; // ligne a partir de laquelle on affiche la map
+  //int debutY = 0; ligne a partir de laquelle on affiche la map
   int numSprite = 10;
   int positionX = debutX + 1;
   int positionY = HAUTEUR_TABLEAU - 5; // * hauteur_une_case(h);
@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 
     
 
-    carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, w, h, debutX, debutY, map); // affiche la map
+    carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, w, h, debutX, map); // affiche la map
     personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x);
     //emplacement_balle1(ecran, balle1, image_balle1, map);
 
@@ -96,7 +96,7 @@ int main(int argc, char *argv[])
     //animer_ennemi(scientist, ecran);
 
 
-    if (!collision_pied(map, 1 , positionX, positionY)){
+    if (!collision_pied(map, positionX, positionY)){
       if (!trou(map, positionX, positionY)){
         gravite(map, 2, &positionX, 1 , &positionY);//int *map, int vitesse, int *positionX, int direction, int *positionY
       }
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
     SDL_RenderPresent(ecran);
     if (SDL_PollEvent(&evenements))
     {
-      gestionTouche(evenements, ecran, &terminer, &debutX, &debutY, &numSprite, &positionX, &positionY, &affichage_position_x, map, h);
+      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x, map, h);
 
       //decalage_stf(ecran, scientifique, &image_stf, &pos_stf);
 

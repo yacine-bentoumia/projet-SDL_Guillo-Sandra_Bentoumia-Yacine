@@ -1,6 +1,6 @@
 #include "gestionDesTouches.h"
 
-void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,int *debutY, int *numSprite , int* positionX , int* positionY,int * affichage_position_x, int* map, int* h){
+void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,  int *numSprite , int* positionX , int* positionY,int * affichage_position_x, int* map, int* h){
 
         switch(evenements.type)
         {
@@ -26,7 +26,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 break ;
             case SDLK_RIGHT : // touche fleche droite
                 if (!collision(map,1 ,*positionX, *positionY)){
-                    deplacement_sur_map (debutX, 1 , positionX ,  positionY,affichage_position_x);
+                    deplacement_sur_map (debutX, 1 , positionX ,  affichage_position_x);
                     
                 }
                 //SDL_Delay(1000);
@@ -46,7 +46,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 break;
             case SDLK_LEFT : // touche fleche gauche
                 if (!collision(map,-1 ,*positionX, *positionY)){
-                    deplacement_sur_map (debutX, (-1), positionX , positionY,affichage_position_x);
+                    deplacement_sur_map (debutX, (-1), positionX ,affichage_position_x);
                 }
                 if(trou(map, *positionX, *positionY)){
                     
@@ -62,8 +62,8 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 }      
                 break;
             case SDLK_UP : //fleche du haut
-            if (!collision_tete(map, -1 , *positionX, *positionY)){
-                saut(map, -1 , 10, positionX, positionY, h);
+            if (!collision_tete(map, *positionX, *positionY)){
+                saut(-1 , 10, positionX, positionY, h);
             }
             if(trou(map, *positionX, *positionY)){
                     
