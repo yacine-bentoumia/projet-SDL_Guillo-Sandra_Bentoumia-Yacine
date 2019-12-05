@@ -139,3 +139,7 @@ bool trou(int *map, int positionX, int positionY)
 {
     return map[positionX + (positionY + 3) * LARGEUR_TABLEAU] == 1;
 }
+
+bool gagner(int*map,int positionX, int positionY){
+    return map[positionX + (positionY + 3) * LARGEUR_TABLEAU] == 9 ;
+}

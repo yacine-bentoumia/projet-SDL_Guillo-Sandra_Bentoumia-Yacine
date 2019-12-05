@@ -50,13 +50,15 @@ int *lire_fichier(const char *nomFichier)
     {
 
         rewind(fichier);
+        
+        
 
         for (int i = 0; i < SURFACE_MAP; i++)
         {
 
             fscanf(fichier, "%c", &c);
 
-            if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5')
+            if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '9')
             {
                 entier = c - '0'; // on convertit le caractère lu en entier interprétable
                 tab[i] = entier;

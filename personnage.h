@@ -28,3 +28,5 @@ bool collision_tete(int *map, int positionX, int positionY);
 bool trou(int* map, int positionX, int positionY);
 
 void saut (int direction, int vitesse, int* positionY);
+
+bool gagner(int*map,int positionX, int positionY);

@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
   SDL_Texture *ciel = charger_image("ciel.bmp", ecran);
   SDL_Texture *troux = charger_image("trou.bmp", ecran);
   SDL_Texture *obstacle = charger_image("obstacle.bmp", ecran);
+  SDL_Texture *gain = charger_image("win.bmp", ecran);
   SDL_Texture* perso = charger_image_transparente("mario.bmp", ecran, 0, 115, 0);
 
 
@@ -87,7 +88,7 @@ int main(int argc, char *argv[])
 
     
 
-    carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, w, h, debutX, map); // affiche la map
+    carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, w, h, debutX, map,gain); // affiche la map
     personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x);
     //emplacement_balle1(ecran, balle1, image_balle1, map);
 
@@ -102,11 +103,16 @@ int main(int argc, char *argv[])
       }
       else {
         gameOver("gameOver.bmp", ecran);
+        terminer = true ;
       }
-      //printf("103\n");
-       //gravite(map, 2, &positionX, 1 , &positionY);//int *map, int vitesse, int *positionX, int direction, int *positionY
-       //printf("106\n");
+     
     }
+    if (gagner(map, positionX, positionY)){
+      win("winner.bmp", ecran);
+      terminer = true ;
+
+    }
+    
 
 
     //stf(ecran, scientifique, &image_scientifique);
@@ -119,8 +125,6 @@ int main(int argc, char *argv[])
 
       //decalage_stf(ecran, scientifique, &image_stf, &pos_stf);
 
-      
-       // pos_stf.x -= 20;
       
 
     }
@@ -138,6 +142,7 @@ int main(int argc, char *argv[])
   SDL_DestroyTexture(troux);
   SDL_DestroyTexture(obstacle);
   SDL_DestroyTexture(perso);
+  SDL_DestroyTexture(win);
   SDL_DestroyWindow(fenetre);
   SDL_Quit();
   return 0;
