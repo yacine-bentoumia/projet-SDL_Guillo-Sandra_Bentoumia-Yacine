@@ -112,10 +112,10 @@ bool collision_pied(char *map, int positionX, int positionY){
 
     bool condition_sol = map[((positionX) + (positionY + 3)*LARGEUR_TABLEAU)]== '3';
     bool condition_bloc = map[((positionX) + (positionY + 3)*LARGEUR_TABLEAU)]== '2' ;
-
+    bool condition_gain = map[((positionX) + (positionY + 3)*LARGEUR_TABLEAU)]== '9';
     //printf ("collision pied %d\n", condition_sol || condition_bloc);
         
-    return (condition_sol || condition_bloc) ;
+    return (condition_sol || condition_bloc || condition_gain) ;
 }
 
 bool collision_tete(char *map, int positionX, int positionY){
@@ -143,3 +143,13 @@ bool trou(char *map, int positionX, int positionY)
 bool gagner(char *map,int positionX, int positionY){
     return map[positionX + (positionY + 3) * LARGEUR_TABLEAU] == '9' ;
 }
+
+
+
+
+
+
+
+
+
+
