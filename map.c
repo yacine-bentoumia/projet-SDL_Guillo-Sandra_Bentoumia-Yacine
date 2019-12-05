@@ -4,8 +4,8 @@
 
 SDL_Rect dest , pos ;
 
-void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, int w, int h,int debutX,int* map, SDL_Texture* gain){
-    
+void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, int w, int h,int debutX,char* map, SDL_Texture* gain){
+
     dest.x = 0 ;
     dest.y = 0 ;
 
@@ -25,34 +25,35 @@ void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_T
             //position initiale
             pos.x = (i * largeur_case) ;
             pos.y = (j * hauteur_case) ;
-            int champ = map[((i+debutX)+j*LARGEUR_TABLEAU) ]; 
+            char champ = map[((i+debutX)+j*LARGEUR_TABLEAU) ]; 
+            //printf("%c \n",champ);
             switch(champ) 
             {
-                case 0 :
+                case '0' :
                 SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
                 break ;
-                case 1 :
+                case '1' :
                 SDL_RenderCopy(ecran, trou, &dest, &pos) ;
                 break ;
-                case 2 :
+                case '2' :
                 SDL_RenderCopy(ecran, obstacle, &dest, &pos) ;
                 break ;
-                case 3 :
+                case '3' :
                 SDL_RenderCopy(ecran, sol, &dest, &pos) ;
                 break ;
-                case 4:
+                case '4':
                 SDL_RenderCopy(ecran, tour4, &dest, &pos);
                 break;
-                case 5:
+                case '5':
                 SDL_RenderCopy(ecran, tour5, &dest, &pos);
                 break;
-                case 9 :
-                SDL_RenderCopy(ecran, win, &dest, &pos);
+                case '9' :
+                SDL_RenderCopy(ecran, gain, &dest, &pos);
                 //win("winner.bmp", ecran);
                 
                 break;
                 default : 
-                SDL_RenderCopy(ecran, sol, &dest, &pos) ;
+                SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
                 break;
                 
             }

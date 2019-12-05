@@ -11,7 +11,7 @@
 int main(int argc, char *argv[])
 {
 
-  int *map = lire_fichier("map.txt");
+  char *map = lire_fichier("map.txt");
 
   SDL_Window *fenetre;  // Déclaration de la fenêtre
   SDL_Event evenements; // Événements liés à la fenêtre
@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
   SDL_DestroyTexture(troux);
   SDL_DestroyTexture(obstacle);
   SDL_DestroyTexture(perso);
-  SDL_DestroyTexture(win);
+  SDL_DestroyTexture(gain);
   SDL_DestroyWindow(fenetre);
   SDL_Quit();
   return 0;

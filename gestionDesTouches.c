@@ -19,11 +19,6 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 gameOver("gameOver.bmp", ecran);
                 *terminer = true ;
                 break;
-            //test affichage du winner avec la touche espace
-            case SDLK_SPACE : //touche barre d'espace
-                win("winner.bmp", ecran);
-                *terminer = true ;
-                break ;
             case SDLK_RIGHT : // touche fleche droite
                 if (!collision(map,1 ,*positionX, *positionY)){
                     deplacement_sur_map (debutX, 1 , positionX ,  affichage_position_x);

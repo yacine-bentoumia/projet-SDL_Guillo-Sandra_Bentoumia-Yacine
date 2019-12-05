@@ -16,17 +16,17 @@ SDL_Rect* sprite_personnage() ;
 
 void deplacement_sur_map (int* debutX, int direction , int* positionX , int * affichage_position_x) ;
 
-bool collision(int *map, int direction ,int positionX, int positionY);
+bool collision(char *map, int direction ,int positionX, int positionY);
 
 //void gravite(int vitesse,  int *positionY);
 void gravite(int direction, int *positionY);
 
-bool collision_pied(int *map,  int positionX, int positionY);
+bool collision_pied(char *map,  int positionX, int positionY);
 
-bool collision_tete(int *map, int positionX, int positionY);
+bool collision_tete(char *map, int positionX, int positionY);
 
-bool trou(int* map, int positionX, int positionY);
+bool trou(char* map, int positionX, int positionY);
 
 void saut (int direction, int vitesse, int* positionY);
 
-bool gagner(int*map,int positionX, int positionY);
+bool gagner(char *map,int positionX, int positionY);

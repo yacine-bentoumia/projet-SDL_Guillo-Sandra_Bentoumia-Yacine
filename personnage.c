@@ -91,13 +91,13 @@ void gravite( int direction, int *positionY){//(int* map, int direction, int vit
 }
 
 
-bool collision(int *map, int direction, int positionX, int positionY)
+bool collision(char *map, int direction, int positionX, int positionY)
 {
 
     //ajouter la colision au niveau de la tete
-    bool condition1 = map[(positionX + direction) + positionY * LARGEUR_TABLEAU] == 2;       //position de x1 +1 == 2
-    bool condition2 = map[(positionX + direction) + (positionY + 1) * LARGEUR_TABLEAU] == 2; // position de x2 +1 ==2
-    bool condition3 = map[(positionX + direction) + (positionY + 2) * LARGEUR_TABLEAU] == 2; //position de x3 +1 == 2
+    bool condition1 = map[(positionX + direction) + positionY * LARGEUR_TABLEAU] == '2';       //position de x1 +1 == 2
+    bool condition2 = map[(positionX + direction) + (positionY + 1) * LARGEUR_TABLEAU] == '2'; // position de x2 +1 ==2
+    bool condition3 = map[(positionX + direction) + (positionY + 2) * LARGEUR_TABLEAU] == '2'; //position de x3 +1 == 2
 
     
 
@@ -107,25 +107,25 @@ bool collision(int *map, int direction, int positionX, int positionY)
     return condition1 || condition2 || condition3 ;// || condition4 ;
 }
 
-bool collision_pied(int *map, int positionX, int positionY){
+bool collision_pied(char *map, int positionX, int positionY){
     //printf("collision_pied personnage \n");
 
-    bool condition_sol = map[((positionX) + (positionY + 3)*LARGEUR_TABLEAU)]== 3;
-    bool condition_bloc = map[((positionX) + (positionY + 3)*LARGEUR_TABLEAU)]== 2 ;
+    bool condition_sol = map[((positionX) + (positionY + 3)*LARGEUR_TABLEAU)]== '3';
+    bool condition_bloc = map[((positionX) + (positionY + 3)*LARGEUR_TABLEAU)]== '2' ;
 
     //printf ("collision pied %d\n", condition_sol || condition_bloc);
         
     return (condition_sol || condition_bloc) ;
 }
 
-bool collision_tete(int *map, int positionX, int positionY){
+bool collision_tete(char *map, int positionX, int positionY){
     bool collision = false;
     //printf("direction %d\n",direction);
     //if ((positionY + (direction) < HAUTEUR_MAP - 1) && (positionY + (direction) > 0)){
         for (int i= 0 ; i<15 ; i++){
         
             if (!collision){
-                collision = map[(positionX) + (positionY - i)*LARGEUR_TABLEAU] == 2;
+                collision = map[(positionX) + (positionY - i)*LARGEUR_TABLEAU] == '2';
             }
         //printf("%d\n",collision);
         
@@ -135,11 +135,11 @@ bool collision_tete(int *map, int positionX, int positionY){
 }
 
 // gerer lorsque le personnage atteint un trou
-bool trou(int *map, int positionX, int positionY)
+bool trou(char *map, int positionX, int positionY)
 {
-    return map[positionX + (positionY + 3) * LARGEUR_TABLEAU] == 1;
+    return map[positionX + (positionY + 3) * LARGEUR_TABLEAU] == '1';
 }
 
-bool gagner(int*map,int positionX, int positionY){
-    return map[positionX + (positionY + 3) * LARGEUR_TABLEAU] == 9 ;
+bool gagner(char *map,int positionX, int positionY){
+    return map[positionX + (positionY + 3) * LARGEUR_TABLEAU] == '9' ;
 }
