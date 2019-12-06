@@ -1,6 +1,6 @@
 #include "personnage.h"
 
-void personnage_jeu(SDL_Renderer *ecran, int h, int w, int positionY, SDL_Texture *perso, int numSprite, SDL_Rect *sprite, int affichage_position_x)
+void personnage_jeu(SDL_Renderer *ecran, int h, int w, int positionY, SDL_Texture *perso, int numSprite, SDL_Rect *sprite, int affichage_position_x,int hauteur)
 {
 
     SDL_Rect position;
@@ -8,9 +8,9 @@ void personnage_jeu(SDL_Renderer *ecran, int h, int w, int positionY, SDL_Textur
 
     position.x = affichage_position_x * largeur_une_case(w);
 
-    position.y = positionY * hauteur_une_case(h);
+    position.y = positionY * hauteur_une_case(h,hauteur);
 
-    position.h = (h / HAUTEUR_MAP) * 3;
+    position.h = (h / hauteur) * 3;
     position.w = w / LARGEUR_MAP;
 
     SDL_RenderCopy(ecran, perso, &sprite[numSprite], &position);
@@ -45,14 +45,14 @@ SDL_Rect *sprite_personnage()
     return sprite;
 }
 
-void deplacement_sur_map(int *debutX, int direction, int *positionX, int *affichage_position_x)
+void deplacement_sur_map(int *debutX, int direction, int *positionX, int *affichage_position_x, int largeur)
 {
 
-    if (((direction > 0) && (*positionX < LARGEUR_TABLEAU - 1)) || (direction < 0 && *positionX > 0))
+    if (((direction > 0) && (*positionX < largeur - 1)) || (direction < 0 && *positionX > 0))
     {
         *positionX += direction;
     }
-    if (*debutX + (direction) <= LARGEUR_TABLEAU - LARGEUR_MAP && *debutX + (direction) >= 0)
+    if (*debutX + (direction) <= largeur - LARGEUR_MAP && *debutX + (direction) >= 0)
     {
         *debutX = *debutX + direction;
     }
@@ -67,10 +67,10 @@ void deplacement_sur_map(int *debutX, int direction, int *positionX, int *affich
 }
 
 //fonction du saut du personnage
-void saut(int direction, int vitesse, int *positionY)
+void saut(int direction, int vitesse, int *positionY, int hauteur)
 { 
 
-    if ((*positionY + (direction*vitesse) < HAUTEUR_MAP - 1) && (*positionY + (direction*vitesse) > 0))//ne sort pas du tableau + (direction*vitesse)
+    if ((*positionY + (direction*vitesse) < hauteur - 1) && (*positionY + (direction*vitesse) > 0))//ne sort pas du tableau 
     {         
         *positionY -= 1 * vitesse ;  
               
@@ -79,9 +79,9 @@ void saut(int direction, int vitesse, int *positionY)
 }
 
 
-void gravite( int direction, int *positionY){//(int* map, int direction, int vitesse, int *positionX, int *positionY
+void gravite( int direction, int *positionY, int hauteur){//(int* map, int direction, int vitesse, int *positionX, int *positionY
    
-       if ((*positionY + (direction) < HAUTEUR_MAP - 1) && (*positionY + (direction) > 0)){
+       if ((*positionY + (direction) < hauteur - 1) && (*positionY + (direction) > 0)){
            
             *positionY += direction ;//* vitesse ;
 
@@ -91,13 +91,13 @@ void gravite( int direction, int *positionY){//(int* map, int direction, int vit
 }
 
 
-bool collision(char *map, int direction, int positionX, int positionY)
+bool collision(char *map, int direction, int positionX, int positionY, int largeur)
 {
 
     //ajouter la colision au niveau de la tete
-    bool condition1 = map[(positionX + direction) + positionY * LARGEUR_TABLEAU] == '2';       //position de x1 +1 == 2
-    bool condition2 = map[(positionX + direction) + (positionY + 1) * LARGEUR_TABLEAU] == '2'; // position de x2 +1 ==2
-    bool condition3 = map[(positionX + direction) + (positionY + 2) * LARGEUR_TABLEAU] == '2'; //position de x3 +1 == 2
+    bool condition1 = map[(positionX + direction) + positionY * largeur] == '2';       //position de x1 +1 == 2
+    bool condition2 = map[(positionX + direction) + (positionY + 1) * largeur] == '2'; // position de x2 +1 ==2
+    bool condition3 = map[(positionX + direction) + (positionY + 2) * largeur] == '2'; //position de x3 +1 == 2
 
     
 
@@ -107,25 +107,25 @@ bool collision(char *map, int direction, int positionX, int positionY)
     return condition1 || condition2 || condition3 ;// || condition4 ;
 }
 
-bool collision_pied(char *map, int positionX, int positionY){
+bool collision_pied(char *map, int positionX, int positionY,int largeur){
     //printf("collision_pied personnage \n");
 
-    bool condition_sol = map[((positionX) + (positionY + 3)*LARGEUR_TABLEAU)]== '3';
-    bool condition_bloc = map[((positionX) + (positionY + 3)*LARGEUR_TABLEAU)]== '2' ;
-    bool condition_gain = map[((positionX) + (positionY + 3)*LARGEUR_TABLEAU)]== '9';
+    bool condition_sol = map[((positionX) + (positionY + 3)*largeur)]== '3';
+    bool condition_bloc = map[((positionX) + (positionY + 3)*largeur)]== '2' ;
+    bool condition_gain = map[((positionX) + (positionY + 3)*largeur)]== '9';
     //printf ("collision pied %d\n", condition_sol || condition_bloc);
         
     return (condition_sol || condition_bloc || condition_gain) ;
 }
 
-bool collision_tete(char *map, int positionX, int positionY){
+bool collision_tete(char *map, int positionX, int positionY, int largeur){
     bool collision = false;
     //printf("direction %d\n",direction);
     //if ((positionY + (direction) < HAUTEUR_MAP - 1) && (positionY + (direction) > 0)){
         for (int i= 0 ; i<15 ; i++){
         
             if (!collision){
-                collision = map[(positionX) + (positionY - i)*LARGEUR_TABLEAU] == '2';
+                collision = map[(positionX) + (positionY - i)*largeur] == '2';
             }
         //printf("%d\n",collision);
         
@@ -135,13 +135,13 @@ bool collision_tete(char *map, int positionX, int positionY){
 }
 
 // gerer lorsque le personnage atteint un trou
-bool trou(char *map, int positionX, int positionY)
+bool trou(char *map, int positionX, int positionY,int largeur)
 {
-    return map[positionX + (positionY + 3) * LARGEUR_TABLEAU] == '1';
+    return map[positionX + (positionY + 3) * largeur] == '1';
 }
 
-bool gagner(char *map,int positionX, int positionY){
-    return map[positionX + (positionY + 3) * LARGEUR_TABLEAU] == '9' ;
+bool gagner(char *map,int positionX, int positionY, int largeur){
+    return map[positionX + (positionY + 3) * largeur] == '9' ;
 }
 
 

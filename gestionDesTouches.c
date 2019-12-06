@@ -1,6 +1,6 @@
 #include "gestionDesTouches.h"
 
-void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,  int *numSprite , int* positionX , int* positionY,int * affichage_position_x, int* map){
+void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,  int *numSprite , int* positionX , int* positionY,int * affichage_position_x, int* map,int largeur,int hauteur){
 
         switch(evenements.type)
         {
@@ -20,13 +20,13 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 *terminer = true ;
                 break;
             case SDLK_RIGHT : // touche fleche droite
-                if (!collision(map,1 ,*positionX, *positionY)){
-                    deplacement_sur_map (debutX, 1 , positionX ,  affichage_position_x);
+                if (!collision(map,1 ,*positionX, *positionY,largeur)){
+                    deplacement_sur_map (debutX, 1 , positionX ,  affichage_position_x,largeur);
                     
                 }
                 //SDL_Delay(1000);
                 
-                if(trou(map, *positionX, *positionY)){
+                if(trou(map, *positionX, *positionY, largeur)){
                     
                     gameOver("gameOver.bmp", ecran);
                     *terminer = true ;
@@ -40,10 +40,10 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 }
                 break;
             case SDLK_LEFT : // touche fleche gauche
-                if (!collision(map,-1 ,*positionX, *positionY)){
-                    deplacement_sur_map (debutX, (-1), positionX ,affichage_position_x);
+                if (!collision(map,-1 ,*positionX, *positionY,largeur)){
+                    deplacement_sur_map (debutX, (-1), positionX ,affichage_position_x,largeur);
                 }
-                if(trou(map, *positionX, *positionY)){
+                if(trou(map, *positionX, *positionY, largeur)){
                     
                     gameOver("gameOver.bmp", ecran);
                     *terminer = true ;
@@ -57,10 +57,10 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 }      
                 break;
             case SDLK_UP : //fleche du haut
-            if (!collision_tete(map, *positionX, *positionY)){
-                saut(-1 , 10, positionY);
+            if (!collision_tete(map, *positionX, *positionY,largeur)){
+                saut(-1 , 10, positionY, hauteur);
             }
-            if(trou(map, *positionX, *positionY)){
+            if(trou(map, *positionX, *positionY,largeur)){
                     
                 gameOver("gameOver.bmp", ecran);
                 *terminer = true ;

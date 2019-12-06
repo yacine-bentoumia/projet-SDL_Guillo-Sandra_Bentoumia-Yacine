@@ -4,14 +4,14 @@
 
 SDL_Rect dest , pos ;
 
-void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, int w, int h,int debutX,char* map, SDL_Texture* gain){
+void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, int w, int h,int debutX,char* map, SDL_Texture* gain, int largeur,int hauteur){
 
     dest.x = 0 ;
     dest.y = 0 ;
 
 
     //hauteur d'une case
-    int hauteur_case = hauteur_une_case(h) ;
+    int hauteur_case = hauteur_une_case(h,hauteur) ;
     //largeur d'une case
     int largeur_case = largeur_une_case(w) ;
 
@@ -21,11 +21,11 @@ void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_T
     
 
     for (int i = 0 ; i < LARGEUR_MAP ; i++){ 
-        for (int j = 0 ; j < HAUTEUR_MAP ; j++) {
+        for (int j = 0 ; j < hauteur ; j++) {
             //position initiale
             pos.x = (i * largeur_case) ;
             pos.y = (j * hauteur_case) ;
-            char champ = map[((i+debutX)+j*LARGEUR_TABLEAU) ]; 
+            char champ = map[((i+debutX)+j*largeur) ]; 
             //printf("%c \n",champ);
             switch(champ) 
             {
@@ -65,15 +65,15 @@ void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_T
 }
 
 
-int hauteur_une_case(int h){
+int hauteur_une_case(int h,int hauteur){
     
 
     //hauteur d'une case
-    if(h % HAUTEUR_MAP==0){
-        dest.h = (h / HAUTEUR_MAP) ; // h = hauteur_fenetre
+    if(h % hauteur==0){
+        dest.h = (h / hauteur) ; // h = hauteur_fenetre
     }
     else{
-        dest.h = (h / HAUTEUR_MAP) + 1;
+        dest.h = (h / hauteur) + 1;
     }
     return dest.h ;
 }

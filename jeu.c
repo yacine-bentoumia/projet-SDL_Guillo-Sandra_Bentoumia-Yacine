@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
   int hauteur = 0;
   int largeur = 0;
   int taille = 0 ;
-  char *map = lire_fichier("map.txt",&hauteur, &largeur, &taille);
+  char *map = lire_fichier("map2.txt",&hauteur, &largeur, &taille);
   //printf("%d\n",hauteur);
 
   SDL_Window *fenetre;  // Déclaration de la fenêtre
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
   //int debutY = 0; ligne a partir de laquelle on affiche la map
   int numSprite = 10;
   int positionX = debutX + 1;
-  int positionY = HAUTEUR_TABLEAU - 5; // * hauteur_une_case(h);
+  int positionY = hauteur - 5; // * hauteur_une_case(h);
   int affichage_position_x = 1;
   SDL_Rect *sprite = sprite_personnage();
   int temps_debut = 0 ;
@@ -91,8 +91,8 @@ int main(int argc, char *argv[])
 
     
 
-    carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, w, h, debutX, map,gain); // affiche la map
-    personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x);
+    carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, w, h, debutX, map,gain,largeur, hauteur); // affiche la map
+    personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,hauteur);
     //emplacement_balle1(ecran, balle1, image_balle1, map);
 
     //afficher_personnage(scientist, ecran);
@@ -100,9 +100,9 @@ int main(int argc, char *argv[])
     //animer_ennemi(scientist, ecran);
 
 
-    if (!collision_pied(map, positionX, positionY)){
-      if (!trou(map, positionX, positionY)){
-        gravite(1 , &positionY);//int *map, int vitesse, int *positionX, int direction, int *positionY
+    if (!collision_pied(map, positionX, positionY, largeur)){
+      if (!trou(map, positionX, positionY, largeur)){
+        gravite(1 , &positionY,hauteur);//int *map, int vitesse, int *positionX, int direction, int *positionY
       }
       else {
         gameOver("gameOver.bmp", ecran);
@@ -110,7 +110,7 @@ int main(int argc, char *argv[])
       }
      
     }
-    if (gagner(map, positionX, positionY)){
+    if (gagner(map, positionX, positionY,largeur)){
       win("winner.bmp", ecran);
       terminer = true ;
 
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
     SDL_RenderPresent(ecran);
     if (SDL_PollEvent(&evenements))
     {
-      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x, map);
+      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x, map,largeur, hauteur);
 
       //decalage_stf(ecran, scientifique, &image_stf, &pos_stf);
 
