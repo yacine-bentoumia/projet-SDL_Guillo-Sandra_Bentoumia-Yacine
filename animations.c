@@ -4,58 +4,7 @@
 #include "animations.h"
 #include "constante.h"
 
-// à adapter aux différentes structures personnage et aux gestions de touches et fenêtre
 
-// animation de saut
-
-void anim_saut(SDL_Event evenements, SDL_Window *fenetre, SDL_Renderer *ecran, SDL_Texture *raccoon, SDL_Rect sprite_raccoon, SDL_Rect emplacement_raccoon)
-{
-
-    int temps_precedent_raccoon = 0;
-    int temps_actuel_raccoon = 0;
-
-    int position_maximale = 450;
-    int ancienne_position = emplacement_raccoon.y;
-
-    while (emplacement_raccoon.y > position_maximale)
-    {
-
-        SDL_RenderCopy(ecran, raccoon, &sprite_raccoon, &emplacement_raccoon);
-
-        temps_actuel_raccoon = SDL_GetTicks();
-
-        if (temps_actuel_raccoon - temps_precedent_raccoon > 20)
-        {
-            emplacement_raccoon.y -= 10 * TAILLE_PAS;
-
-            temps_precedent_raccoon = temps_actuel_raccoon;
-        }
-
-        SDL_UpdateWindowSurface(fenetre);
-        SDL_RenderPresent(ecran);
-    }
-
-    // il redescend
-
-    while (emplacement_raccoon.y < ancienne_position)
-    {
-
-        SDL_RenderCopy(ecran, raccoon, &sprite_raccoon, &emplacement_raccoon);
-
-        temps_actuel_raccoon = SDL_GetTicks();
-
-        if (temps_actuel_raccoon - temps_precedent_raccoon > 20)
-        {
-            emplacement_raccoon.y += 15 * TAILLE_PAS;
-
-            temps_precedent_raccoon = temps_actuel_raccoon;
-        }
-
-        SDL_RenderPresent(ecran);
-    }
-}
-
-// animation de tir
 
 void anim_tir(SDL_Event evenements, SDL_Renderer *ecran,
               SDL_Texture *balle, SDL_Rect sprite_balle, SDL_Rect emplacement_balle,
@@ -129,54 +78,5 @@ void anim_r(SDL_Event evenements, SDL_Renderer *ecran, SDL_Texture *raccoon, SDL
         }
 
         SDL_RenderPresent(ecran);
-    }
-}
-
-
-
-
-// mouvement d'un chat 1
-
-void anim_chat1(SDL_Event evenements, SDL_Renderer *ecran, SDL_Texture *chat1, SDL_Rect sprite_chat1, SDL_Rect emplacement_chat1)
-{
-
-    int temps_precedent_chat1 = 0;
-    int temps_actuel_chat1 = 0;
-
-    temps_actuel_chat1 = SDL_GetTicks();
-
-    while (temps_actuel_chat1 - temps_precedent_chat1 > 2)
-    {
-
-        emplacement_chat1.x -= TAILLE_PAS;
-
-        temps_precedent_chat1 = temps_actuel_chat1;
-        SDL_RenderPresent(ecran);
-
-        // printf("%d\n", emplacement_chat1.x);
-    }
-}
-
-
-
-// mouvement du chat2
-
-void anim_chat2(SDL_Event evenements, SDL_Renderer *ecran, SDL_Texture *chat2, SDL_Rect sprite_chat2, SDL_Rect emplacement_chat2)
-{
-
-    int temps_precedent_chat2 = 0;
-    int temps_actuel_chat2 = 0;
-
-    temps_actuel_chat2 = SDL_GetTicks();
-
-    while (temps_actuel_chat2 - temps_precedent_chat2 > 2)
-    {
-
-        emplacement_chat2.x -= TAILLE_PAS;
-
-        temps_precedent_chat2 = temps_actuel_chat2;
-        SDL_RenderPresent(ecran);
-
-        // printf("%d\n", emplacement_chat2.x);
     }
 }

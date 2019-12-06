@@ -10,8 +10,10 @@
 
 int main(int argc, char *argv[])
 {
-
-  char *map = lire_fichier("map.txt");
+  int hauteur = 0;
+  int largeur = 0;
+  int taille = 0 ;
+  char *map = lire_fichier("map.txt",&hauteur, &largeur, &taille);
 
   SDL_Window *fenetre;  // Déclaration de la fenêtre
   SDL_Event evenements; // Événements liés à la fenêtre

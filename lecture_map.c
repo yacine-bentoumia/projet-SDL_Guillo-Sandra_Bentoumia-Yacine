@@ -24,44 +24,62 @@ void allouer_tab(char* tab, int taille)
     printf("\n");
 }*/
 
-int taille_fichier(const char* nomFichier){
+
+void taille_fichier(const char* nomFichier, int* largeur, int*hauteur, int*taille){
+    
     FILE* fichier = NULL; 
     fichier = fopen(nomFichier, "r");
     char caractere_actuel = ' ';
-    int compteur = 0;
+    //int compteur = 0;
+    
 
     if (fichier != NULL)
     {
+        
         // Boucle de lecture des caractères un à un
+        int t = 0 ;
+        int h = 0 ;
         do
         {
             caractere_actuel = fgetc(fichier); // On lit le caractère
             //printf("%c", caractere_actuel); // On l'affiche
+            
             if(caractere_actuel != '\n'&& caractere_actuel != EOF){
-                compteur++ ;
+                t++ ;
+            }else{
+                //printf("taillefiuchier\n");
+                h++ ;
             }
 
            
         } while (caractere_actuel != EOF); 
+        
+        *taille = t ;
+        *hauteur = h ;
+        int l = t/h ;
+        *largeur = l ;
+        
+        
+        
         fclose(fichier);
     }
-    return compteur ;
+    
     
 
 
 
 }
 
-char* lire_fichier(const char *nomFichier)
+char* lire_fichier(const char *nomFichier, int* hauteur,int* largeur, int* taille)
 {
     
     FILE* fichier = NULL; 
     //int caractere_actuel = 0;
     fichier = fopen(nomFichier, "r");
-    int taille = taille_fichier(nomFichier) ;
+    taille_fichier(nomFichier,largeur,hauteur,taille) ;
     char caractere_actuel = ' ';
     char* tab = NULL ;
-    tab = malloc((taille) *sizeof(char));
+    tab = malloc((*taille) *sizeof(char));
     //allouer_tab(tab,SURFACE_MAP);
     int i = 0;
 
