@@ -144,6 +144,8 @@ int main(int argc, char *argv[])
   SDL_DestroyTexture(perso);
   SDL_DestroyTexture(gain);
   SDL_DestroyWindow(fenetre);
+  SDL_DestroyTexture(tour4);
+  SDL_DestroyTexture(tour5);
   SDL_Quit();
   return 0;
 }
