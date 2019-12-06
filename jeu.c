@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
   int largeur = 0;
   int taille = 0 ;
   char *map = lire_fichier("map.txt",&hauteur, &largeur, &taille);
+  //printf("%d\n",hauteur);
 
   SDL_Window *fenetre;  // Déclaration de la fenêtre
   SDL_Event evenements; // Événements liés à la fenêtre
@@ -138,6 +139,8 @@ int main(int argc, char *argv[])
   }
   // Quitter SDL
   free(sprite);
+  free(map);
+  
   SDL_DestroyTexture(fond);
   SDL_DestroyTexture(ciel);
   SDL_DestroyTexture(sol);
@@ -148,6 +151,7 @@ int main(int argc, char *argv[])
   SDL_DestroyWindow(fenetre);
   SDL_DestroyTexture(tour4);
   SDL_DestroyTexture(tour5);
+  SDL_DestroyRenderer(ecran);
   SDL_Quit();
   return 0;
 }
