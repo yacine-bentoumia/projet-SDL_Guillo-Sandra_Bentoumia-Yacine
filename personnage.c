@@ -71,6 +71,7 @@ void saut(int direction, int vitesse, int *positionY, int hauteur)
 { 
 
     if ((*positionY + (direction*vitesse) < hauteur - 1) && (*positionY + (direction*vitesse) > 0))//ne sort pas du tableau 
+    //for (int i = 0 ; i< vitesse; i++)
     {         
         *positionY -= 1 * vitesse ;  
               

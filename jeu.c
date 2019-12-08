@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
   int hauteur = 0;
   int largeur = 0;
   int taille = 0 ;
-  char *map = lire_fichier("map2.txt",&hauteur, &largeur, &taille);
+  char *map = lire_fichier("map.txt",&hauteur, &largeur, &taille);
   //printf("%d\n",hauteur);
 
   SDL_Window *fenetre;  // Déclaration de la fenêtre
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
   //initialisation de l'image du menu
   SDL_Renderer *ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
-  SDL_Texture *fond = charger_image("raccoon.bmp", ecran); //charger l'image de fond
+  //SDL_Texture *fond = charger_image("raccoon.bmp", ecran); //charger l'image de fond
 
 
   //  Sprites des composants de la map
@@ -33,8 +33,20 @@ int main(int argc, char *argv[])
   SDL_Texture *ciel = charger_image("ciel.bmp", ecran);
   SDL_Texture *troux = charger_image("trou.bmp", ecran);
   SDL_Texture *obstacle = charger_image("obstacle.bmp", ecran);
-  SDL_Texture *gain = charger_image("win.bmp", ecran);
-  SDL_Texture* perso = charger_image_transparente("mario.bmp", ecran, 0, 115, 0);
+  SDL_Texture *gain = charger_image("win.bmp", ecran); //image du win
+  SDL_Texture* perso = charger_image_transparente("mario.bmp", ecran, 0, 115, 0); // image du perso
+  //image pour le menu
+  SDL_Texture *jouer = charger_image("raccoon_jouer.bmp", ecran);
+  SDL_Texture *option = charger_image("raccoon_option.bmp", ecran);
+  SDL_Texture *niveau = charger_image("raccoon_niveau.bmp", ecran);
+  SDL_Texture *quitter = charger_image("raccoon_quitter.bmp", ecran);
+
+  //tableau de texture pour le menu
+  SDL_Texture *tableau[4] ;
+  tableau[0] = jouer ;
+  tableau[1] = option ;
+  tableau[2] = niveau ;
+  tableau[3] = quitter ;
 
 
   // Sprites des différents ennemis
@@ -63,6 +75,10 @@ int main(int argc, char *argv[])
   SDL_Rect *sprite = sprite_personnage();
   int temps_debut = 0 ;
   int temps_fin = 0; 
+  int mode = 0 ;
+  int num = 0 ;
+
+  
 
   
   // definition de l'ennemi
@@ -87,8 +103,9 @@ int main(int argc, char *argv[])
     temps_debut = SDL_GetTicks();
     SDL_GetWindowSize(fenetre, &w, &h);
     SDL_RenderClear(ecran);
-    SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
-
+    choix_menu(ecran,num,&tableau) ;
+    //SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
+/*
     
 
     carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, w, h, debutX, map,gain,largeur, hauteur); // affiche la map
@@ -120,11 +137,11 @@ int main(int argc, char *argv[])
 
     //stf(ecran, scientifique, &image_scientifique);
     //deplacement_stf(ecran, pos_stf, s, scientifique, debutX, positionX, positionY, affichage_position_x);
-
+*/
     SDL_RenderPresent(ecran);
     if (SDL_PollEvent(&evenements))
     {
-      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x, map,largeur, hauteur);
+      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x, map,largeur, hauteur,&mode,&num);
 
       //decalage_stf(ecran, scientifique, &image_stf, &pos_stf);
 
@@ -141,7 +158,7 @@ int main(int argc, char *argv[])
   free(sprite);
   free(map);
   
-  SDL_DestroyTexture(fond);
+  //SDL_DestroyTexture(fond);
   SDL_DestroyTexture(ciel);
   SDL_DestroyTexture(sol);
   SDL_DestroyTexture(troux);
