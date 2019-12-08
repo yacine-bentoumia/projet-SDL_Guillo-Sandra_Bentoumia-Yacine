@@ -33,8 +33,11 @@ int main(int argc, char *argv[])
   SDL_Texture *ciel = charger_image("ciel.bmp", ecran);
   SDL_Texture *troux = charger_image("trou.bmp", ecran);
   SDL_Texture *obstacle = charger_image("obstacle.bmp", ecran);
+
   SDL_Texture *gain = charger_image("win.bmp", ecran); //image du win
+
   SDL_Texture* perso = charger_image_transparente("mario.bmp", ecran, 0, 115, 0); // image du perso
+
   //image pour le menu
   SDL_Texture *jouer = charger_image("raccoon_jouer.bmp", ecran);
   SDL_Texture *option = charger_image("raccoon_option.bmp", ecran);
@@ -48,7 +51,26 @@ int main(int argc, char *argv[])
   tableau[2] = niveau ;
   tableau[3] = quitter ;
 
+  //menu des options
+  SDL_Texture *commande = charger_image("options.bmp", ecran);
 
+  //niveau differents
+  SDL_Texture *niv1 = charger_image("niveau_un.bmp", ecran);
+  SDL_Texture *niv2 = charger_image("niveau_deux.bmp", ecran);
+  SDL_Texture *niv3 = charger_image("niveau_trois.bmp", ecran);
+  SDL_Texture *niv4 = charger_image("niveau_quatre.bmp", ecran);
+  SDL_Texture *niv5 = charger_image("niveau_cinq.bmp", ecran);
+  SDL_Texture *niv6 = charger_image("niveau_six.bmp", ecran);
+
+  //tableau de texture de niveau 
+  SDL_Texture *tab_niv[6] ;
+  tab_niv[0] = niv1 ;
+  tab_niv[1] = niv2 ;
+  tab_niv[2] = niv3 ;
+  tab_niv[3] = niv4 ;
+  tab_niv[4] = niv5 ;
+  tab_niv[5] = niv6 ;
+  
   // Sprites des différents ennemis
 
   //SDL_Texture *perso = charger_image_transparente("rocket.bmp", ecran, 0, 137, 84);
@@ -76,7 +98,8 @@ int main(int argc, char *argv[])
   int temps_debut = 0 ;
   int temps_fin = 0; 
   int mode = 0 ;
-  int num = 0 ;
+  int num = 0 ; // numero dans le menu
+  int numero = 0 ;  // numero de niveau
 
   
 
@@ -106,9 +129,9 @@ int main(int argc, char *argv[])
     if(mode == 0){
       choix_menu(ecran,num,&tableau) ;
     }
-    else{
+    else if (mode == 1){
       carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, w, h, debutX, map,gain,largeur, hauteur); // affiche la map
-    personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,hauteur);
+      personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,hauteur);
     //emplacement_balle1(ecran, balle1, image_balle1, map);
 
     //afficher_personnage(scientist, ecran);
@@ -116,27 +139,31 @@ int main(int argc, char *argv[])
     //animer_ennemi(scientist, ecran);
 
 
-    if (!collision_pied(map, positionX, positionY, largeur)){
-      if (!trou(map, positionX, positionY, largeur)){
-        gravite(1 , &positionY,hauteur);//int *map, int vitesse, int *positionX, int direction, int *positionY
-      }
-      else {
-        gameOver("gameOver.bmp", ecran);
-        terminer = true ;
-      }
+      if (!collision_pied(map, positionX, positionY, largeur)){
+        if (!trou(map, positionX, positionY, largeur)){
+          gravite(1 , &positionY,hauteur);//int *map, int vitesse, int *positionX, int direction, int *positionY
+        }
+        else {
+         gameOver("gameOver.bmp", ecran);
+         terminer = true ;
+        }
      
-    }
-    if (gagner(map, positionX, positionY,largeur)){
-      win("winner.bmp", ecran);
-      terminer = true ;
+      }
+      if (gagner(map, positionX, positionY,largeur)){
+        win("winner.bmp", ecran);
+        terminer = true ;
 
-    }
+      }
     
 
 
     //stf(ecran, scientifique, &image_scientifique);
     //deplacement_stf(ecran, pos_stf, s, scientifique, debutX, positionX, positionY, affichage_position_x);
 
+    }else if(mode == 2){
+      choix_option( ecran,commande);
+    }else if(mode == 3){
+      choix_niveau(ecran, tab_niv[numero]);
     }
     
     //SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
@@ -148,7 +175,7 @@ int main(int argc, char *argv[])
     SDL_RenderPresent(ecran);
     if (SDL_PollEvent(&evenements))
     {
-      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x, map,largeur, hauteur,&mode,&num);
+      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x, map,largeur, hauteur,&mode,&num,&numero);
 
       //decalage_stf(ecran, scientifique, &image_stf, &pos_stf);
 
@@ -165,6 +192,7 @@ int main(int argc, char *argv[])
   free(sprite);
   free(map);
   
+ 
   //SDL_DestroyTexture(fond);
   SDL_DestroyTexture(ciel);
   SDL_DestroyTexture(sol);
@@ -175,6 +203,19 @@ int main(int argc, char *argv[])
   SDL_DestroyWindow(fenetre);
   SDL_DestroyTexture(tour4);
   SDL_DestroyTexture(tour5);
+  SDL_DestroyTexture(jouer);
+  SDL_DestroyTexture(option);
+  SDL_DestroyTexture(niveau);
+  SDL_DestroyTexture(quitter);
+
+  SDL_DestroyTexture(niv1);
+  SDL_DestroyTexture(niv2);
+  SDL_DestroyTexture(niv3);
+  SDL_DestroyTexture(niv4);
+  SDL_DestroyTexture(niv5);
+  SDL_DestroyTexture(niv6);
+  
+  
   SDL_DestroyRenderer(ecran);
   SDL_Quit();
   return 0;

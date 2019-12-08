@@ -1,7 +1,8 @@
 #include "gestionDesTouches.h"
 
-void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,  int *numSprite , int* positionX , int* positionY,int * affichage_position_x, int* map,int largeur,int hauteur, int* mode, int* num){
-
+void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,  int *numSprite , int* positionX , int* positionY,int * affichage_position_x, 
+                                                    int* map,int largeur,int hauteur, int* mode, int* num, int* numero){
+        SDL_Rect position ;
         switch(evenements.type)
         {
             case SDL_QUIT:
@@ -18,12 +19,30 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 case SDLK_RETURN  : //touche entrer
                     if(*mode == 0 ){
                         if(*num == 0){
+                            //free(*map);
+                            //*map = lire_fichier("map2.txt",&hauteur, &largeur, &taille);
                             *mode = 1;
                         }
-                        else if(*num == 1 ){}
-                        else if(*num == 2 ){}
+                        else if(*num == 1 ){
+                            *mode = 2;
+                        }
+                        else if(*num == 2 ){
+                            /*if(*numero == 1){
+
+                            }else if(*numero == 2){
+                                
+                            }else if(*numero == 3){
+
+                            }else if(*numero == 4){
+
+                            }else if(*numero == 5){
+                                
+                            }else if(*numero == 6){
+                                
+                            }*/
+                        }
                         else if(*num == 3 ){
-                             *terminer = true ;
+                            *terminer = true ;
                         }
                     }else{
                     gameOver("gameOver.bmp", ecran);
@@ -54,7 +73,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     if (!collision(map,-1 ,*positionX, *positionY,largeur)){
                         deplacement_sur_map (debutX, (-1), positionX ,affichage_position_x,largeur);
                     }
-                    if(trou(map, *positionX, *positionY, largeur)){
+                    if(trou(map, *positionX, *positionY,largeur)){
                     
                         gameOver("gameOver.bmp", ecran);
                         *terminer = true ;
@@ -94,10 +113,28 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                         }
                         
                     }
+                    break ;
+                
          
                 
                 
         }
+        case SDL_MOUSEBUTTONUP:
+                 //printf("coucou : %d : %d \n",evenements.button.x, evenements.button.y);
+                    switch(evenements.button.button){
+                        case SDL_BUTTON_LEFT : //clique souris 
+
+                        position.x = evenements.button.x ;
+                        position.y = evenements.button.y ;
+                        
+                        if((position.x > 1225 && position.x < 1260)&&(position.y < 870 && position.y > 820)){
+                         //printf("x %d : y %d \n",evenements.button.x, evenements.button.y);   
+                         *mode = 0 ;
+                        }
+                        break ;
+                    }
+                    
+                    break;
 
         }
 

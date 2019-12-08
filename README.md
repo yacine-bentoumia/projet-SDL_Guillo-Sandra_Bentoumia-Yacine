@@ -2,8 +2,9 @@ BIBLIOGRAPHIE :
 
 pour la gestion de touche :  http://user.oc-static.com/ftp/mateo21/sdlkeysym.html
 
-exemple de map : http://sdz.tdct.org/sdz/ile-mapping.html
+pour la gestion de la sourie : https://wiki.libsdl.org/SDL_MouseButtonEvent
 
+exemple de map : http://sdz.tdct.org/sdz/ile-mapping.html
 
 COMPILATION : make
 

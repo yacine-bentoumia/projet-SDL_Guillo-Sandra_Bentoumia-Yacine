@@ -5,12 +5,7 @@
     #define LARGEUR_FENETRE             1300  //taille fenetre
     #define HAUTEUR_FENETRE             900  // taille fenetre
 
-    //#define SURFACE_MAP                 2925
-    //#define HAUTEUR_MAP                 45   hauteur de lamap affichee dans la fenetre
     #define LARGEUR_MAP                 25 // largeur de la map affichee dans la fenetre 
-
-    //#define LARGEUR_TABLEAU             65  largeur de la carte du jeu
-    //#define HAUTEUR_TABLEAU             45   hauteur de la carte de jeu
 
     #define LARGEUR_SPRITE              284 // sprite du personnage
     #define HAUTEUR_SPRITE              256 // sprite du personnage
