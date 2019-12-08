@@ -103,12 +103,11 @@ int main(int argc, char *argv[])
     temps_debut = SDL_GetTicks();
     SDL_GetWindowSize(fenetre, &w, &h);
     SDL_RenderClear(ecran);
-    choix_menu(ecran,num,&tableau) ;
-    //SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
-/*
-    
-
-    carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, w, h, debutX, map,gain,largeur, hauteur); // affiche la map
+    if(mode == 0){
+      choix_menu(ecran,num,&tableau) ;
+    }
+    else{
+      carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, w, h, debutX, map,gain,largeur, hauteur); // affiche la map
     personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,hauteur);
     //emplacement_balle1(ecran, balle1, image_balle1, map);
 
@@ -137,7 +136,15 @@ int main(int argc, char *argv[])
 
     //stf(ecran, scientifique, &image_scientifique);
     //deplacement_stf(ecran, pos_stf, s, scientifique, debutX, positionX, positionY, affichage_position_x);
-*/
+
+    }
+    
+    //SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond
+
+    
+
+    
+
     SDL_RenderPresent(ecran);
     if (SDL_PollEvent(&evenements))
     {

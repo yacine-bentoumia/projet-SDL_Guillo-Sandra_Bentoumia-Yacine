@@ -16,8 +16,19 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     break;
             //test de l'affichage du game over avec la touche entrer
                 case SDLK_RETURN  : //touche entrer
+                    if(*mode == 0 ){
+                        if(*num == 0){
+                            *mode = 1;
+                        }
+                        else if(*num == 1 ){}
+                        else if(*num == 2 ){}
+                        else if(*num == 3 ){
+                             *terminer = true ;
+                        }
+                    }else{
                     gameOver("gameOver.bmp", ecran);
                     *terminer = true ;
+                    }
                     break;
                 case SDLK_RIGHT : // touche fleche droite
                     if (!collision(map,1 ,*positionX, *positionY,largeur)){
