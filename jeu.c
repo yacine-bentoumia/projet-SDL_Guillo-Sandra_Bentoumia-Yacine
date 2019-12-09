@@ -185,25 +185,26 @@ int main(int argc, char *argv[])
       
       choix_niveau(ecran, tab_niv[numero]);
       switch (numero){
-        case 1 :
-         // map1.carteJeu = lire_fichier("map.txt",&map1.hauteur, &map1.largeur, &map1.taille);
+        case 0 :
+         lire_fichier("map.txt",&map1);
            //printf("map1\n");
           //map = map1.carteJeu ;
           /*hauteur = &map1.hauteur ;
           largeur = &map1.largeur ;
           taille =  &map1.taille ;*/
           break;
-        case 2 :
+        case 1 :
           //map2.carteJeu = lire_fichier("map1.txt",&map2.hauteur, &map2.largeur, &map2.taille);
           //printf("map1\n");
           //map = map2.carteJeu ;
           
-          lire_fichier("map2.txt",&map1);
+          lire_fichier("map1.txt",&map1);
 /*          hauteur = map2.hauteur ;
           largeur = map2.largeur ;
           taille =  map2.taille ;
   */        break;
-        case 3 :
+        case 2 :
+        lire_fichier("map2.txt",&map1);
           //map3.carteJeu = lire_fichier("map3.txt",&map3.hauteur, &map3.largeur, &map3.taille);
           // printf("map1\n");
           //map = map3.carteJeu ;
@@ -211,26 +212,30 @@ int main(int argc, char *argv[])
           largeur = &map3.largeur ;
           taille =  &map3.taille ;*/
           break ;
-        case 4 :
+        case 3 :
+        lire_fichier("map1.txt",&map1);
           //map4.carteJeu = lire_fichier("map2.txt",&map4.hauteur, &map4.largeur, &map4.taille);
 
           /*hauteur = &map4.hauteur ;
           largeur = &map4.largeur ;
           taille =  &map4.taille ;*/
           break;
-        case 5:
+        case 4:
+        lire_fichier("map3.txt",&map1);
           //map5.carteJeu = lire_fichier("map2.txt",&map5.hauteur, &map5.largeur, &map5.taille);
           /*hauteur = &map5.hauteur ;
           largeur = &map5.largeur ;
           taille =  &map5.taille ;*/
           break;
-        case 6:
+        case 5:
+        lire_fichier("map2.txt",&map1);
           //map6.carteJeu = lire_fichier("map2.txt",&map6.hauteur, &map6.largeur, &map6.taille);
           /*hauteur = &map6.hauteur ;
           largeur = &map6.largeur ;
           taille =  &map6.taille ;*/
           break;
         default :
+        lire_fichier("map.txt",&map1);
           //map1.carteJeu = lire_fichier("map.txt",&map1.hauteur, &map1.largeur, &map1.taille);
           /*hauteur = &map1.hauteur ;
           largeur = &map1.largeur ;
