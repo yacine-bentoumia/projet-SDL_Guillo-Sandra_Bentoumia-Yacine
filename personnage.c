@@ -1,6 +1,6 @@
 #include "personnage.h"
 
-void personnage_jeu(SDL_Renderer *ecran, int h, int w, int positionY, SDL_Texture *perso, int numSprite, SDL_Rect *sprite, int affichage_position_x,int hauteur)
+void personnage_jeu(SDL_Renderer *ecran, int h, int w, int positionY, SDL_Texture *perso, int numSprite, SDL_Rect *sprite, int affichage_position_x, Carte map1)
 {
 
     SDL_Rect position;
@@ -8,9 +8,9 @@ void personnage_jeu(SDL_Renderer *ecran, int h, int w, int positionY, SDL_Textur
 
     position.x = affichage_position_x * largeur_une_case(w);
 
-    position.y = positionY * hauteur_une_case(h,hauteur);
+    position.y = positionY * hauteur_une_case(h,map1);
 
-    position.h = (h / hauteur) * 3;
+    position.h = (h / map1.hauteur) * 3;
     position.w = w / LARGEUR_MAP;
 
 
@@ -46,14 +46,14 @@ SDL_Rect *sprite_personnage()
     return sprite;
 }
 
-void deplacement_sur_map(int *debutX, int direction, int *positionX, int *affichage_position_x, int largeur)
+void deplacement_sur_map(int *debutX, int direction, int *positionX, int *affichage_position_x, Carte map1)
 {
 
-    if (((direction > 0) && (*positionX < largeur - 1)) || (direction < 0 && *positionX > 0))
+    if (((direction > 0) && (*positionX < map1.largeur - 1)) || (direction < 0 && *positionX > 0))
     {
         *positionX += direction;
     }
-    if (*debutX + (direction) <= largeur - LARGEUR_MAP && *debutX + (direction) >= 0)
+    if (*debutX + (direction) <= map1.largeur - LARGEUR_MAP && *debutX + (direction) >= 0)
     {
         *debutX = *debutX + direction;
     }
@@ -68,11 +68,11 @@ void deplacement_sur_map(int *debutX, int direction, int *positionX, int *affich
 }
 
 //fonction du saut du personnage
-void saut(int direction, int vitesse, int *positionY, int hauteur)
+void saut(int direction, int vitesse, int *positionY, Carte map1)
 { 
 
-    if ((*positionY + (direction*vitesse) < hauteur - 1) && (*positionY + (direction*vitesse) > 0))//ne sort pas du tableau 
-    //for (int i = 0 ; i< vitesse; i++)
+    if ((*positionY + (direction*vitesse) < map1.hauteur - 1) && (*positionY + (direction*vitesse) > 0))//ne sort pas du tableau 
+    
     {         
         *positionY -= 1 * vitesse ;  
               
@@ -81,9 +81,9 @@ void saut(int direction, int vitesse, int *positionY, int hauteur)
 }
 
 
-void gravite( int direction, int *positionY, int hauteur){//(int* map, int direction, int vitesse, int *positionX, int *positionY
+void gravite( int direction, int *positionY, Carte map1){
    
-       if ((*positionY + (direction) < hauteur - 1) && (*positionY + (direction) > 0)){
+       if ((*positionY + (direction) < map1.hauteur - 1) && (*positionY + (direction) > 0)){
            
             *positionY += direction ;//* vitesse ;
 
@@ -93,57 +93,52 @@ void gravite( int direction, int *positionY, int hauteur){//(int* map, int direc
 }
 
 
-bool collision(char *map, int direction, int positionX, int positionY, int largeur)
+bool collision(int direction, int positionX, int positionY, Carte map1)
 {
 
-    //ajouter la colision au niveau de la tete
-    bool condition1 = map[(positionX + direction) + positionY * largeur] == '2';       //position de x1 +1 == 2
-    bool condition2 = map[(positionX + direction) + (positionY + 1) * largeur] == '2'; // position de x2 +1 ==2
-    bool condition3 = map[(positionX + direction) + (positionY + 2) * largeur] == '2'; //position de x3 +1 == 2
+   
+    bool condition1 = map1.carteJeu[(positionX + direction) + positionY * map1.largeur] == '2';       //position de x1 +1 == 2
+    bool condition2 = map1.carteJeu[(positionX + direction) + (positionY + 1) * map1.largeur] == '2'; // position de x2 +1 ==2
+    bool condition3 = map1.carteJeu[(positionX + direction) + (positionY + 2) * map1.largeur] == '2'; //position de x3 +1 == 2
 
-    
 
-    //colision avec le sol
-
-   // bool condition4 = map[(positionX) + (positionY +2)*LARGEUR_TABLEAU + direction] == 3 ;  //les pied du perso touche le sol
     return condition1 || condition2 || condition3 ;// || condition4 ;
 }
 
-bool collision_pied(char *map, int positionX, int positionY,int largeur){
-    //printf("collision_pied personnage \n");
+bool collision_pied(int positionX, int positionY, Carte map1){
+   
 
-    bool condition_sol = map[((positionX) + (positionY + 3)*largeur)]== '3';
-    bool condition_bloc = map[((positionX) + (positionY + 3)*largeur)]== '2' ;
-    bool condition_gain = map[((positionX) + (positionY + 3)*largeur)]== '9';
-    //printf ("collision pied %d\n", condition_sol || condition_bloc);
+    bool condition_sol = map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== '3';
+    bool condition_bloc = map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== '2' ;
+    bool condition_gain = map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== '9';
+   
         
     return (condition_sol || condition_bloc || condition_gain) ;
 }
 
-bool collision_tete(char *map, int positionX, int positionY, int largeur){
+bool collision_tete(int positionX, int positionY, Carte map1){
     bool collision = false;
-    //printf("direction %d\n",direction);
-    //if ((positionY + (direction) < HAUTEUR_MAP - 1) && (positionY + (direction) > 0)){
+    
         for (int i= 0 ; i<15 ; i++){
         
             if (!collision){
-                collision = map[(positionX) + (positionY - i)*largeur] == '2';
+                collision = map1.carteJeu[(positionX) + (positionY - i)*map1.largeur] == '2';
             }
-        //printf("%d\n",collision);
+       
         
         }
-    //}
+   
     return collision ;
 }
 
 // gerer lorsque le personnage atteint un trou
-bool trou(char *map, int positionX, int positionY,int largeur)
+bool trou(int positionX, int positionY, Carte map1)
 {
-    return map[positionX + (positionY + 3) * largeur] == '1';
+    return map1.carteJeu[positionX + (positionY + 3) * map1.largeur] == '1';
 }
 
-bool gagner(char *map,int positionX, int positionY, int largeur){
-    return map[positionX + (positionY + 3) * largeur] == '9' ;
+bool gagner(int positionX, int positionY, Carte map1){
+    return map1.carteJeu[positionX + (positionY + 3) * map1.largeur] == '9' ;
 }
 
 

@@ -1,7 +1,7 @@
 #include "gestionDesTouches.h"
 
 void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,  int *numSprite , int* positionX , int* positionY,int * affichage_position_x, 
-                                                    int* map,int largeur,int hauteur, int* mode, int* num, int* numero){
+                                                     int* mode, int* num, int* numero, Carte map1){
         SDL_Rect position ;
         switch(evenements.type)
         {
@@ -19,8 +19,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 case SDLK_RETURN  : //touche entrer
                     if(*mode == 0 ){
                         if(*num == 0){
-                            //free(*map);
-                            //*map = lire_fichier("map2.txt",&hauteur, &largeur, &taille);
+                            
                             *mode = 1;
                         }
                         else if(*num == 1 ){
@@ -42,13 +41,13 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     }
                     break;
                 case SDLK_RIGHT : // touche fleche droite
-                    if (!collision(map,1 ,*positionX, *positionY,largeur)){
-                        deplacement_sur_map (debutX, 1 , positionX ,  affichage_position_x,largeur);
+                    if (!collision(1 ,*positionX, *positionY,map1)){
+                        deplacement_sur_map (debutX, 1 , positionX ,  affichage_position_x,map1);
                     
                     }
                 //SDL_Delay(1000);
                 
-                    if(trou(map, *positionX, *positionY, largeur)){
+                    if(trou(*positionX, *positionY, map1)){
                     
                         gameOver("gameOver.bmp", ecran);
                         *terminer = true ;
@@ -62,10 +61,10 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     }
                     break;
                 case SDLK_LEFT : // touche fleche gauche
-                    if (!collision(map,-1 ,*positionX, *positionY,largeur)){
-                        deplacement_sur_map (debutX, (-1), positionX ,affichage_position_x,largeur);
+                    if (!collision(-1 ,*positionX, *positionY,map1)){
+                        deplacement_sur_map (debutX, (-1), positionX ,affichage_position_x,map1);
                     }
-                    if(trou(map, *positionX, *positionY,largeur)){
+                    if(trou(*positionX, *positionY,map1)){
                     
                         gameOver("gameOver.bmp", ecran);
                         *terminer = true ;
@@ -93,17 +92,17 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                         }
                     }
 
-                    if(!collision_tete(map, *positionX, *positionY,largeur)){
-                        saut(-1 , 10, positionY, hauteur);
+                    if(!collision_tete(*positionX, *positionY,map1)){
+                        saut(-1 , 10, positionY, map1);
                     }
-                    if(trou(map, *positionX, *positionY,largeur)){
+                    if(trou(*positionX, *positionY,map1)){
                     
                         gameOver("gameOver.bmp", ecran);
                         *terminer = true ;
                     }
                     break ;
                 case SDLK_DOWN : //fleche du bas
-                //printf("c ouou\n");
+                
                     if (*mode == 0){
                         if (*num<3){
                             *num +=1 ;
@@ -126,7 +125,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 
         }
         case SDL_MOUSEBUTTONUP:
-                 //printf("coucou : %d : %d \n",evenements.button.x, evenements.button.y);
+                 
                     switch(evenements.button.button){
                         case SDL_BUTTON_LEFT : //clique souris 
 
@@ -134,7 +133,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                         position.y = evenements.button.y ;
                         
                         if((position.x > 1225 && position.x < 1260)&&(position.y < 870 && position.y > 820)){
-                         //printf("x %d : y %d \n",evenements.button.x, evenements.button.y);   
+                       
                          *mode = 0 ;
                         }
                         break ;

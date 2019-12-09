@@ -13,25 +13,27 @@
 #include "finDeJeu.h"
 
 
-void personnage_jeu(SDL_Renderer* ecran ,int h, int w  , int positionY , SDL_Texture* perso , int numSprite,SDL_Rect* sprite, int affichage_position_x,int hauteur)  ;
+void personnage_jeu(SDL_Renderer* ecran ,int h, int w  , int positionY , SDL_Texture* perso , int numSprite,SDL_Rect* sprite, int affichage_position_x, Carte map1)  ;
 
 SDL_Rect* sprite_personnage() ;
 
-void deplacement_sur_map (int* debutX, int direction , int* positionX , int * affichage_position_x, int largeur) ;
+void deplacement_sur_map (int* debutX, int direction , int* positionX , int * affichage_position_x, Carte map1) ;
 
-bool collision(char *map, int direction ,int positionX, int positionY, int largeur);
+bool collision(int direction ,int positionX, int positionY, Carte map1);
 
 //void gravite(int vitesse,  int *positionY);
-void gravite(int direction, int *positionY, int hauteur);
+void gravite(int direction, int *positionY, Carte map1);
 
-bool collision_pied(char *map,  int positionX, int positionY, int largeur);
+bool collision_pied(int positionX, int positionY, Carte map1);
 
-bool collision_tete(char *map, int positionX, int positionY, int largeur);
+bool collision_tete(int positionX, int positionY, Carte map1);
 
-bool trou(char* map, int positionX, int positionY, int largeur);
+bool trou(int positionX, int positionY, Carte map1);
 
-void saut (int direction, int vitesse, int* positionY, int hauteur);
+void saut (int direction, int vitesse, int* positionY, Carte map1);
 
-bool gagner(char *map,int positionX, int positionY, int largeur);
+bool gagner(int positionX, int positionY, Carte map1);
+
+int vie_du_personnage();
 
 #endif

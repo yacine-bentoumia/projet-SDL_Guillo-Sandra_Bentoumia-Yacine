@@ -5,14 +5,14 @@
 SDL_Rect dest , pos ;
 
 void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, 
-int w, int h,int debutX,char* map, SDL_Texture* gain, int largeur,int hauteur){
+int w, int h,int debutX,SDL_Texture* gain, Carte map1){
 
     dest.x = 0 ;
     dest.y = 0 ;
 
 
     //hauteur d'une case
-    int hauteur_case = hauteur_une_case(h,hauteur) ;
+    int hauteur_case = hauteur_une_case(h,map1) ;
     //largeur d'une case
     int largeur_case = largeur_une_case(w) ;
 
@@ -23,14 +23,14 @@ int w, int h,int debutX,char* map, SDL_Texture* gain, int largeur,int hauteur){
     
  
     for (int i = 0 ; i < LARGEUR_MAP ; i++){ 
-        //printf("coucou\n");
-        for (int j = 0 ; j < hauteur ; j++) {
+       
+        for (int j = 0 ; j < map1.hauteur ; j++) {
            
             //position initiale
             pos.x = (i * largeur_case) ;
             pos.y = (j * hauteur_case) ;
-            char champ = map[((i+debutX)+j*largeur) ]; 
-            //printf("%c \n",champ);
+            char champ = map1.carteJeu[((i+debutX)+j*map1.largeur) ]; 
+          
             switch(champ) 
             {
                 case '0' :
@@ -53,7 +53,7 @@ int w, int h,int debutX,char* map, SDL_Texture* gain, int largeur,int hauteur){
                 break;
                 case '9' :
                 SDL_RenderCopy(ecran, gain, &dest, &pos);
-                //win("winner.bmp", ecran);
+                
                 
                 break;
                 default : 
@@ -69,15 +69,15 @@ int w, int h,int debutX,char* map, SDL_Texture* gain, int largeur,int hauteur){
 }
 
 
-int hauteur_une_case(int h,int hauteur){
+int hauteur_une_case(int h, Carte map1){
     
 
     //hauteur d'une case
-    if(h % hauteur==0){
-        dest.h = (h / hauteur) ; // h = hauteur_fenetre
+    if(h % map1.hauteur==0){
+        dest.h = (h / map1.hauteur) ; // h = hauteur_fenetre
     }
     else{
-        dest.h = (h / hauteur) + 1;
+        dest.h = (h / map1.hauteur) + 1;
     }
     return dest.h ;
 }

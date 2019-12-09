@@ -10,7 +10,7 @@
 
 
 
-void choix_menu(SDL_Renderer* ecran, int num,SDL_Texture **tableau);
+void choix_menu(SDL_Renderer* ecran, SDL_Texture *tableau);
 
 void choix_option(SDL_Renderer* ecran,SDL_Texture* commande);
 

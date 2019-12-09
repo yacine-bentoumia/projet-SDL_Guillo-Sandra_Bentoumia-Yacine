@@ -6,6 +6,8 @@ pour la gestion de la sourie : https://wiki.libsdl.org/SDL_MouseButtonEvent
 
 exemple de map : http://sdz.tdct.org/sdz/ile-mapping.html
 
+gestion de map de differentes taille : https://koor.fr/C/cstdlib/realloc.wp
+
 COMPILATION : make
 
 EXECUTER : ./jeu 

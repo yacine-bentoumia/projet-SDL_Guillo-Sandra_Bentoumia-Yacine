@@ -13,6 +13,6 @@
 
 
 void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool * terminer,int *debutX, int *numSprite , int* positionX , int* positionY,
-                                                int * affichage_position_x , int*map,int largeur, int hauteur, int* mode,int *num,int* numero) ;
+                                                int * affichage_position_x , int* mode,int *num,int* numero, Carte map1) ;
 
 #endif
