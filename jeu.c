@@ -14,7 +14,10 @@ int main(int argc, char *argv[])
   int hauteur = 0;
   int largeur = 0;
   int taille = 0 ;
-  char *map = lire_fichier("map.txt",&hauteur, &largeur, &taille);
+  Carte map1 ;
+  map1.carteJeu = NULL;
+  //char *map = lire_fichier("map.txt",&hauteur, &largeur, &taille);
+  lire_fichier("map.txt",&map1);
   //printf("%d\n",hauteur);
 
   SDL_Window *fenetre;  // Déclaration de la fenêtre
@@ -85,7 +88,7 @@ int main(int argc, char *argv[])
 
  // SDL_Texture *scientifique = charger_image_transparente("scientifique.bmp", ecran, 255, 0, 0);
 
-  // Boucle principale
+ 
 
   int w = 0;
   int h = 0;
@@ -93,7 +96,7 @@ int main(int argc, char *argv[])
   //int debutY = 0; ligne a partir de laquelle on affiche la map
   int numSprite = 10;
   int positionX = debutX + 1;
-  int positionY = hauteur - 5; // * hauteur_une_case(h);
+  int positionY = map1.hauteur - 5; // * hauteur_une_case(h);
   int affichage_position_x = 1;
   SDL_Rect *sprite = sprite_personnage();
   int temps_debut = 0 ;
@@ -102,12 +105,14 @@ int main(int argc, char *argv[])
   int num = 0 ; // numero dans le menu
   int numero = 0 ;  // numero de niveau
 
-  Carte map1 ; 
+ 
+  //map1.carteJeu = lire_fichier("map.txt",&map1.hauteur, &map1.largeur, &map1.taille); 
   Carte map2 ; 
   Carte map3 ; 
   Carte map4 ; 
   Carte map5 ; 
   Carte map6 ;
+
 
   
 
@@ -128,7 +133,7 @@ int main(int argc, char *argv[])
 
   //scientist = definir_sprite_stf(scientist);
   //scientist = definir_emplacement_stf(scientist);
-
+ // Boucle principale
   while (!terminer)
   {
     temps_debut = SDL_GetTicks();
@@ -138,8 +143,14 @@ int main(int argc, char *argv[])
       choix_menu(ecran,num,&tableau) ;
     }
     else if (mode == 1){
-      carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, w, h, debutX, map,gain,largeur, hauteur); // affiche la map
-      personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,hauteur);
+      //map = lire_fichier("map.txt",&hauteur, &largeur, &taille);
+      //map1.carteJeu = lire_fichier("map.txt",&map1.hauteur, &map1.largeur, &map1.taille);
+     //printf("ligne148 : %d : %d : %d\n",&(map1.hauteur),map1.hauteur,map1.hauteur);
+      carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, w, h, debutX, map1.carteJeu
+      ,gain,map1.largeur, map1.hauteur); // affiche la map
+      //hauteur = map1.hauteur;
+      //printf("hauteur : %d \n",map1.hauteur);
+      personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,map1.hauteur);
     //emplacement_balle1(ecran, balle1, image_balle1, map);
 
     //afficher_personnage(scientist, ecran);
@@ -147,9 +158,9 @@ int main(int argc, char *argv[])
     //animer_ennemi(scientist, ecran);
 
 
-      if (!collision_pied(map, positionX, positionY, largeur)){
-        if (!trou(map, positionX, positionY, largeur)){
-          gravite(1 , &positionY,hauteur);//int *map, int vitesse, int *positionX, int direction, int *positionY
+      if (!collision_pied(map1.carteJeu, positionX, positionY, map1.largeur)){
+        if (!trou(map1.carteJeu, positionX, positionY, map1.largeur)){
+          gravite(1 , &positionY,map1.hauteur);//int *map, int vitesse, int *positionX, int direction, int *positionY
         }
         else {
          gameOver("gameOver.bmp", ecran);
@@ -157,7 +168,7 @@ int main(int argc, char *argv[])
         }
      
       }
-      if (gagner(map, positionX, positionY,largeur)){
+      if (gagner(map1.carteJeu, positionX, positionY,map1.largeur)){
         win("winner.bmp", ecran);
         terminer = true ;
 
@@ -171,28 +182,59 @@ int main(int argc, char *argv[])
     }else if(mode == 2){
       choix_option( ecran,commande);
     }else if(mode == 3){
+      
       choix_niveau(ecran, tab_niv[numero]);
       switch (numero){
         case 1 :
-          map1.carteJeu = lire_fichier("map.txt",&map1.hauteur, &map1.largeur, &map1.taille);
+         // map1.carteJeu = lire_fichier("map.txt",&map1.hauteur, &map1.largeur, &map1.taille);
+           //printf("map1\n");
+          //map = map1.carteJeu ;
+          /*hauteur = &map1.hauteur ;
+          largeur = &map1.largeur ;
+          taille =  &map1.taille ;*/
           break;
         case 2 :
-          map2.carteJeu = lire_fichier("map1.txt",&map2.hauteur, &map2.largeur, &map2.taille);
-          break;
+          //map2.carteJeu = lire_fichier("map1.txt",&map2.hauteur, &map2.largeur, &map2.taille);
+          //printf("map1\n");
+          //map = map2.carteJeu ;
+          
+          lire_fichier("map2.txt",&map1);
+/*          hauteur = map2.hauteur ;
+          largeur = map2.largeur ;
+          taille =  map2.taille ;
+  */        break;
         case 3 :
-          map3.carteJeu = lire_fichier("map2.txt",&map3.hauteur, &map3.largeur, &map3.taille);
+          //map3.carteJeu = lire_fichier("map3.txt",&map3.hauteur, &map3.largeur, &map3.taille);
+          // printf("map1\n");
+          //map = map3.carteJeu ;
+          /*hauteur = &map3.hauteur ;
+          largeur = &map3.largeur ;
+          taille =  &map3.taille ;*/
           break ;
         case 4 :
-          map4.carteJeu = lire_fichier("map2.txt",&map4.hauteur, &map4.largeur, &map4.taille);
+          //map4.carteJeu = lire_fichier("map2.txt",&map4.hauteur, &map4.largeur, &map4.taille);
+
+          /*hauteur = &map4.hauteur ;
+          largeur = &map4.largeur ;
+          taille =  &map4.taille ;*/
           break;
         case 5:
-          map5.carteJeu = lire_fichier("map2.txt",&map5.hauteur, &map5.largeur, &map5.taille);
+          //map5.carteJeu = lire_fichier("map2.txt",&map5.hauteur, &map5.largeur, &map5.taille);
+          /*hauteur = &map5.hauteur ;
+          largeur = &map5.largeur ;
+          taille =  &map5.taille ;*/
           break;
         case 6:
-          map6.carteJeu = lire_fichier("map2.txt",&map6.hauteur, &map6.largeur, &map6.taille);
+          //map6.carteJeu = lire_fichier("map2.txt",&map6.hauteur, &map6.largeur, &map6.taille);
+          /*hauteur = &map6.hauteur ;
+          largeur = &map6.largeur ;
+          taille =  &map6.taille ;*/
           break;
         default :
-          map1.carteJeu = lire_fichier("map.txt",&map1.hauteur, &map1.largeur, &map1.taille);
+          //map1.carteJeu = lire_fichier("map.txt",&map1.hauteur, &map1.largeur, &map1.taille);
+          /*hauteur = &map1.hauteur ;
+          largeur = &map1.largeur ;
+          taille =  &map1.taille ;*/
           break;
         }
     }
@@ -206,7 +248,7 @@ int main(int argc, char *argv[])
     SDL_RenderPresent(ecran);
     if (SDL_PollEvent(&evenements))
     {
-      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x, map,largeur, hauteur,&mode,&num,&numero);
+      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x, map1.carteJeu,map1.largeur, map1.hauteur,&mode,&num,&numero);
 
       //decalage_stf(ecran, scientifique, &image_stf, &pos_stf);
 
@@ -221,7 +263,7 @@ int main(int argc, char *argv[])
   }
   // Quitter SDL
   free(sprite);
-  free(map);
+  //free(map1);
   
  
   //SDL_DestroyTexture(fond);

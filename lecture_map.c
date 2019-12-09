@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
 #include "lecture_map.h"
-#include "constante.h"
+
 
 void allouer_tab(char* tab, int taille)
 {
@@ -70,16 +67,30 @@ void taille_fichier(const char* nomFichier, int* largeur, int*hauteur, int*taill
 
 }
 
-char* lire_fichier(const char *nomFichier, int* hauteur,int* largeur, int* taille)
+void lire_fichier(const char *nomFichier, Carte *tab)//int* hauteur,int* largeur, int* taille)
 {
+    //printf("lire fichier \n");
+    int hauteur = 0,taille=0,largeur=0;
     
     FILE* fichier = NULL; 
     //int caractere_actuel = 0;
     fichier = fopen(nomFichier, "r");
-    taille_fichier(nomFichier,largeur,hauteur,taille) ;
+    taille_fichier(nomFichier,&largeur,&hauteur,&taille) ;
+    
+    tab->largeur = largeur;
+    tab->hauteur = hauteur ;
+    tab->taille = taille;
     char caractere_actuel = ' ';
-    char* tab = NULL ;
-    tab = malloc((*taille) *sizeof(char));
+//    char* tab = NULL ;
+    if(tab->carteJeu == NULL){
+        //printf("malloc\n");
+        tab->carteJeu = malloc((taille) *sizeof(char));
+        
+    }else{
+        //printf("realloc\n");
+        (tab->carteJeu) = (char*)realloc((tab->carteJeu), ((taille) *sizeof(char)));
+    }
+    
     //allouer_tab(tab,SURFACE_MAP);
     int i = 0;
 
@@ -91,7 +102,7 @@ char* lire_fichier(const char *nomFichier, int* hauteur,int* largeur, int* taill
             caractere_actuel = fgetc(fichier); // On lit le caractère
             //printf("%c", caractere_actuel); // On l'affiche
             if(caractere_actuel != '\n'&& caractere_actuel != EOF){
-                tab[i] = caractere_actuel;
+                tab->carteJeu[i] = caractere_actuel;
                 //printf("%c",tab[i]);
                 i++;
             }//else{printf("\n");}
@@ -165,6 +176,6 @@ printf(" kj : %d \n",kj);*/
 
     //afficher_tab(tab, SURFACE_MAP);
 */
-    return tab;
+    
 
 }

@@ -4,7 +4,8 @@
 
 SDL_Rect dest , pos ;
 
-void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, int w, int h,int debutX,char* map, SDL_Texture* gain, int largeur,int hauteur){
+void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, 
+int w, int h,int debutX,char* map, SDL_Texture* gain, int largeur,int hauteur){
 
     dest.x = 0 ;
     dest.y = 0 ;
@@ -19,9 +20,12 @@ void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_T
     pos.h = hauteur_case ;
     pos.w = largeur_case ;
     
-
+    
+ 
     for (int i = 0 ; i < LARGEUR_MAP ; i++){ 
+        //printf("coucou\n");
         for (int j = 0 ; j < hauteur ; j++) {
+           
             //position initiale
             pos.x = (i * largeur_case) ;
             pos.y = (j * hauteur_case) ;

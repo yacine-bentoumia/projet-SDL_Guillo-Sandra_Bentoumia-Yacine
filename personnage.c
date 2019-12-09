@@ -13,6 +13,7 @@ void personnage_jeu(SDL_Renderer *ecran, int h, int w, int positionY, SDL_Textur
     position.h = (h / hauteur) * 3;
     position.w = w / LARGEUR_MAP;
 
+
     SDL_RenderCopy(ecran, perso, &sprite[numSprite], &position);
 }
 
@@ -145,6 +146,11 @@ bool gagner(char *map,int positionX, int positionY, int largeur){
     return map[positionX + (positionY + 3) * largeur] == '9' ;
 }
 
+
+int vie_du_personnage(){
+    int vie = 3 ; 
+    //sif (trou())
+}
 
 
 

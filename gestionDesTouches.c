@@ -27,12 +27,14 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                             *mode = 2;
                         }
                         else if(*num == 2 ){
+                            
                             *mode = 3 ;
                         }
                         else if(*num == 3 ){
                             *terminer = true ;
                         }
                     }else if(*mode == 3){
+                        
                         *mode = 1 ;
                     }else{
                     gameOver("gameOver.bmp", ecran);
@@ -83,7 +85,14 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                         }else if (*num == 0){
                             *num = 3;
                         }
+                    }else if(*mode == 3){
+                        if (*numero>0){
+                            *numero -=1 ;
+                        }else if (*numero == 0){
+                            *numero = 5;
+                        }
                     }
+
                     if(!collision_tete(map, *positionX, *positionY,largeur)){
                         saut(-1 , 10, positionY, hauteur);
                     }
@@ -105,7 +114,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     }else if(*mode == 3){
                         if (*numero<5){
                             *numero +=1 ;
-                        }else if (*numero == 6){
+                        }else if (*numero == 5){
                             *numero = 0;
                         }
                     }
