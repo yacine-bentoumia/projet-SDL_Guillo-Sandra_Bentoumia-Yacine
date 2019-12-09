@@ -102,7 +102,14 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                             *num = 0;
                         }
                         
+                    }else if(*mode == 3){
+                        if (*numero<5){
+                            *numero +=1 ;
+                        }else if (*numero == 6){
+                            *numero = 0;
+                        }
                     }
+
                     break ;
                 
          
