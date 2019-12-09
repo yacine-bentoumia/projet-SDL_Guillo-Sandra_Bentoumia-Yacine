@@ -7,6 +7,7 @@
 #include "ennemis.h"
 #include "lecture_map.h"
 #include "structures.h"
+#include "menu.h"
 
 int main(int argc, char *argv[])
 {
@@ -101,6 +102,13 @@ int main(int argc, char *argv[])
   int num = 0 ; // numero dans le menu
   int numero = 0 ;  // numero de niveau
 
+  Carte map1 ; 
+  Carte map2 ; 
+  Carte map3 ; 
+  Carte map4 ; 
+  Carte map5 ; 
+  Carte map6 ;
+
   
 
   
@@ -164,6 +172,29 @@ int main(int argc, char *argv[])
       choix_option( ecran,commande);
     }else if(mode == 3){
       choix_niveau(ecran, tab_niv[numero]);
+      switch (numero){
+        case 1 :
+          map1.carteJeu = lire_fichier("map.txt",&map1.hauteur, &map1.largeur, &map1.taille);
+          break;
+        case 2 :
+          map2.carteJeu = lire_fichier("map1.txt",&map2.hauteur, &map2.largeur, &map2.taille);
+          break;
+        case 3 :
+          map3.carteJeu = lire_fichier("map2.txt",&map3.hauteur, &map3.largeur, &map3.taille);
+          break ;
+        case 4 :
+          map4.carteJeu = lire_fichier("map2.txt",&map4.hauteur, &map4.largeur, &map4.taille);
+          break;
+        case 5:
+          map5.carteJeu = lire_fichier("map2.txt",&map5.hauteur, &map5.largeur, &map5.taille);
+          break;
+        case 6:
+          map6.carteJeu = lire_fichier("map2.txt",&map6.hauteur, &map6.largeur, &map6.taille);
+          break;
+        default :
+          map1.carteJeu = lire_fichier("map.txt",&map1.hauteur, &map1.largeur, &map1.taille);
+          break;
+        }
     }
     
     //SDL_RenderCopy(ecran, fond, NULL, NULL); // affiche le fond

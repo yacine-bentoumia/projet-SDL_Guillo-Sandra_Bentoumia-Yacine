@@ -1,3 +1,6 @@
+#ifndef PERSONNAGE_H
+#define PERSONNAGE_H
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <stdio.h>
@@ -30,3 +33,5 @@ bool trou(char* map, int positionX, int positionY, int largeur);
 void saut (int direction, int vitesse, int* positionY, int hauteur);
 
 bool gagner(char *map,int positionX, int positionY, int largeur);
+
+#endif

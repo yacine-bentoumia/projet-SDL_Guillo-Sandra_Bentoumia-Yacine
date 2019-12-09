@@ -27,23 +27,13 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                             *mode = 2;
                         }
                         else if(*num == 2 ){
-                            /*if(*numero == 1){
-
-                            }else if(*numero == 2){
-                                
-                            }else if(*numero == 3){
-
-                            }else if(*numero == 4){
-
-                            }else if(*numero == 5){
-                                
-                            }else if(*numero == 6){
-                                
-                            }*/
+                            *mode = 3 ;
                         }
                         else if(*num == 3 ){
                             *terminer = true ;
                         }
+                    }else if(*mode == 3){
+                        *mode = 1 ;
                     }else{
                     gameOver("gameOver.bmp", ecran);
                     *terminer = true ;
