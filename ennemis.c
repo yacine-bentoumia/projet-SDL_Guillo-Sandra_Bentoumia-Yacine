@@ -554,7 +554,7 @@ SDL_Rect sprite_balle1()
     return sprite;
 }
 
-void emplacement_balle1(SDL_Renderer *ecran, SDL_Texture *perso, SDL_Rect sprite, int *map)
+void emplacement_balle1(SDL_Rect sprite)
 {
 
     SDL_Rect position;
@@ -591,7 +591,7 @@ void emplacement_balle1(SDL_Renderer *ecran, SDL_Texture *perso, SDL_Rect sprite
 
                 position.x = 298;
             }
-            printf("posx: %d\n", position.x);
+            //printf("posx: %d\n", position.x);
             temps_precedent = temps_actuel;
         }
     }

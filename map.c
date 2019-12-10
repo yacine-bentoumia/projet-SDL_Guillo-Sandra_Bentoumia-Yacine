@@ -37,10 +37,10 @@ SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debu
                 SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
                 break ;
                 case '1' :
-                SDL_RenderCopy(ecran, trou, &dest, &pos) ;
+                SDL_RenderCopy(ecran, obstacle, &dest, &pos) ;
                 break ;
                 case '2' :
-                SDL_RenderCopy(ecran, obstacle, &dest, &pos) ;
+                SDL_RenderCopy(ecran, trou, &dest, &pos) ;
                 break ;
                 case '3' :
                 SDL_RenderCopy(ecran, sol, &dest, &pos) ;

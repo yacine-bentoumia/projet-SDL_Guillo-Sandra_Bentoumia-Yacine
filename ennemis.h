@@ -51,7 +51,7 @@ ennemi correction_position_ennemi(ennemi e, SDL_Event evenements, int positionX)
 /*
 SDL_Rect sprite_balle1();
 
-void emplacement_balle1(SDL_Renderer *ecran, SDL_Texture *perso, SDL_Rect sprite, int *map);
+void emplacement_balle1(SDL_Rect sprite);
 
 void deplacement_balle1(SDL_Renderer *ecran, SDL_Texture *perso, SDL_Rect sprite);
 
