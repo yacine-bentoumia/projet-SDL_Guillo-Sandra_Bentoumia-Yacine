@@ -19,7 +19,7 @@ struct Carte{
 };
 
 
-void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, int w, int h,int debutX, SDL_Texture* gain, Carte map1);
+void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8, int w, int h,int debutX, SDL_Texture* gain, Carte map1);
 
 int hauteur_une_case(int h, Carte map1) ;
 

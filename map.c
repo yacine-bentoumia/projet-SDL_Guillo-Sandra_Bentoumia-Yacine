@@ -5,7 +5,7 @@
 SDL_Rect dest , pos ;
 
 void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, 
-int w, int h,int debutX,SDL_Texture* gain, Carte map1){
+SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debutX,SDL_Texture* gain, Carte map1){
 
     dest.x = 0 ;
     dest.y = 0 ;
@@ -50,6 +50,15 @@ int w, int h,int debutX,SDL_Texture* gain, Carte map1){
                 break;
                 case '5':
                 SDL_RenderCopy(ecran, tour5, &dest, &pos);
+                break;
+                case '6':
+                SDL_RenderCopy(ecran, tour6, &dest, &pos);
+                break;
+                case '7':
+                SDL_RenderCopy(ecran, tour7, &dest, &pos);
+                break;
+                case '8':
+                SDL_RenderCopy(ecran, tour8, &dest, &pos);
                 break;
                 case '9' :
                 SDL_RenderCopy(ecran, gain, &dest, &pos);
