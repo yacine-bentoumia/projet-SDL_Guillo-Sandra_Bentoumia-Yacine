@@ -22,7 +22,16 @@
     #define LARGEUR_STF2                27
 
 
-    #define NB_CASE_TOURELLE            1
+   
+
+
+    #define POS_BALLE1                  297
+    #define POS_BALLE2                  661
+    #define POS_BALLE3                  1300
+
+    #define POS_MISSILE1_X              477
+    #define POS_MISSILE1_Y              260
+
 
     //#define LARGEUR_RACCOON 50
     //#define HAUTEUR_RACCOON 30
