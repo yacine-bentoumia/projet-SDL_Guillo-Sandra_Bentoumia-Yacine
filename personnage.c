@@ -102,7 +102,13 @@ bool collision(int direction, int positionX, int positionY, Carte map1)
     bool condition3 = map1.carteJeu[(positionX + direction) + (positionY + 2) * map1.largeur] == '2'; //position de x3 +1 == 2
 
 
-    return condition1 || condition2 || condition3 ;// || condition4 ;
+    // collision contre une tourelle
+
+    bool condition4 = map1.carteJeu[(positionX + direction) + positionY * map1.largeur] == '4';       
+    bool condition5 = map1.carteJeu[(positionX + direction) + (positionY + 1) * map1.largeur] == '4'; 
+    bool condition6 = map1.carteJeu[(positionX + direction) + (positionY + 2) * map1.largeur] == '4'; 
+
+    return condition1 || condition2 || condition3  || condition4 || condition5 || condition6;
 }
 
 bool collision_pied(int positionX, int positionY, Carte map1){
@@ -112,8 +118,9 @@ bool collision_pied(int positionX, int positionY, Carte map1){
     bool condition_bloc = map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== '2' ;
     bool condition_gain = map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== '9';
    
+    bool condition_tourelle = map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== '4';
         
-    return (condition_sol || condition_bloc || condition_gain) ;
+    return (condition_sol || condition_bloc || condition_gain || condition_tourelle) ;
 }
 
 bool collision_tete(int positionX, int positionY, Carte map1){
