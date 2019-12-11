@@ -71,10 +71,12 @@ void deplacement_sur_map(int *debutX, int direction, int *positionX, int *affich
 void saut(int direction, int vitesse, int *positionY, Carte map1)
 { 
 
-    if ((*positionY + (direction*vitesse) < map1.hauteur - 1) && (*positionY + (direction*vitesse) > 0))//ne sort pas du tableau 
-    
-    {         
-        *positionY -= 1 * vitesse ;  
+    if ((*positionY + (direction*vitesse) < map1.hauteur - 1) && (*positionY + (direction*vitesse) > 0))  {//ne sort pas du tableau 
+    //int v = 0 ;
+    //while (v!= vitesse){
+        *positionY -= vitesse ;  
+        
+    //}            
               
 
     }
@@ -114,7 +116,7 @@ bool collision(int direction, int positionX, int positionY, Carte map1)
 bool collision_pied(int positionX, int positionY, Carte map1){
    
 
-    bool condition_sol = map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== '3';
+    bool condition_sol = map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== '3' ;
     bool condition_bloc = map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== '2' ;
     bool condition_gain = map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== '9';
    
@@ -123,19 +125,29 @@ bool collision_pied(int positionX, int positionY, Carte map1){
     return (condition_sol || condition_bloc || condition_gain || condition_tourelle) ;
 }
 
-bool collision_tete(int positionX, int positionY, Carte map1){
-    bool collision = false;
+int collision_tete(int positionX, int positionY, Carte map1, int direction,int vitesse){
+    int pos = vitesse;
     
-        for (int i= 0 ; i<15 ; i++){
-        
-            if (!collision){
-                collision = map1.carteJeu[(positionX) + (positionY - i)*map1.largeur] == '2';
-            }
-       
-        
+    bool collision  ;
+    int i;
+    
+        for (i = 1 ; i < (vitesse) && (!collision); i++){ // && (!collision)
+            collision = map1.carteJeu[(positionX) + (positionY - i)*map1.largeur] == '2';        
         }
-   
-    return collision ;
+        pos = positionY - i + 1;
+    printf("Pos = %d\n", pos);
+    return  pos;
+}
+bool perte_de_vie(int positionX,int positionY,Carte map1, int direction){
+    //si le personnage touche des pics avec les pieds
+    bool condition =  map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== 'p';
+    //si le personnage touche des pics avec le corps
+    bool condition1 = map1.carteJeu[(positionX + direction) + positionY * map1.largeur] == 'p';       //position de x1 +1 == 2
+    bool condition2 = map1.carteJeu[(positionX + direction) + (positionY + 1) * map1.largeur] == 'p'; // position de x2 +1 ==2
+    bool condition3 = map1.carteJeu[(positionX + direction) + (positionY + 2) * map1.largeur] == 'p';
+    //si le perso touche des pics avec la tete 
+    bool collision4 = map1.carteJeu[(positionX) + (positionY - 1)*map1.largeur] == 'p';
+    return condition ;
 }
 
 // gerer lorsque le personnage atteint un trou
@@ -149,9 +161,13 @@ bool gagner(int positionX, int positionY, Carte map1){
 }
 
 
-int vie_du_personnage(){
-    int vie = 3 ; 
-    //sif (trou())
+int vie_du_personnage(int positionX,int positionY,Carte map1){
+    /*int vie = 3 ; 
+    if (perte_de_vie(positionX,positionY,map1)){
+        vie-- ;
+
+    }
+    //sif (trou())*/
 }
 
 

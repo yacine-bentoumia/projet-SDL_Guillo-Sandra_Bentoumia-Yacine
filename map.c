@@ -5,7 +5,7 @@
 SDL_Rect dest , pos ;
 
 void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, 
-SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debutX,SDL_Texture* gain, Carte map1){
+SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debutX,SDL_Texture* gain, Carte map1,SDL_Texture*pics){
 
     dest.x = 0 ;
     dest.y = 0 ;
@@ -34,37 +34,45 @@ SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debu
             switch(champ) 
             {
                 case '0' :
-                SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
-                break ;
+                    SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
+                    break ;
                 case '1' :
-                SDL_RenderCopy(ecran, obstacle, &dest, &pos) ;
-                break ;
+                    SDL_RenderCopy(ecran, obstacle, &dest, &pos) ;
+                    break ;
                 case '2' :
-                SDL_RenderCopy(ecran, trou, &dest, &pos) ;
-                break ;
+                    SDL_RenderCopy(ecran, trou, &dest, &pos) ;
+                    break ;
                 case '3' :
-                SDL_RenderCopy(ecran, sol, &dest, &pos) ;
-                break ;
+                    SDL_RenderCopy(ecran, sol, &dest, &pos) ;
+                    break ;
                 case '4':
-                SDL_RenderCopy(ecran, tour4, &dest, &pos);
-                break;
+                    SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
+                    SDL_RenderCopy(ecran, tour4, &dest, &pos);
+                    break;
                 case '5':
-                SDL_RenderCopy(ecran, tour5, &dest, &pos);
-                break;
+                    SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
+                    SDL_RenderCopy(ecran, tour5, &dest, &pos);
+                    break;
                 case '6':
-                SDL_RenderCopy(ecran, tour6, &dest, &pos);
-                break;
+                    SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
+                    SDL_RenderCopy(ecran, tour6, &dest, &pos);
+                    break;
                 case '7':
-                SDL_RenderCopy(ecran, tour7, &dest, &pos);
-                break;
+                    SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
+                    SDL_RenderCopy(ecran, tour7, &dest, &pos);
+                    break;
                 case '8':
-                SDL_RenderCopy(ecran, tour8, &dest, &pos);
-                break;
+                    SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
+                    SDL_RenderCopy(ecran, tour8, &dest, &pos);
+                    break;
                 case '9' :
-                SDL_RenderCopy(ecran, gain, &dest, &pos);
+                    SDL_RenderCopy(ecran, gain, &dest, &pos);
+                    break;
+                case 'p' :
+                    SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
+                    SDL_RenderCopy(ecran, pics, &dest, &pos) ;
+                    break ;
                 
-                
-                break;
                 default : 
                 SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
                 break;

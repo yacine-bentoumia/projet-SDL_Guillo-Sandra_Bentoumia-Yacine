@@ -91,10 +91,20 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                             *numero = 5;
                         }
                     }
-
-                    if(!collision_tete(*positionX, *positionY,map1)){
-                        saut(-1 , 10, positionY, map1);
-                    }
+                    
+                    /*while (collision_tete(*positionX, *positionY,map1,1,vitesse)){
+                    if(!collision_tete(*positionX, *positionY,map1,1,10)){
+                        //printf("%d \n",vitesse);
+                        
+                        vitesse-- ;
+                    }*/
+                    //if(!collision_tete(*positionX, *positionY,map1,1,10)){
+                    
+                    
+                             saut(-1 ,10 , positionY, map1);
+                            
+                    //}
+                    
                     if(trou(*positionX, *positionY,map1)){
                     
                         gameOver("gameOver.bmp", ecran);
