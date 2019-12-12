@@ -35,12 +35,10 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     }else if(*mode == 3){
                         
                         *mode = 1 ;
-                    }else{
-                    gameOver("gameOver.bmp", ecran);
-                    *terminer = true ;
                     }
                     break;
                 case SDLK_RIGHT : // touche fleche droite
+                    
                     if (!collision(1 ,*positionX, *positionY,map1)){
                         deplacement_sur_map (debutX, 1 , positionX ,  affichage_position_x,map1);
                     
@@ -92,18 +90,9 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                         }
                     }
                     
-                    /*while (collision_tete(*positionX, *positionY,map1,1,vitesse)){
-                    if(!collision_tete(*positionX, *positionY,map1,1,10)){
-                        //printf("%d \n",vitesse);
-                        
-                        vitesse-- ;
-                    }*/
-                    //if(!collision_tete(*positionX, *positionY,map1,1,10)){
-                    
-                    
+                   
                              saut(-1 ,10 , positionY, map1);
-                            
-                    //}
+                     
                     
                     if(trou(*positionX, *positionY,map1)){
                     

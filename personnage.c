@@ -138,7 +138,7 @@ int collision_tete(int positionX, int positionY, Carte map1,int vitesse){
    
     return  pos;
 }
-/*bool perte_de_vie(int positionX,int positionY,Carte map1, int direction){
+bool perte_de_vie(int positionX,int positionY,Carte map1, int direction){
     //si le personnage touche des pics avec les pieds
     bool condition =  map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== 'p';
     //si le personnage touche des pics avec le corps
@@ -146,9 +146,9 @@ int collision_tete(int positionX, int positionY, Carte map1,int vitesse){
     bool condition2 = map1.carteJeu[(positionX + direction) + (positionY + 1) * map1.largeur] == 'p'; // position de x2 +1 ==2
     bool condition3 = map1.carteJeu[(positionX + direction) + (positionY + 2) * map1.largeur] == 'p';
     //si le perso touche des pics avec la tete 
-    bool collision4 = map1.carteJeu[(positionX) + (positionY - 1)*map1.largeur] == 'p';
-    return condition ;
-}*/
+    bool condition4 = map1.carteJeu[(positionX) + (positionY - 1)*map1.largeur] == 'p';
+    return condition || condition1 || condition2 || condition3 || condition4 ;
+}
 
 // gerer lorsque le personnage atteint un trou
 bool trou(int positionX, int positionY, Carte map1)
@@ -160,21 +160,27 @@ bool gagner(int positionX, int positionY, Carte map1){
     return map1.carteJeu[positionX + (positionY + 3) * map1.largeur] == '9' ;
 }
 
-/*
-int vie_du_personnage(int positionX,int positionY,Carte map1){
-    int vie = 3 ; 
-    if (perte_de_vie(positionX,positionY,map1)){
-        vie-- ;
 
-    }
-    //sif (trou())
+void vie_du_personnage(SDL_Renderer *ecran,SDL_Texture *vie,int vie_perso){
+    
+    SDL_Rect  pos ;
+    //position
+    pos.x = 10 ;
+    pos.y = 10 ;
+    //taille
+    pos.h = 50 ;
+    pos.w = 50 ;
+
+   
+        for (int i = 0 ; i < vie_perso ; i++){
+            SDL_RenderCopy(ecran,vie, NULL, &pos);
+                //printf("%d \n",pos.x);
+                pos.x += 50 ;
+        }
+            
+            
+}
+
+/*int nb_vie_perso(){
+
 }*/
-
-
-
-
-
-
-
-
-

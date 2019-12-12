@@ -37,6 +37,7 @@ int main(void)//int argc, char *argv[])
   SDL_Texture *troux = charger_image("trou.bmp", ecran);
   SDL_Texture *obstacle = charger_image("obstacle.bmp", ecran);
   SDL_Texture *pics = charger_image_transparente("pics.bmp",ecran,255,0,0);
+  SDL_Texture *vie = charger_image_transparente("vie.bmp" ,ecran ,255,255,255);
 
   SDL_Texture *gain = charger_image("win.bmp", ecran); //image du win
 
@@ -170,10 +171,7 @@ int main(void)//int argc, char *argv[])
 
     positionY -= collision_element(balle1, positionY, w, h, map1);
     positionY -= collision_element(balle2,positionY, w, h, map1);
-    
- 
-
-
+  
     SDL_RenderClear(ecran);
     if(mode == 0){ 
       choix_menu(ecran,tableau[num]) ;
@@ -183,6 +181,7 @@ int main(void)//int argc, char *argv[])
       carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, tour6, tour7, tour8, w, h, debutX, gain,map1,pics); // affiche la map
     
       personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,map1);
+      vie_du_personnage(ecran,vie,3);
       
       afficher_element(balle1, ecran);
       afficher_element(balle2, ecran);
@@ -206,6 +205,7 @@ int main(void)//int argc, char *argv[])
         terminer = true ;
 
       }
+      
     
 
     }else if(mode == 2){
@@ -305,6 +305,7 @@ int main(void)//int argc, char *argv[])
   SDL_DestroyTexture(niveau);
   SDL_DestroyTexture(quitter);
   SDL_DestroyTexture(pics);
+  SDL_DestroyTexture(vie);
 
   SDL_DestroyTexture(niv1);
   SDL_DestroyTexture(niv2);
