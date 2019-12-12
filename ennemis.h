@@ -12,7 +12,7 @@ ennemi definir_vitesse(ennemi e, int vitesse);
 ennemi definir_nom(ennemi e, char *nom);
 ennemi definir_image(ennemi e, SDL_Texture *image);
 /*ennemi definir_sprite(ennemi e, SDL_Rect sprite);
-ennemi definir_emplacement_sprite(ennemi e, SDL_Rect emplacement);*/
+ennemi definir_position_sprite(ennemi e, SDL_Rect position);*/
 
 // fonctions de lecture
 
@@ -31,13 +31,13 @@ void afficher_personnage(ennemi e, SDL_Renderer *ecran);
 void afficher(SDL_Renderer *ecran, SDL_Event evenements, ennemi e);
 SDL_Rect sprite(SDL_Event evenements, ennemi e);
 /*int*/
-ennemi animer_ennemi(ennemi e, SDL_Renderer *ecran);
-ennemi deplacer_ennemi(ennemi e, SDL_Renderer *ecran);
+ennemi animer_ennemi(ennemi e);
+ennemi deplacer_ennemi(ennemi e);
 
 // definiton du scientifique par défaut
 
 ennemi definir_sprite_stf(ennemi e);
-ennemi definir_emplacement_stf(ennemi e);
+ennemi definir_position_stf(ennemi e);
 
 /* correction de l'affichage des objets lors du déplacement :
 
@@ -51,7 +51,7 @@ ennemi correction_position_ennemi(ennemi e, SDL_Event evenements, int positionX)
 /*
 SDL_Rect sprite_balle1();
 
-void emplacement_balle1(SDL_Rect sprite);
+void position_balle1(SDL_Rect sprite);
 
 void deplacement_balle1(SDL_Renderer *ecran, SDL_Texture *perso, SDL_Rect sprite);
 

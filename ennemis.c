@@ -23,15 +23,15 @@
     e.sprite.w = TAILLE_STF;
     e.sprite.h = TAILLE_STF;
 
-    e.emplacement_sprite.x = 100;
-    e.emplacement_sprite.y = 600;
-    e.emplacement_sprite.w = 150;
-    e.emplacement_sprite.h = 100;
+    e.position_sprite.x = 100;
+    e.position_sprite.y = 600;
+    e.position_sprite.w = 150;
+    e.position_sprite.h = 100;
 
     return e;
 }*/
 
-ennemi definir_nouveau_personnage(SDL_Renderer *ecran)
+/*ennemi definir_nouveau_personnage(SDL_Renderer *ecran)
 {
 
     ennemi e;
@@ -40,12 +40,12 @@ ennemi definir_nouveau_personnage(SDL_Renderer *ecran)
     e.vitesse = 0;
     //e.nom = "";
     e.image = NULL;
-    /*e.sprite = NULL;
-    e.emplacement_sprite = NULL;*/
+    //e.sprite = NULL;
+    //e.position_sprite = NULL;
 
     return e;
 }
-
+*/
 // fonctions d'écriture
 
 ennemi definir_vie(ennemi e, unsigned int vie)
@@ -60,7 +60,7 @@ ennemi definir_vitesse(ennemi e, int vitesse)
 {
 
     e.vitesse = vitesse;
-    e.emplacement_sprite.x += vitesse;
+    e.position_sprite.x += vitesse;
 
     return e;
 }
@@ -93,10 +93,10 @@ ennemi definir_sprite(ennemi e, SDL_Rect sprite)
     return e;
 }
 
-ennemi definir_emplacement_sprite(ennemi e, SDL_Rect emplacement)
+ennemi definir_position_sprite(ennemi e, SDL_Rect position)
 {
 
-    e.emplacement_sprite = emplacement;
+    e.position_sprite = position;
 
     return e;
 }
@@ -114,12 +114,12 @@ int lire_vitesse(ennemi e)
 
     return e.vitesse;
 }
-
+/*
 char *lire_nom(ennemi e)
 {
 
     return e.nom;
-}
+}*/
 
 /*void afficher_nom(ennemi e){
 
@@ -139,19 +139,19 @@ char *lire_nom(ennemi e)
 int lire_abscisse(ennemi e)
 {
 
-    return e.emplacement_sprite.x;
+    return e.position_sprite.x;
 }
 
 int lire_ordonnee(ennemi e)
 {
 
-    return e.emplacement_sprite.y;
+    return e.position_sprite.y;
 }
 
 void afficher_personnage(ennemi e, SDL_Renderer *ecran)
 {
 
-    SDL_RenderCopy(ecran, e.image, &e.sprite, &e.emplacement_sprite);
+    SDL_RenderCopy(ecran, e.image, &e.sprite, &e.position_sprite);
 }
 
 // SDL_Renderer *ecran;
@@ -186,40 +186,40 @@ ennemi definir_sprite_stf(ennemi e)
 }
 
 /*SDL_Rect*/
-ennemi definir_emplacement_stf(ennemi e)
+ennemi definir_position_stf(ennemi e)
 {
 
-    e.emplacement_sprite.x = 600;
-    e.emplacement_sprite.y = 620;
-    e.emplacement_sprite.w = 100;
-    e.emplacement_sprite.h = 80;
+    e.position_sprite.x = 600;
+    e.position_sprite.y = 620;
+    e.position_sprite.w = 100;
+    e.position_sprite.h = 80;
 
     return e;
 }
 
 // fonctions de définition
 
-ennemi deplacer_ennemi(ennemi e, SDL_Renderer *ecran)
+ennemi deplacer_ennemi(ennemi e)
 {
 
     bool stop = false;
 
-    if (e.emplacement_sprite.x < -TAILLE_STF)
+    if (e.position_sprite.x < -TAILLE_STF)
         stop = true;
 
     if (!stop)
     {
 
-        e.emplacement_sprite.x += lire_vitesse(e);
-        //e.emplacement_sprite.x -= 10;
+        e.position_sprite.x += lire_vitesse(e);
+        //e.position_sprite.x -= 10;
         //afficher_personnage(e, ecran);
 
-        //printf("pos: %d\n", e.emplacement_sprite.x);
+        //printf("pos: %d\n", e.position_sprite.x);
     }
     return e;
 }
 
-ennemi animer_ennemi(ennemi e, SDL_Renderer *ecran)
+ennemi animer_ennemi(ennemi e)
 {
 
     int parcours; // = -1; // sens du parcours de la feuille de sprite (-1: vers la gauche)
@@ -279,25 +279,25 @@ ennemi correction_position_ennemi(ennemi e, SDL_Event evenements, int positionX)
     case SDLK_LEFT:
         if (positionX == 0)
         {
-            e.emplacement_sprite.x += 17;
+            e.position_sprite.x += 17;
         }
         else
         {
-            e.emplacement_sprite.x += 25;
+            e.position_sprite.x += 25;
         }
         break;
     case SDLK_RIGHT:
-        e.emplacement_sprite.x -= 35;
-        //("e: %d\n", e.emplacement_sprite.x);
+        e.position_sprite.x -= 35;
+        //("e: %d\n", e.position_sprite.x);
         break;
     }
 
-    //e.emplacement_sprite.x -= 52;
+    //e.position_sprite.x -= 52;
 
     return e;
 }
 
-//lire emplacement...
+//lire position...
 
 /*
 typedef struct Personnage chat1;
@@ -306,7 +306,7 @@ typedef struct Personnage chat2;
 
 /*
 void afficher(SDL_Renderer *ecran, SDL_Event evenements, ennemi e) 
-//, SDL_Rect sprite, SDL_Rect emplacement)
+//, SDL_Rect sprite, SDL_Rect position)
 */
 /*{
 
@@ -322,7 +322,7 @@ void afficher(SDL_Renderer *ecran, SDL_Event evenements, ennemi e)
 
     // avant : ennemi est ici une texture
 
-    SDL_RenderCopy(ecran, e.image, &e.sprite, &e.emplacement_sprite);
+    SDL_RenderCopy(ecran, e.image, &e.sprite, &e.position_sprite);
 }
 
 */
@@ -337,7 +337,7 @@ SDL_Rect sprite(SDL_Event evenements, ennemi e)
 
     //SDL_Event evenements;
 
-    /*if (evenements.type == SDL_KEYDOWN)
+    if (evenements.type == SDL_KEYDOWN)
     {*/
 /*
     const Uint8 *etat_touche = SDL_GetKeyboardState(NULL);
@@ -360,7 +360,7 @@ SDL_Rect sprite(SDL_Event evenements, ennemi e)
     return e.sprite;
 }
 */
-/*void afficher_balle(SDL_Renderer *ecran, SDL_Texture *balle, bool afficher) /*, SDL_Rect sprite, SDL_Rect emplacement)*/
+//void afficher_balle(SDL_Renderer *ecran, SDL_Texture *balle, bool afficher)) //, SDL_Rect sprite, SDL_Rect position)
 //{
 
 /* SDL_Rect position_balle;
@@ -387,10 +387,11 @@ SDL_Rect sprite(SDL_Event evenements, ennemi e)
             while (position_balle.x < 1346 && temps_actuel - temps_precedent > 20)
             {
 
-                /* if (activer_anim == true)
-                printf("true\n");
-            else
-                printf("false\n");*/
+                // if (activer_anim == true)
+                //printf("true\n");
+            //else
+                //printf("false\n");
+                */
 
 /*   position_balle.x += VITESSE_BALLE;
 
@@ -446,7 +447,7 @@ SDL_Rect sprite_tourelle()
 
     //32 54 14 139
 
-    /*for (int i = 0; i < NB_CASE_TOURELLE + 1; i++)
+    //for (int i = 0; i < NB_CASE_TOURELLE + 1; i++)
     {*/
 
 /*  //hauteur d'une case
@@ -466,7 +467,7 @@ SDL_Rect sprite_tourelle()
 }*/
 
 // scientifique
-
+/*
 void stf(SDL_Renderer *ecran, SDL_Texture *perso, SDL_Rect *sprite, int numSprite)
 {
 
@@ -504,7 +505,7 @@ SDL_Rect *sprite_stf()
     }
 
     return sprite;
-}
+}*/
 
 /*void deplacement_stf(int *debutX, int direction, int *positionX, int *positionY, int *affichage_position_x)
 {
@@ -534,7 +535,7 @@ SDL_Rect *sprite_stf()
         temps_precedent = temps_actuel;
     }
 }*/
-
+/*
 SDL_Rect sprite_balle1()
 {
     SDL_Rect sprite;
@@ -554,7 +555,7 @@ SDL_Rect sprite_balle1()
     return sprite;
 }
 
-void emplacement_balle1(SDL_Rect sprite)
+void position_balle1(SDL_Rect sprite)
 {
 
     SDL_Rect position;
@@ -595,4 +596,4 @@ void emplacement_balle1(SDL_Rect sprite)
             temps_precedent = temps_actuel;
         }
     }
-}
+}*/

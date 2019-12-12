@@ -1,5 +1,7 @@
 #include "structures.h"
 #include "constante.h"
+#include "map.h"
+#include "personnage.h"
 
 #ifndef ELEMENTS_H
 #define ELEMENTS_H
@@ -10,47 +12,71 @@
 
 */
 
+// création d'un élément
+
+element creer_balle1(element e, int vitesse, SDL_Texture *image, int largeur, int hauteur, Carte map1);
+element creer_balle2(element e, int vitesse, SDL_Texture *image, int largeur, int hauteur, Carte map1);
+element creer_balle3(element e, int vitesse, SDL_Texture *image, int largeur, int hauteur, Carte map1);
+element creer_balle4(element e, int vitesse, SDL_Texture *image, int largeur, int hauteur, Carte map1);
+
+element creer_missile1(element e, int vitesse, SDL_Texture *image, int largeur, int hauteur, Carte map1);
+
+element creer_explosion1(element e, int vitesse, SDL_Texture *image, int largeur, int hauteur, Carte map1);
+
 // fonctions d'écriture générales
 
 element definir_vitesse_element(element e, int vitesse);
 element definir_image_element(element e, SDL_Texture *image);
 
 /*element definir_sprite_element(element e, SDL_Rect sprite);
-element definir_emplacement_sprite_element(element e, SDL_Rect emplacement);*/
+element definir_position_sprite_element(element e, SDL_Rect position);*/
 
 // fonctions de lecture
 
 int lire_vitesse_element(element e);
 int lire_abscisse_element(element e);
 int lire_ordonnee_element(element e);
+int lire_abscisse_reference(element e);
+int lire_ordonnee_reference(element e);
 void afficher_element(element e, SDL_Renderer *ecran);
 
 // fonctions d'animations
 
-element animer_laser(element e, SDL_Renderer *ecran);
-element animer_balle(element e, SDL_Renderer *ecran, int positionX, int position_depart);
-element animer_missile(element e, SDL_Renderer *ecran);
+element animer_laser(element e);
+element animer_balle(element e, int positionX, int largeur);
+element animer_missile(element e, int largeur, int hauteur, Carte map1);
+
+bool activer_explosion(element m, int largeur, int hauteur);
+element animer_explosion(element e, element m, SDL_Renderer *ecran);
 
 // définition du laser par défaut
 
 element definir_sprite_laser(element e);
-element definir_emplacement_laser(element e);
+element definir_position_laser(element e, int largeur, int hauteur, Carte map1);
 
 // balles
 
 element definir_sprite_balle(element e);
-element definir_emplacement_balle1(element e);
-element definir_emplacement_balle2(element e);
-element definir_emplacement_balle3(element e);
-element definir_emplacement_balle4(element e);
+element definir_position_balle1(element e, int largeur, int hauteur, Carte map1);
+element definir_position_balle2(element e, int largeur, int hauteur, Carte map1);
+element definir_position_balle3(element e, int largeur, int hauteur, Carte map1);
+element definir_position_balle4(element e, int largeur, int hauteur, Carte map1);
 
 // missiles
 
 element definir_sprite_missile(element e);
-element definir_emplacement_missile1(element e);
-element definir_emplacement_missile2(element e);
-element definir_emplacement_missile3(element e);
-element definir_emplacement_missile4(element e);
+element definir_position_missile1(element e, int largeur, int hauteur, Carte map1);
+element definir_position_missile2(element e, int largeur, int hauteur, Carte map1);
+element definir_position_missile3(element e, int largeur, int hauteur, Carte map1);
+element definir_position_missile4(element e, int largeur, int hauteur, Carte map1);
+
+// explosion
+
+element definir_sprite_explosion(element e);
+element definir_position_explosion1(element e, int largeur, int hauteur, Carte map1);
+element definir_position_explosion2(element e, int largeur, int hauteur, Carte map1);
+element definir_position_explosion3(element e, int largeur, int hauteur, Carte map1);
+element definir_position_explosion4(element e, int largeur, int hauteur, Carte map1);
 
 /* correction de l'affichage des objets lors du déplacement :
 
@@ -59,13 +85,12 @@ element definir_emplacement_missile4(element e);
 
 */
 
-element correction_position_element(element e, SDL_Event evenements, int positionX);
-
+element correction_position_element(element e, SDL_Event evenements, int positionX, int positionY, int direction, int largeur, Carte map1, int *debutX);
 
 // collision entre un élément et le personnage principal
 
 // s(il y a une collision, l'élément repart à sa position initiale
 
-int collision_element(element e, int positionX, int positionY, int position_initiale);
+int collision_element(element e, int positionX, int positionY, int largeur, int hauteur, Carte map1);
 
 #endif

@@ -79,7 +79,6 @@ int main(void)//int argc, char *argv[])
 
   //SDL_Texture *perso = charger_image_transparente("rocket.bmp", ecran, 0, 137, 84);
 
-  //SDL_Texture *balle1 = charger_image_transparente("balle1.bmp", ecran, 0, 128, 255);
   SDL_Texture *balle_image = charger_image_transparente("balle1.bmp", ecran, 0, 128, 255);
   SDL_Texture *tour4 = charger_image_transparente("tour4.bmp", ecran,54,157,211);
   SDL_Texture *tour5 = charger_image_transparente("tour5.bmp", ecran,54,157,211);
@@ -91,7 +90,9 @@ int main(void)//int argc, char *argv[])
 
   SDL_Texture *laser_image = charger_image_transparente("laser.bmp", ecran, 0, 0, 0);
 
-  SDL_Texture *missile_image = charger_image_transparente("missile.bmp", ecran, 0, 255, 0);
+  //SDL_Texture *missile_image = charger_image_transparente("missile.bmp", ecran, 0, 255, 0);
+
+  //SDL_Texture *explosion_image = charger_image_transparente("explosion.bmp", ecran, 248, 0, 248);
 
   int w = 0;
   int h = 0;
@@ -108,12 +109,21 @@ int main(void)//int argc, char *argv[])
   int num = 0 ; // numero dans le menu
   int numero = 0 ;  // numero de niveau
 
+  int direction = 0;
 
   // nécessaires pour les animations
   int temps_debut_animation = 0;
   int temps_fin_animation = 0;
  
   // definition de l'ennemi
+
+  /*  
+      Pour que les sprites s'affichent en fonction de la taille de la fenêtre,
+      il faut récupérer cette taille, ce qui se fait dans le while.
+      Pour fixer la position de départ des éléments qu'une seule fois, et pas 
+      à chaque tour de boucle, on fait appel à un booléen
+  */
+  bool determiner_position = false;
 
   ennemi scientist;
 
@@ -125,58 +135,69 @@ int main(void)//int argc, char *argv[])
 
   scientist = definir_image(scientist, scientifique);
   //scientist = definir_sprite(scientist, image_stf);
-  //scientist = definir_emplacement_sprite(scientist, pos_stf);
+  //scientist = definir_position_sprite(scientist, pos_stf);
 
   scientist = definir_sprite_stf(scientist);
-  scientist = definir_emplacement_stf(scientist);
+  scientist = definir_position_stf(scientist);
 
-  element laser;
+  element balle1, balle2, balle3;  
+  //element missile1;
+  //element explosion1;
 
-  laser = definir_vitesse_element(laser, 0);
-  laser = definir_image_element(laser, laser_image);
-  laser = definir_sprite_laser(laser);
-  laser = definir_emplacement_laser(laser);
+  balle1 = creer_balle1(balle1, 0, balle_image, w, h, map1);
+  balle2 = creer_balle2(balle2, 0, balle_image, w, h, map1);
+  balle3 = creer_balle3(balle3, 0, balle_image, w, h, map1);
 
-  element balle1, balle2, balle3;
-
-  balle1 = definir_vitesse_element(balle1, 0);
-  balle1 = definir_image_element(balle1, balle_image);
-  balle1 = definir_sprite_balle(balle1);
-  balle1 = definir_emplacement_balle1(balle1);
-
-
-  balle2 = balle1;
-  balle2 = definir_emplacement_balle2(balle2);
-
-  balle3 = balle1;
-  balle3 = definir_emplacement_balle3(balle3);
-
-
-  element missile1;
-
-  missile1 = definir_vitesse_element(missile1, 0);
-  missile1 = definir_image_element(missile1, missile_image);
-  missile1 = definir_sprite_missile(missile1);
-  missile1 = definir_emplacement_missile1(missile1);
-
+  //printf("balle1 pos avant: %d\n", balle1.position_sprite.x);
+    
+  //missile1 = creer_missile1(missile1, 0, missile_image, w, h, map1);
+    
+  //explosion1 = creer_explosion1(explosion1, 0, explosion_image, w, h, map1);
+  //element laser;
+  
 
  // Boucle principale
   while (!terminer)
   {
 
+    //printf("debut %d\t pos %d\n", debutX, positionX);
+
+    //1300  716
+    //1300  900
+
+    //printf("%d, %d\n", positionX, positionY);
+
     temps_debut = SDL_GetTicks();
     temps_debut_animation = SDL_GetTicks();
     SDL_GetWindowSize(fenetre, &w, &h);
- 
-    positionY -= collision_element(balle1, positionX, positionY, POS_BALLE1);
-    positionY -= collision_element(balle2, positionX, positionY, POS_BALLE2);
-    //positionX -= collision_element(missile1, positionX, positionY, POS_MISSILE1_X);
+    
+    if (!determiner_position){
+      balle1 = definir_position_balle1(balle1, w, h, map1);
+      balle2 = definir_position_balle2(balle2, w, h, map1);
+      balle3 = definir_position_balle3(balle3, w, h, map1);
+      //missile1 = definir_position_missile1(missile1, w, h, map1);
+      //explosion1 = definir_position_explosion1(explosion1, w, h, map1);
+
+
+      determiner_position = true;
+    }
+    //printf("balle1 pos apres: %d\n", balle1.position_sprite.x);
+
+    /* laser = definir_vitesse_element(laser, 0);
+    laser = definir_image_element(laser, laser_image);
+    laser = definir_sprite_laser(laser);
+    laser = definir_position_laser(laser);*/
+
+    positionY -= collision_element(balle1, positionX, positionY, w, h, map1);
+    positionY -= collision_element(balle2, positionX, positionY, w, h, map1);
+    
+    //positionX -= collision_element(missile1, positionX, positionY);
     //printf("w, h: %d, %d\n", w, h);
     //printf("hauteur: %d\n", hauteur);
 
 
     SDL_RenderClear(ecran);
-    if(mode == 0){
+    if(mode == 0){ 
       choix_menu(ecran,tableau[num]) ;
     }
     else if (mode == 1){
@@ -187,10 +208,13 @@ int main(void)//int argc, char *argv[])
       
       //afficher_personnage(scientist, ecran);
       //afficher_element(laser, ecran);
+
       afficher_element(balle1, ecran);
       afficher_element(balle2, ecran);
-      afficher_element(missile1, ecran);
-      
+
+      //afficher_element(missile1, ecran);
+      //afficher_element(explosion1, ecran);
+                  
       if (positionX > 10){
         afficher_element(balle3, ecran);
       }
@@ -254,25 +278,31 @@ int main(void)//int argc, char *argv[])
         }
     }
     
-    if (temps_debut_animation - temps_fin_animation > 50)
+    if (temps_debut_animation - temps_fin_animation > VITESSE_JEU)
     {
-      //scientist.emplacement_sprite.x -=10;
-      //scientist.emplacement_sprite.x = deplacer_ennemi(scientist, ecran);
-      scientist = deplacer_ennemi(scientist, ecran);
+      //scientist.position_sprite.x -=10;
+      //scientist.position_sprite.x = deplacer_ennemi(scientist, ecran);
+      scientist = deplacer_ennemi(scientist);
       /*scientist.sprite.x = */
-      //scientist = animer_ennemi(scientist, ecran);
+      //scientist = animer_ennemi(scientist);
       //afficher_personnage(scientist, ecran);
       //laser = animer_laser(laser, ecran);
       //afficher_element(laser, ecran);
 
       
-      balle1 = animer_balle(balle1, ecran, positionX, POS_BALLE1);
-      balle2 = animer_balle(balle2, ecran, positionX, POS_BALLE2);
-      missile1 = animer_missile(missile1, ecran);
+      balle1 = animer_balle(balle1, positionX, w);
+      balle2 = animer_balle(balle2, positionX, w);
+      //missile1 = animer_missile(missile1, w, h, map1);
+      //printf("pos: %d\n", missile1.position_sprite.y);
+
+      /*if (activer_explosion(missile1, w, h)){
+
+        explosion1 = animer_explosion(explosion1, missile1, ecran);
+      }*/
 
       if (positionX > 10){
 
-        balle3 = animer_balle(balle3, ecran, positionX, POS_BALLE3);
+        balle3 = animer_balle(balle3, positionX, w);
       }
 
       temps_fin_animation = temps_debut_animation;
@@ -285,14 +315,17 @@ int main(void)//int argc, char *argv[])
 
       //decalage_stf(ecran, scientifique, &image_stf, &pos_stf);
 
-      laser = correction_position_element(laser, evenements, positionX);
-      scientist = correction_position_ennemi(scientist, evenements, positionX);
-      balle1 = correction_position_element(balle1, evenements, positionX);
-      balle2 = correction_position_element(balle2, evenements, positionX);
-      missile1 = correction_position_element(missile1, evenements, positionX);
+
+      // correction_position_element(elems)
+
+      //laser = correction_position_element(laser, evenements, positionX);
+      //scientist = correction_position_ennemi(scientist, evenements, positionX);
+      balle1 = correction_position_element(balle1, evenements, positionX, positionY, direction, w, map1, &debutX);
+      balle2 = correction_position_element(balle2, evenements, positionX, positionY, direction, w, map1, &debutX);
+      //missile1 = correction_position_element(missile1, evenements, positionX, positionY, direction, w, map1);
 
       if (positionX > 10){
-        balle3 = correction_position_element(balle3, evenements, positionX);
+        balle3 = correction_position_element(balle3, evenements, positionX, positionY, direction, w, map1, &debutX);
       }
       
 
@@ -337,7 +370,7 @@ int main(void)//int argc, char *argv[])
   SDL_DestroyTexture(balle_image);
   SDL_DestroyTexture(scientifique);
   SDL_DestroyTexture(laser_image);
-  SDL_DestroyTexture(missile_image);
+  //SDL_DestroyTexture(missile_image);
   
   
   SDL_DestroyRenderer(ecran);
