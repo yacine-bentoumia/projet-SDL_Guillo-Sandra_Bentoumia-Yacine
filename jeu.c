@@ -128,44 +128,24 @@ int main(void)//int argc, char *argv[])
   ennemi scientist;
 
   scientist = definir_vie(scientist, 200);
-  //printf("vie : %u\n", lire_vie(scientist));
-
   scientist = definir_vitesse(scientist, -10);
-  //printf("vitesse : %d\n", lire_vitesse(scientist));
-
   scientist = definir_image(scientist, scientifique);
-  //scientist = definir_sprite(scientist, image_stf);
-  //scientist = definir_position_sprite(scientist, pos_stf);
+
 
   scientist = definir_sprite_stf(scientist);
   scientist = definir_position_stf(scientist);
 
   element balle1, balle2, balle3;  
-  //element missile1;
-  //element explosion1;
+ 
 
   balle1 = creer_balle1(balle1, 0, balle_image, w, h, map1);
   balle2 = creer_balle2(balle2, 0, balle_image, w, h, map1);
   balle3 = creer_balle3(balle3, 0, balle_image, w, h, map1);
 
-  //printf("balle1 pos avant: %d\n", balle1.position_sprite.x);
-    
-  //missile1 = creer_missile1(missile1, 0, missile_image, w, h, map1);
-    
-  //explosion1 = creer_explosion1(explosion1, 0, explosion_image, w, h, map1);
-  //element laser;
-  
 
  // Boucle principale
   while (!terminer)
   {
-
-    //printf("debut %d\t pos %d\n", debutX, positionX);
-
-    //1300  716
-    //1300  900
-
-    //printf("%d, %d\n", positionX, positionY);
 
     temps_debut = SDL_GetTicks();
     temps_debut_animation = SDL_GetTicks();
@@ -175,25 +155,17 @@ int main(void)//int argc, char *argv[])
       balle1 = definir_position_balle1(balle1, w, h, map1);
       balle2 = definir_position_balle2(balle2, w, h, map1);
       balle3 = definir_position_balle3(balle3, w, h, map1);
-      //missile1 = definir_position_missile1(missile1, w, h, map1);
-      //explosion1 = definir_position_explosion1(explosion1, w, h, map1);
+     
 
 
       determiner_position = true;
     }
-    //printf("balle1 pos apres: %d\n", balle1.position_sprite.x);
+   
 
-    /* laser = definir_vitesse_element(laser, 0);
-    laser = definir_image_element(laser, laser_image);
-    laser = definir_sprite_laser(laser);
-    laser = definir_position_laser(laser);*/
-
-    positionY -= collision_element(balle1, positionX, positionY, w, h, map1);
-    positionY -= collision_element(balle2, positionX, positionY, w, h, map1);
+    positionY -= collision_element(balle1, positionY, w, h, map1);
+    positionY -= collision_element(balle2,positionY, w, h, map1);
     
-    //positionX -= collision_element(missile1, positionX, positionY);
-    //printf("w, h: %d, %d\n", w, h);
-    //printf("hauteur: %d\n", hauteur);
+ 
 
 
     SDL_RenderClear(ecran);
@@ -206,14 +178,8 @@ int main(void)//int argc, char *argv[])
     
       personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,map1);
       
-      //afficher_personnage(scientist, ecran);
-      //afficher_element(laser, ecran);
-
       afficher_element(balle1, ecran);
       afficher_element(balle2, ecran);
-
-      //afficher_element(missile1, ecran);
-      //afficher_element(explosion1, ecran);
                   
       if (positionX > 10){
         afficher_element(balle3, ecran);
@@ -236,10 +202,6 @@ int main(void)//int argc, char *argv[])
       }
     
 
-
-    //stf(ecran, scientifique, &image_scientifique);
-    //deplacement_stf(ecran, pos_stf, s, scientifique, debutX, positionX, positionY, affichage_position_x);
-
     }else if(mode == 2){
       choix_option( ecran,commande);
     }else if(mode == 3){
@@ -253,14 +215,12 @@ int main(void)//int argc, char *argv[])
         case 1 :
           
           lire_fichier("map1.txt",&map1);
-/*          
-  */       break;
+          break;
         case 2 :
           lire_fichier("map2.txt",&map1);
-          
           break ;
         case 3 :
-        lire_fichier("map1.txt",&map1);
+          lire_fichier("map1.txt",&map1);
           
           break;
         case 4:
@@ -280,29 +240,17 @@ int main(void)//int argc, char *argv[])
     
     if (temps_debut_animation - temps_fin_animation > VITESSE_JEU)
     {
-      //scientist.position_sprite.x -=10;
-      //scientist.position_sprite.x = deplacer_ennemi(scientist, ecran);
+      
       scientist = deplacer_ennemi(scientist);
-      /*scientist.sprite.x = */
-      //scientist = animer_ennemi(scientist);
-      //afficher_personnage(scientist, ecran);
-      //laser = animer_laser(laser, ecran);
-      //afficher_element(laser, ecran);
+      
 
       
-      balle1 = animer_balle(balle1, positionX, w);
-      balle2 = animer_balle(balle2, positionX, w);
-      //missile1 = animer_missile(missile1, w, h, map1);
-      //printf("pos: %d\n", missile1.position_sprite.y);
-
-      /*if (activer_explosion(missile1, w, h)){
-
-        explosion1 = animer_explosion(explosion1, missile1, ecran);
-      }*/
-
+      balle1 = animer_balle(balle1,w);
+      balle2 = animer_balle(balle2,w);
+      
       if (positionX > 10){
 
-        balle3 = animer_balle(balle3, positionX, w);
+        balle3 = animer_balle(balle3, w);
       }
 
       temps_fin_animation = temps_debut_animation;
@@ -313,19 +261,12 @@ int main(void)//int argc, char *argv[])
     {
       gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x ,&mode,&num,&numero,map1);
 
-      //decalage_stf(ecran, scientifique, &image_stf, &pos_stf);
+      balle1 = correction_position_element(balle1, evenements, positionX, positionY, direction, w, map1);
+      balle2 = correction_position_element(balle2, evenements, positionX, positionY, direction, w, map1);
 
-
-      // correction_position_element(elems)
-
-      //laser = correction_position_element(laser, evenements, positionX);
-      //scientist = correction_position_ennemi(scientist, evenements, positionX);
-      balle1 = correction_position_element(balle1, evenements, positionX, positionY, direction, w, map1, &debutX);
-      balle2 = correction_position_element(balle2, evenements, positionX, positionY, direction, w, map1, &debutX);
-      //missile1 = correction_position_element(missile1, evenements, positionX, positionY, direction, w, map1);
 
       if (positionX > 10){
-        balle3 = correction_position_element(balle3, evenements, positionX, positionY, direction, w, map1, &debutX);
+        balle3 = correction_position_element(balle3, evenements, positionX, positionY, direction, w, map1);
       }
       
 

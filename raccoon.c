@@ -1,7 +1,7 @@
 #include "raccoon.h"
 #include "constante.h"
-
-void afficher_raccoon(SDL_Renderer *ecran, SDL_Texture *raccoon)/*, SDL_Rect sprite, SDL_Rect emplacement_raccoon)*/
+/*
+void afficher_raccoon(SDL_Renderer *ecran, SDL_Texture *raccoon)/*, SDL_Rect sprite, SDL_Rect emplacement_raccoon)
 {
 
     SDL_Rect position_raccoon;
@@ -26,4 +26,4 @@ SDL_Rect sprite_raccoon()
     sprite.h = HAUTEUR_RACCOON;
 
     return sprite;
-}
+}*/

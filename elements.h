@@ -28,8 +28,6 @@ element creer_explosion1(element e, int vitesse, SDL_Texture *image, int largeur
 element definir_vitesse_element(element e, int vitesse);
 element definir_image_element(element e, SDL_Texture *image);
 
-/*element definir_sprite_element(element e, SDL_Rect sprite);
-element definir_position_sprite_element(element e, SDL_Rect position);*/
 
 // fonctions de lecture
 
@@ -43,8 +41,8 @@ void afficher_element(element e, SDL_Renderer *ecran);
 // fonctions d'animations
 
 element animer_laser(element e);
-element animer_balle(element e, int positionX, int largeur);
-element animer_missile(element e, int largeur, int hauteur, Carte map1);
+element animer_balle(element e,int largeur);
+element animer_missile(element e,int hauteur, Carte map1);
 
 bool activer_explosion(element m, int largeur, int hauteur);
 element animer_explosion(element e, element m, SDL_Renderer *ecran);
@@ -85,12 +83,12 @@ element definir_position_explosion4(element e, int largeur, int hauteur, Carte m
 
 */
 
-element correction_position_element(element e, SDL_Event evenements, int positionX, int positionY, int direction, int largeur, Carte map1, int *debutX);
+element correction_position_element(element e, SDL_Event evenements, int positionX, int positionY, int direction, int largeur, Carte map1);
 
 // collision entre un élément et le personnage principal
 
 // s(il y a une collision, l'élément repart à sa position initiale
 
-int collision_element(element e, int positionX, int positionY, int largeur, int hauteur, Carte map1);
+int collision_element(element e,int positionY, int largeur, int hauteur, Carte map1);
 
 #endif
