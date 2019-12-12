@@ -27,7 +27,7 @@ bool collision_pied(int positionX, int positionY, Carte map1);
 
 int collision_tete(int positionX, int positionY, Carte map1, int vitesse);
 
-bool perte_de_vie(int positionX,int positionY,Carte map1, int direction);
+bool perte_de_vie(int positionX,int positionY,Carte map1);
 
 bool trou(int positionX, int positionY, Carte map1);
 
@@ -37,5 +37,7 @@ bool gagner(int positionX, int positionY, Carte map1);
 
 //int vie_du_personnage(int positionX,int positionY,Carte map1);
 void vie_du_personnage(SDL_Renderer *ecran,SDL_Texture *vie,int vie_perso);
+
+void nb_vie_perso(int positionX,int positionY,Carte map1,int* nb_vie,int *posX,int *posY);
 
 #endif

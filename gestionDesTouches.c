@@ -38,11 +38,14 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     }
                     break;
                 case SDLK_RIGHT : // touche fleche droite
-                    
-                    if (!collision(1 ,*positionX, *positionY,map1)){
-                        deplacement_sur_map (debutX, 1 , positionX ,  affichage_position_x,map1);
+                    //if (perte_de_vie(*positionX,*positionY,map1, 1)){
+                        if (!collision(1 ,*positionX, *positionY,map1)){
+                            deplacement_sur_map (debutX, 1 , positionX ,  affichage_position_x,map1);
                     
                     }
+                    //}
+
+                    
                 //SDL_Delay(1000);
                 
                     if(trou(*positionX, *positionY, map1)){

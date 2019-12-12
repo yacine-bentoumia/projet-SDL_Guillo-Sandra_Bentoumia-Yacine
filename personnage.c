@@ -138,13 +138,13 @@ int collision_tete(int positionX, int positionY, Carte map1,int vitesse){
    
     return  pos;
 }
-bool perte_de_vie(int positionX,int positionY,Carte map1, int direction){
+bool perte_de_vie(int positionX,int positionY,Carte map1){
     //si le personnage touche des pics avec les pieds
     bool condition =  map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== 'p';
     //si le personnage touche des pics avec le corps
-    bool condition1 = map1.carteJeu[(positionX + direction) + positionY * map1.largeur] == 'p';       //position de x1 +1 == 2
-    bool condition2 = map1.carteJeu[(positionX + direction) + (positionY + 1) * map1.largeur] == 'p'; // position de x2 +1 ==2
-    bool condition3 = map1.carteJeu[(positionX + direction) + (positionY + 2) * map1.largeur] == 'p';
+    bool condition1 = map1.carteJeu[(positionX) + positionY * map1.largeur] == 'p';       //position de x1 +1 == 2
+    bool condition2 = map1.carteJeu[(positionX) + (positionY + 1) * map1.largeur] == 'p'; // position de x2 +1 ==2
+    bool condition3 = map1.carteJeu[(positionX) + (positionY + 2) * map1.largeur] == 'p';
     //si le perso touche des pics avec la tete 
     bool condition4 = map1.carteJeu[(positionX) + (positionY - 1)*map1.largeur] == 'p';
     return condition || condition1 || condition2 || condition3 || condition4 ;
@@ -181,6 +181,11 @@ void vie_du_personnage(SDL_Renderer *ecran,SDL_Texture *vie,int vie_perso){
             
 }
 
-/*int nb_vie_perso(){
-
-}*/
+void nb_vie_perso(int positionX,int positionY,Carte map1,int* nb_vie,int *posX,int *posY){
+    
+    if (*posX != positionX && *posY != positionY && perte_de_vie(positionX,positionY,map1)){
+        *nb_vie -= 1 ;
+        *posX = positionX ;
+        *posY = positionY ;
+    }
+}

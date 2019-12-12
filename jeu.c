@@ -101,7 +101,7 @@ int main(void)//int argc, char *argv[])
   //int debutY = 0; ligne a partir de laquelle on affiche la map
   int numSprite = 10;
   int positionX = debutX + 1;
-  int positionY = 0;//map1.hauteur - 5; // * hauteur_une_case(h);
+  int positionY = 0;
   int affichage_position_x = 1;
   SDL_Rect *sprite = sprite_personnage();
   int temps_debut = 0 ;
@@ -114,6 +114,10 @@ int main(void)//int argc, char *argv[])
   int hauteur = 0;
 
   int direction = 0;
+  int nb_vie = 3 ;
+
+  int posX = 0; 
+  int posY = 0;
 
   // nécessaires pour les animations
   int temps_debut_animation = 0;
@@ -149,9 +153,6 @@ int main(void)//int argc, char *argv[])
     
     if (w != largeur || h != hauteur){
 
-       
-        
-
       balle1 = definir_sprite_balle(balle1, w, h, map1);
       balle1 = definir_position_balle1(balle1, w, h, map1);
       
@@ -163,8 +164,6 @@ int main(void)//int argc, char *argv[])
 
       largeur = w;
       hauteur = h;
-
-      
 
       }
    
@@ -181,10 +180,15 @@ int main(void)//int argc, char *argv[])
       carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, tour6, tour7, tour8, w, h, debutX, gain,map1,pics); // affiche la map
     
       personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,map1);
-      vie_du_personnage(ecran,vie,3);
+      nb_vie_perso(positionX,positionY,map1,&nb_vie,&posX,&posY);
+      vie_du_personnage(ecran,vie,nb_vie);
       
       afficher_element(balle1, ecran);
       afficher_element(balle2, ecran);
+      if (nb_vie == 0){
+        gameOver("gameOver.bmp", ecran);
+         terminer = true ;
+      }
                   
       if (positionX > 10){
         afficher_element(balle3, ecran);
