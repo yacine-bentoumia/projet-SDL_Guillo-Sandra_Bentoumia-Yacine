@@ -109,6 +109,9 @@ int main(void)//int argc, char *argv[])
   int num = 0 ; // numero dans le menu
   int numero = 0 ;  // numero de niveau
 
+  int largeur = 0;
+  int hauteur = 0;
+
   int direction = 0;
 
   // nécessaires pour les animations
@@ -116,14 +119,6 @@ int main(void)//int argc, char *argv[])
   int temps_fin_animation = 0;
  
   // definition de l'ennemi
-
-  /*  
-      Pour que les sprites s'affichent en fonction de la taille de la fenêtre,
-      il faut récupérer cette taille, ce qui se fait dans le while.
-      Pour fixer la position de départ des éléments qu'une seule fois, et pas 
-      à chaque tour de boucle, on fait appel à un booléen
-  */
-  bool determiner_position = false;
 
   ennemi scientist;
 
@@ -151,15 +146,26 @@ int main(void)//int argc, char *argv[])
     temps_debut_animation = SDL_GetTicks();
     SDL_GetWindowSize(fenetre, &w, &h);
     
-    if (!determiner_position){
+    if (w != largeur || h != hauteur){
+
+       
+        
+
+      balle1 = definir_sprite_balle(balle1, w, h, map1);
       balle1 = definir_position_balle1(balle1, w, h, map1);
+      
+      balle2 = definir_sprite_balle(balle2, w, h, map1);
       balle2 = definir_position_balle2(balle2, w, h, map1);
+      
+      balle3 = definir_sprite_balle(balle3, w, h, map1);
       balle3 = definir_position_balle3(balle3, w, h, map1);
-     
 
+      largeur = w;
+      hauteur = h;
 
-      determiner_position = true;
-    }
+      
+
+      }
    
 
     positionY -= collision_element(balle1, positionY, w, h, map1);
@@ -263,7 +269,6 @@ int main(void)//int argc, char *argv[])
 
       balle1 = correction_position_element(balle1, evenements, positionX, positionY, direction, w, map1);
       balle2 = correction_position_element(balle2, evenements, positionX, positionY, direction, w, map1);
-
 
       if (positionX > 10){
         balle3 = correction_position_element(balle3, evenements, positionX, positionY, direction, w, map1);
