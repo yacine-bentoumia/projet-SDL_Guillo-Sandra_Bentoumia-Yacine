@@ -4,9 +4,10 @@
 #include "constante.h"
 #include "map.h"
 #include "personnage.h"
-
 #include "lecture_map.h"
 #include "menu.h"
+#include "difficultes.h"
+
 
 
 int main(void)
@@ -74,7 +75,7 @@ int main(void)
   
   // Sprites des différents ennemis
 
-  //SDL_Texture *balle_image = charger_image_transparente("balle1.bmp", ecran, 0, 128, 255);
+  SDL_Texture *balle = charger_image_transparente("balle1.bmp", ecran, 0, 128, 255);
   SDL_Texture *tour4 = charger_image_transparente("tour4.bmp", ecran,54,157,211);
   SDL_Texture *tour5 = charger_image_transparente("tour5.bmp", ecran,54,157,211);
   SDL_Texture *tour6 = charger_image_transparente("tour6.bmp", ecran,54,157,211);
@@ -100,7 +101,11 @@ int main(void)
   int num = 0 ; // numero dans le menu
   int numero = 0 ;  // numero de niveau
   int vitesse = 10 ;
-
+  SDL_Rect* posBalle = NULL;
+  //SDL_Rect* posBalle = {NULL,NULL,NULL,NULL,NULL};
+  int posball = def_position_balle(map1); 
+  posBalle = malloc(posball*sizeof(SDL_Rect));
+  
  //int hauteur = 0;
  //int largeur = 0;
 
@@ -158,8 +163,10 @@ int main(void)
     }
     else if (mode == 1){
      
-      carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, tour6, tour7, tour8, w, h, debutX, gain,map1,pics); // affiche la map
-    
+      carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, tour6, tour7, tour8, w, h, debutX, gain,map1,pics,posBalle,posball); // affiche la map
+
+      affichage_balle(ecran,balle,posBalle,posball);
+
       personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,map1);
       nb_vie_perso(positionX,positionY,map1,&nb_vie,&posX,&posY);
       vie_du_personnage(ecran,vie,nb_vie);
@@ -169,6 +176,7 @@ int main(void)
       if (nb_vie == 0){
         gameOver("gameOver.bmp", ecran);
          terminer = true ;
+         //mode = 0;
       }
                   
       /*if (positionX > 10){
@@ -227,6 +235,8 @@ int main(void)
         
           break;
         }
+        posball = def_position_balle(map1);
+        posBalle = (SDL_Rect*)realloc((posBalle), ((posball) *sizeof(SDL_Rect)));
     }
     
     /*if (temps_debut_animation - temps_fin_animation > VITESSE_JEU)
@@ -265,6 +275,7 @@ int main(void)
   }
   // Quitter SDL
   free(sprite);
+  free(posBalle);
 
   SDL_DestroyTexture(ciel);
   SDL_DestroyTexture(sol);

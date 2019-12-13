@@ -72,11 +72,9 @@ void saut(int direction, int vitesse, int *positionY, Carte map1)
 { 
 
     if ((*positionY + (direction*vitesse) < map1.hauteur - 1) && (*positionY + (direction*vitesse) > 0))  {//ne sort pas du tableau 
-    //int v = 0 ;
-    //while (v!= vitesse){
+    
         *positionY -= vitesse ;  
-        
-    //}            
+              
               
 
     }
@@ -87,8 +85,7 @@ void gravite( int direction, int *positionY, Carte map1){
    
        if ((*positionY + (direction) < map1.hauteur - 1) && (*positionY + (direction) > 0)){
            
-            *positionY += direction ;//* vitesse ;
-
+            *positionY += direction ;
        }
 
     

@@ -10,7 +10,7 @@
 
 void taille_fichier(const char* nomFichier, int* largeur, int* hauteur, int*taille);
 
-void lire_fichier(const char *nomFichier, Carte *map);
+void lire_fichier(const char *nomFichier, Carte *tab);
 
 
 
