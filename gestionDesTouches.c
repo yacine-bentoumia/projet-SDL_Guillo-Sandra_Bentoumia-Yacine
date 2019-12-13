@@ -1,7 +1,7 @@
 #include "gestionDesTouches.h"
 
 void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,  int *numSprite , int* positionX , int* positionY,int * affichage_position_x, 
-                                                     int* mode, int* num, int* numero, Carte map1){
+                                                     int* mode, int* num, int* numero, Carte map1,int * vitesse){
         SDL_Rect position ;
         switch(evenements.type)
         {
@@ -92,9 +92,9 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                             *numero = 5;
                         }
                     }
-                    
-                   
-                             saut(-1 ,10 , positionY, map1);
+                    *vitesse = 10 ;
+                    collision_tete(*positionX, *positionY,map1,vitesse); 
+                    saut(-1 ,*vitesse, positionY, map1);
                      
                     
                     if(trou(*positionX, *positionY,map1)){

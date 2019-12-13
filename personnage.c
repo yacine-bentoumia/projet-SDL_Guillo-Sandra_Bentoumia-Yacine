@@ -98,7 +98,7 @@ void gravite( int direction, int *positionY, Carte map1){
 bool collision(int direction, int positionX, int positionY, Carte map1)
 {
 
-   
+    // gestion de la collision sur la droite et la gauche du personnage 
     bool condition1 = map1.carteJeu[(positionX + direction) + positionY * map1.largeur] == '2';       //position de x1 +1 == 2
     bool condition2 = map1.carteJeu[(positionX + direction) + (positionY + 1) * map1.largeur] == '2'; // position de x2 +1 ==2
     bool condition3 = map1.carteJeu[(positionX + direction) + (positionY + 2) * map1.largeur] == '2'; //position de x3 +1 == 2
@@ -110,7 +110,13 @@ bool collision(int direction, int positionX, int positionY, Carte map1)
     bool condition5 = map1.carteJeu[(positionX + direction) + (positionY + 1) * map1.largeur] == '4'; 
     bool condition6 = map1.carteJeu[(positionX + direction) + (positionY + 2) * map1.largeur] == '4'; 
 
-    return condition1 || condition2 || condition3  || condition4 || condition5 || condition6;
+    bool condition7 = map1.carteJeu[(positionX + direction) + positionY * map1.largeur] == '5';       
+    bool condition8 = map1.carteJeu[(positionX + direction) + (positionY + 1) * map1.largeur] == '5'; 
+    bool condition9 = map1.carteJeu[(positionX + direction) + (positionY + 2) * map1.largeur] == '5'; 
+
+    //bool condition7 = map1.carteJeu[(positionX + direction) + (positionY - 1) * map1.largeur] == '8' ;
+
+    return condition1 || condition2 || condition3  || condition4 || condition5 || condition6 || condition7 || condition8 || condition9 ;
 }
 
 bool collision_pied(int positionX, int positionY, Carte map1){
@@ -125,18 +131,23 @@ bool collision_pied(int positionX, int positionY, Carte map1){
     return (condition_sol || condition_bloc || condition_gain || condition_tourelle) ;
 }
 
-int collision_tete(int positionX, int positionY, Carte map1,int vitesse){
-    int pos = vitesse;
+void collision_tete(int positionX, int positionY, Carte map1,int* vitesse){
     
     bool collision  ;
+    bool condition ;
+    bool condition2;
+
     int i;
     
-        for (i = 1 ; i < (vitesse) && (!collision); i++){ // && (!collision)
-            collision = map1.carteJeu[(positionX) + (positionY - i)*map1.largeur] == '2';        
+        for (i = 1 ; i < (*vitesse) && (!collision) && (!condition) && (!condition2); i++){ // && (!collision)
+            collision = map1.carteJeu[(positionX) + (positionY - i)*map1.largeur] == '2';   
+            condition = map1.carteJeu[(positionX) + (positionY - i) * map1.largeur] == '8' ;  
+            condition2 =  map1.carteJeu[(positionX) + (positionY - i) * map1.largeur] == '4' ;  
+
         }
-        pos = positionY - i + 1;
+        *vitesse = i - 2;
+        
    
-    return  pos;
 }
 bool perte_de_vie(int positionX,int positionY,Carte map1){
     //si le personnage touche des pics avec les pieds

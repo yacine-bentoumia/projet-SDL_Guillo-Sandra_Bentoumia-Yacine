@@ -25,7 +25,7 @@ void gravite(int direction, int *positionY, Carte map1);
 
 bool collision_pied(int positionX, int positionY, Carte map1);
 
-int collision_tete(int positionX, int positionY, Carte map1, int vitesse);
+void collision_tete(int positionX, int positionY, Carte map1, int* vitesse);
 
 bool perte_de_vie(int positionX,int positionY,Carte map1);
 

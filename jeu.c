@@ -99,6 +99,7 @@ int main(void)
   int mode = 0 ;
   int num = 0 ; // numero dans le menu
   int numero = 0 ;  // numero de niveau
+  int vitesse = 10 ;
 
  //int hauteur = 0;
  //int largeur = 0;
@@ -245,7 +246,7 @@ int main(void)
     SDL_RenderPresent(ecran);
     if (SDL_PollEvent(&evenements))
     {
-      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x ,&mode,&num,&numero,map1);
+      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x ,&mode,&num,&numero,map1,&vitesse);
 
       //balle1 = correction_position_element(balle1, evenements, positionX, positionY, direction, w, map1);
       //balle2 = correction_position_element(balle2, evenements, positionX, positionY, direction, w, map1);
