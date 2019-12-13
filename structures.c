@@ -35,17 +35,6 @@ ennemi definir_vitesse(ennemi e, int vitesse)
     return e;
 }
 
-ennemi definir_nom(ennemi e, char *nom)
-{
-
-    for (int i = 0; i < 20; i++)
-    {
-
-        e.nom[i] = nom[i];
-    }
-
-    return e;
-}
 
 ennemi definir_image(ennemi e, SDL_Texture *image)
 {
@@ -73,22 +62,11 @@ ennemi definir_emplacement_sprite(ennemi e, SDL_Rect emplacement)
 
 // Fonctions de lecture
 
-unsigned int lire_vie(ennemi e)
-{
-
-    return e.vie;
-}
 
 int lire_vitesse(ennemi e)
 {
 
     return e.vitesse;
-}
-
-char *lire_nom(ennemi e)
-{
-
-    return e.nom;
 }
 
 int lire_abscisse(ennemi e)
@@ -111,7 +89,7 @@ void afficher_personnage(ennemi e, SDL_Renderer *ecran)
 
 
 
-/*SDL_Rect */ ennemi definir_sprite_stf(ennemi e){
+/*SDL_Rect  ennemi definir_sprite_stf(ennemi e){
 
     e.sprite.x = 7*TAILLE_STF;
     e.sprite.y = 0;
@@ -120,11 +98,11 @@ void afficher_personnage(ennemi e, SDL_Renderer *ecran)
 
     return e;
 
-}
+}*/
 
 
 
-/*SDL_Rect*/ ennemi definir_emplacement_stf(ennemi e){
+/*SDL_Rect ennemi definir_emplacement_stf(ennemi e){
 
     e.emplacement_sprite.x = 600;
     e.emplacement_sprite.y = 620;
@@ -133,14 +111,14 @@ void afficher_personnage(ennemi e, SDL_Renderer *ecran)
 
     return e;
 
-}
+}*/
 
 
 
 
 
 
-void animer_ennemi(ennemi e, SDL_Renderer *ecran)
+/*void animer_ennemi(ennemi e, SDL_Renderer *ecran)
 {
 
     int temps_actuel = 0;
@@ -156,7 +134,7 @@ void animer_ennemi(ennemi e, SDL_Renderer *ecran)
 
         afficher_personnage(e, ecran);
      
-        //printf("%dx, %dy\n", e.sprite.x, e.sprite.y);
+       
         e.emplacement_sprite.x -= 10;
         e.sprite.x += parcours * (TAILLE_STF);
 
@@ -165,12 +143,10 @@ void animer_ennemi(ennemi e, SDL_Renderer *ecran)
         if (e.sprite.x == 0 && e.sprite.y == 0)
         {
 
-            //e.sprite.x = 7 * TAILLE_STF;
-            //e.sprite.x = 121;
-            //e.sprite.y = 59;
-            parcours = 1;
+           
+            parcours = 1;s
             e.sprite.y += TAILLE_STF;
-            //moins = 1;
+          
         }
 
         if (e.sprite.x == 8 * TAILLE_STF && e.sprite.y == TAILLE_STF)
@@ -192,4 +168,4 @@ void animer_ennemi(ennemi e, SDL_Renderer *ecran)
     }
 
     
-}
+}*/

@@ -8,8 +8,6 @@
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
 
-// structure pouvant être commune à tous les personnages
-// ici elle définit seulement les ennemis
 
 struct Personnage
 {
@@ -41,11 +39,7 @@ struct Element
 
 //typedef struct Personnage raccoon;
 typedef struct Personnage ennemi;
-//typedef struct ennemi scientifique;
-typedef struct Element element;
 
-/*
-void afficher_balle(SDL_Renderer *ecran, SDL_Texture *balle, bool afficher);
-SDL_Rect sprite_balle();*/
+
 
 #endif

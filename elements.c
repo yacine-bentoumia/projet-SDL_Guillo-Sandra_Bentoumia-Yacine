@@ -297,7 +297,7 @@ int collision_element(element e, int positionY, int largeur, int hauteur, Carte 
   return toucher;
 }
 
-/*
+
 element definir_position_balle4(element e)
 {
 
@@ -307,7 +307,7 @@ element definir_position_balle4(element e)
     e.position_sprite.w = 16;
 
     return e;
-}*/
+}
 
 /*
 

@@ -4,32 +4,27 @@
 #include "constante.h"
 #include "map.h"
 #include "personnage.h"
-#include "ennemis.h"
-#include "lecture_map.h"
-#include "structures.h"
-#include "menu.h"
-#include "elements.h"
 
-int main(void)//int argc, char *argv[])
+#include "lecture_map.h"
+#include "menu.h"
+
+
+int main(void)
 {
   
   Carte map1 ;
   map1.carteJeu = NULL;
-  //char *map = lire_fichier("map.txt",&hauteur, &largeur, &taille);
+  
   lire_fichier("map.txt",&map1);
-  //printf("%d\n",hauteur);
-
   SDL_Window *fenetre;  // Déclaration de la fenêtre
   SDL_Event evenements; // Événements liés à la fenêtre
-
   bool terminer = false;
+
   // Créer la fenêtre
   fenetre = fenetreDuJeu();
 
   //initialisation de l'image du menu
   SDL_Renderer *ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
-  //SDL_Texture *fond = charger_image("raccoon.bmp", ecran); //charger l'image de fond
-
 
   //  Sprites des composants de la map
   SDL_Texture *sol = charger_image("sol.bmp", ecran);
@@ -41,6 +36,7 @@ int main(void)//int argc, char *argv[])
 
   SDL_Texture *gain = charger_image("win.bmp", ecran); //image du win
 
+  //Sprite du personnage
   SDL_Texture* perso = charger_image_transparente("mario.bmp", ecran, 0, 115, 0); // image du perso
 
   //image pour le menu
@@ -78,79 +74,63 @@ int main(void)//int argc, char *argv[])
   
   // Sprites des différents ennemis
 
-  //SDL_Texture *perso = charger_image_transparente("rocket.bmp", ecran, 0, 137, 84);
-
-  SDL_Texture *balle_image = charger_image_transparente("balle1.bmp", ecran, 0, 128, 255);
+  //SDL_Texture *balle_image = charger_image_transparente("balle1.bmp", ecran, 0, 128, 255);
   SDL_Texture *tour4 = charger_image_transparente("tour4.bmp", ecran,54,157,211);
   SDL_Texture *tour5 = charger_image_transparente("tour5.bmp", ecran,54,157,211);
   SDL_Texture *tour6 = charger_image_transparente("tour6.bmp", ecran,54,157,211);
   SDL_Texture *tour7 = charger_image_transparente("tour7.bmp", ecran,54,157,211);
   SDL_Texture *tour8 = charger_image_transparente("tour8.bmp", ecran,54,157,211);
 
-  SDL_Texture *scientifique = charger_image_transparente("scientifique.bmp", ecran, 255, 0, 0);
+  //SDL_Texture *laser_image = charger_image_transparente("laser.bmp", ecran, 0, 0, 0);
 
-  SDL_Texture *laser_image = charger_image_transparente("laser.bmp", ecran, 0, 0, 0);
+  //initialisation des valeurs
 
-  //SDL_Texture *missile_image = charger_image_transparente("missile.bmp", ecran, 0, 255, 0);
-
-  //SDL_Texture *explosion_image = charger_image_transparente("explosion.bmp", ecran, 248, 0, 248);
-
-  int w = 0;
-  int h = 0;
+  int w = 0; // permet de recuperer la largeur de la carte
+  int h = 0; // permet de recuperer la hauteur de la carte 
   int debutX = 0; // colonne a partir de laquelle on affiche la map
-  //int debutY = 0; ligne a partir de laquelle on affiche la map
+ 
   int numSprite = 10;
-  int positionX = debutX + 1;
-  int positionY = 0;
-  int affichage_position_x = 1;
-  SDL_Rect *sprite = sprite_personnage();
+  int positionX = debutX + 1; // position sur l'axe des abscisses du perso 
+  int positionY = 0; //recupere la position sur l'axe des ordonnees  du perso
+  int affichage_position_x = 1; //position d'affichage du personnage
+  SDL_Rect *sprite = sprite_personnage(); //tableau de sprite du personnage
   int temps_debut = 0 ;
   int temps_fin = 0; 
   int mode = 0 ;
   int num = 0 ; // numero dans le menu
   int numero = 0 ;  // numero de niveau
 
-  int largeur = 0;
-  int hauteur = 0;
+ //int hauteur = 0;
+ //int largeur = 0;
 
-  int direction = 0;
+  //int direction = 0;
   int nb_vie = 3 ;
 
   int posX = 0; 
   int posY = 0;
 
   // nécessaires pour les animations
-  int temps_debut_animation = 0;
-  int temps_fin_animation = 0;
- 
-  // definition de l'ennemi
+  /*int temps_debut_animation = 0;
+  int temps_fin_animation = 0;*/
 
-  ennemi scientist;
-
-  scientist = definir_vie(scientist, 200);
-  scientist = definir_vitesse(scientist, -10);
-  scientist = definir_image(scientist, scientifique);
-
-
-  scientist = definir_sprite_stf(scientist);
-  scientist = definir_position_stf(scientist);
-
+  
+/*
   element balle1, balle2, balle3;  
  
 
   balle1 = creer_balle1(balle1, 0, balle_image, w, h, map1);
   balle2 = creer_balle2(balle2, 0, balle_image, w, h, map1);
   balle3 = creer_balle3(balle3, 0, balle_image, w, h, map1);
-
+*/
 
  // Boucle principale
   while (!terminer)
   {
 
     temps_debut = SDL_GetTicks();
-    temps_debut_animation = SDL_GetTicks();
+    //temps_debut_animation = SDL_GetTicks();
     SDL_GetWindowSize(fenetre, &w, &h);
-    
+    /*
     if (w != largeur || h != hauteur){
 
       balle1 = definir_sprite_balle(balle1, w, h, map1);
@@ -169,7 +149,7 @@ int main(void)//int argc, char *argv[])
    
 
     positionY -= collision_element(balle1, positionY, w, h, map1);
-    positionY -= collision_element(balle2,positionY, w, h, map1);
+    positionY -= collision_element(balle2,positionY, w, h, map1);*/
   
     SDL_RenderClear(ecran);
     if(mode == 0){ 
@@ -183,16 +163,16 @@ int main(void)//int argc, char *argv[])
       nb_vie_perso(positionX,positionY,map1,&nb_vie,&posX,&posY);
       vie_du_personnage(ecran,vie,nb_vie);
       
-      afficher_element(balle1, ecran);
-      afficher_element(balle2, ecran);
+      /*afficher_element(balle1, ecran);
+      afficher_element(balle2, ecran);*/
       if (nb_vie == 0){
         gameOver("gameOver.bmp", ecran);
          terminer = true ;
       }
                   
-      if (positionX > 10){
+      /*if (positionX > 10){
         afficher_element(balle3, ecran);
-      }
+      }*/
 
       if (!collision_pied(positionX, positionY, map1)){
         if (!trou(positionX, positionY, map1)){
@@ -248,13 +228,9 @@ int main(void)//int argc, char *argv[])
         }
     }
     
-    if (temps_debut_animation - temps_fin_animation > VITESSE_JEU)
+    /*if (temps_debut_animation - temps_fin_animation > VITESSE_JEU)
     {
-      
-      scientist = deplacer_ennemi(scientist);
-      
-
-      
+    
       balle1 = animer_balle(balle1,w);
       balle2 = animer_balle(balle2,w);
       
@@ -264,19 +240,19 @@ int main(void)//int argc, char *argv[])
       }
 
       temps_fin_animation = temps_debut_animation;
-    }
+    }*/
 
     SDL_RenderPresent(ecran);
     if (SDL_PollEvent(&evenements))
     {
       gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x ,&mode,&num,&numero,map1);
 
-      balle1 = correction_position_element(balle1, evenements, positionX, positionY, direction, w, map1);
-      balle2 = correction_position_element(balle2, evenements, positionX, positionY, direction, w, map1);
+      //balle1 = correction_position_element(balle1, evenements, positionX, positionY, direction, w, map1);
+      //balle2 = correction_position_element(balle2, evenements, positionX, positionY, direction, w, map1);
 
-      if (positionX > 10){
+     /* if (positionX > 10){
         balle3 = correction_position_element(balle3, evenements, positionX, positionY, direction, w, map1);
-      }
+      }*/
       
 
     }
@@ -284,14 +260,11 @@ int main(void)//int argc, char *argv[])
     if(temps_fin - temps_debut < 30){
       SDL_Delay(30-(temps_fin - temps_debut));
     }
-    //
+    
   }
   // Quitter SDL
   free(sprite);
-  //free(map1);
-  
- 
-  //SDL_DestroyTexture(fond);
+
   SDL_DestroyTexture(ciel);
   SDL_DestroyTexture(sol);
   SDL_DestroyTexture(troux);
@@ -318,9 +291,9 @@ int main(void)//int argc, char *argv[])
   SDL_DestroyTexture(niv5);
   SDL_DestroyTexture(niv6);
 
-  SDL_DestroyTexture(balle_image);
-  SDL_DestroyTexture(scientifique);
-  SDL_DestroyTexture(laser_image);
+  //SDL_DestroyTexture(balle_image);
+  //SDL_DestroyTexture(scientifique);
+  //SDL_DestroyTexture(laser_image);
   //SDL_DestroyTexture(missile_image);
   
   
