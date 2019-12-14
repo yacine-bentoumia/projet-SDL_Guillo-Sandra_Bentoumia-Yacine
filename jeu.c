@@ -1,3 +1,4 @@
+#include <time.h>
 #include "fenetreDuJeu.h"
 #include "finDeJeu.h"
 #include "gestionDesTouches.h"
@@ -10,13 +11,38 @@
 
 
 
+
 int main(void)
 {
-  
+  srand(time(NULL)); // initialisation de rand
   Carte map1 ;
   map1.carteJeu = NULL;
-  
-  lire_fichier("map.txt",&map1);
+  int fichier = rand()%6;
+  printf("%d \n",fichier);
+      switch (fichier){
+        case 0 :
+          lire_fichier("map.txt",&map1);
+          break;
+        case 1 :          
+          lire_fichier("map1.txt",&map1);
+          break;
+        case 2 :
+          lire_fichier("map2.txt",&map1);
+          break ;
+        case 3 :
+          lire_fichier("map1.txt",&map1);          
+          break;
+        case 4:
+          lire_fichier("map3.txt",&map1);         
+          break;
+        case 5:
+          lire_fichier("map2.txt",&map1);          
+          break;
+        default :
+          lire_fichier("map.txt",&map1);
+          break;
+        }  
+  //lire_fichier("map.txt",&map1);
   SDL_Window *fenetre;  // Déclaration de la fenêtre
   SDL_Event evenements; // Événements liés à la fenêtre
   bool terminer = false;
