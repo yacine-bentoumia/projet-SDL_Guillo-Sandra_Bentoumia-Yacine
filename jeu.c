@@ -82,7 +82,7 @@ int main(void)
   SDL_Texture *tour7 = charger_image_transparente("tour7.bmp", ecran,54,157,211);
   SDL_Texture *tour8 = charger_image_transparente("tour8.bmp", ecran,54,157,211);
 
-  //SDL_Texture *laser_image = charger_image_transparente("laser.bmp", ecran, 0, 0, 0);
+  SDL_Texture *missile = charger_image_transparente("missile.bmp", ecran, 246, 246, 246);
 
   //initialisation des valeurs
 
@@ -103,13 +103,24 @@ int main(void)
   int num = 0 ; // numero dans le menu
   int numero = 0 ;  // numero de niveau
   int vitesse = 10 ;
+  int cmp_missile = 0 ;
+  int cmp_balle = 0 ;
+
+  //gestion des differente difficulté
   SDL_Rect* posBalle = NULL;
+  SDL_Rect* posMissile = NULL;
   //recupere la position des tours pour pouvoir faire partir les balles
-  int posball = nb_de_balle(map1); 
-  posBalle = malloc(posball*sizeof(SDL_Rect));
+  nb_de_balle(map1,&cmp_balle,&cmp_missile); 
+  posBalle = malloc(cmp_balle*sizeof(SDL_Rect));
+  posMissile = malloc(cmp_missile*sizeof(SDL_Rect));
   //besoin d'un tableau pour le deplacement des balles
   SDL_Rect * dep_balle = NULL ;
-  dep_balle = malloc(posball*sizeof(SDL_Rect));
+  dep_balle = malloc(cmp_balle*sizeof(SDL_Rect));
+  //creation d'un tableau pour le deplacement des missiles
+  SDL_Rect * dep_missile = NULL ;
+  dep_missile = malloc(cmp_missile*sizeof(SDL_Rect));
+
+  
 
 
   //int direction = 0;
@@ -131,18 +142,19 @@ int main(void)
     }
     else if (mode == 1){
       
-      carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, tour6, tour7, tour8, w, h, debutX, gain,map1,pics,posBalle,posball); // affiche la map   
+      carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, tour6, tour7, tour8, w, h, debutX, gain,map1,pics,posBalle,cmp_balle,posMissile,cmp_missile); // affiche la map   
       if(temps_debut_balle - temps_fin_balle  > 1500){
-        copie_de_position(posBalle,dep_balle,posball);
+        copie_de_position(posBalle,dep_balle,cmp_balle);
+        copie_de_position(posMissile,dep_missile,cmp_missile);
         temps_fin_balle = temps_debut_balle;
       }
-      deplacer_balle(dep_balle, w,posball);
-      affichage_balle(ecran,balle,dep_balle,posball);
-
+      deplacer_balle(dep_balle, w,cmp_balle);
+      deplacer_missile(dep_missile, h,cmp_missile,map1,posMissile);
+      affichage_balle(ecran,balle,dep_balle,cmp_balle);
+      affichage_balle(ecran,missile,dep_missile,cmp_missile);
       personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,map1);
 
-      if(collision_balle(affichage_position_x,positionY,map1,posball,dep_balle ,h,w)){
-        //printf("collision \n");
+      if(collision_balle(affichage_position_x,positionY,map1,cmp_balle,dep_balle ,h,w)){
         nb_vie--;
       }
       nb_vie_perso(positionX,positionY,map1,&nb_vie,&posX,&posY);
@@ -195,8 +207,11 @@ int main(void)
           lire_fichier("map.txt",&map1);
           break;
         }
-        posball = nb_de_balle(map1);
-        posBalle = (SDL_Rect*)realloc((posBalle), ((posball) *sizeof(SDL_Rect)));
+        nb_de_balle(map1,&cmp_balle,&cmp_missile);
+        posBalle = (SDL_Rect*)realloc((posBalle), ((cmp_balle) *sizeof(SDL_Rect)));
+        posMissile = (SDL_Rect*)realloc((posMissile), ((cmp_missile) *sizeof(SDL_Rect)));
+        dep_balle = (SDL_Rect*)realloc((dep_balle), ((cmp_balle) *sizeof(SDL_Rect)));
+        dep_missile = (SDL_Rect*)realloc((dep_missile), ((cmp_missile) *sizeof(SDL_Rect)));
     }
     
     SDL_RenderPresent(ecran);
@@ -213,6 +228,7 @@ int main(void)
   // Quitter SDL
   free(sprite);
   free(posBalle);
+  free(posMissile) ;
 
   SDL_DestroyTexture(ciel);
   SDL_DestroyTexture(sol);
@@ -242,7 +258,7 @@ int main(void)
 
   SDL_DestroyTexture(balle);
   //SDL_DestroyTexture(scientifique);
-  //SDL_DestroyTexture(laser_image);
+  SDL_DestroyTexture(missile);
   //SDL_DestroyTexture(missile_image);
   
   
