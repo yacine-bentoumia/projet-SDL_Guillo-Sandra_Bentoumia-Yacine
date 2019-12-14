@@ -36,14 +36,6 @@
 
             #define VITESSE_JEU                     50
 
-//#define LARGEUR_RACCOON 50
-//#define HAUTEUR_RACCOON 30
-//#define TAILLE_PAS 1
-//#define NB_SPRITES_RACCOON 5
 
-//#define VITESSE_BALLE 1
-
-//#define LARGEUR_CHAT 100
-//#define HAUTEUR_CHAT 100
 
 #endif

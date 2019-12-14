@@ -9,6 +9,13 @@
 #include "lecture_map.h"
 #include "map.h"
 
-int def_position_balle(Carte map1);
+int nb_de_balle(Carte map1);
+
 void affichage_balle(SDL_Renderer* ecran,SDL_Texture* balle,SDL_Rect* posBalle,int taille);
+
+void copie_de_position(SDL_Rect*posBalle,SDL_Rect*dep_balle,int taille);
+
+void deplacer_balle(SDL_Rect*pos_tab,int w,int taille);
+
+
 #endif

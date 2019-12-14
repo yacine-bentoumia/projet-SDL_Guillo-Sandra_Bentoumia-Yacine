@@ -97,15 +97,19 @@ int main(void)
   SDL_Rect *sprite = sprite_personnage(); //tableau de sprite du personnage
   int temps_debut = 0 ;
   int temps_fin = 0; 
+  int temps_debut_balle = 0 ;
+  int temps_fin_balle = 0; 
   int mode = 0 ;
   int num = 0 ; // numero dans le menu
   int numero = 0 ;  // numero de niveau
   int vitesse = 10 ;
   SDL_Rect* posBalle = NULL;
-  //SDL_Rect* posBalle = {NULL,NULL,NULL,NULL,NULL};
-  int posball = def_position_balle(map1); 
+  //recupere la position des tours pour pouvoir faire partir les balles
+  int posball = nb_de_balle(map1); 
   posBalle = malloc(posball*sizeof(SDL_Rect));
-  
+  //besoin d'un tableau pour le deplacement des balles
+  SDL_Rect * dep_balle = NULL ;
+  dep_balle = malloc(posball*sizeof(SDL_Rect));
  //int hauteur = 0;
  //int largeur = 0;
 
@@ -134,7 +138,7 @@ int main(void)
   {
 
     temps_debut = SDL_GetTicks();
-    //temps_debut_animation = SDL_GetTicks();
+    temps_debut_balle = SDL_GetTicks();
     SDL_GetWindowSize(fenetre, &w, &h);
     /*
     if (w != largeur || h != hauteur){
@@ -162,10 +166,17 @@ int main(void)
       choix_menu(ecran,tableau[num]) ;
     }
     else if (mode == 1){
-     
-      carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, tour6, tour7, tour8, w, h, debutX, gain,map1,pics,posBalle,posball); // affiche la map
-
-      affichage_balle(ecran,balle,posBalle,posball);
+      
+      carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, tour6, tour7, tour8, w, h, debutX, gain,map1,pics,posBalle,posball); // affiche la map   
+      if(temps_debut_balle - temps_fin_balle  > 1000){
+        copie_de_position(posBalle,dep_balle,posball);
+        temps_fin_balle = temps_debut_balle;
+      }
+      
+      
+      deplacer_balle(dep_balle, w,posball);
+      
+      affichage_balle(ecran,balle,dep_balle,posball);
 
       personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,map1);
       nb_vie_perso(positionX,positionY,map1,&nb_vie,&posX,&posY);
@@ -235,7 +246,7 @@ int main(void)
         
           break;
         }
-        posball = def_position_balle(map1);
+        posball = nb_de_balle(map1);
         posBalle = (SDL_Rect*)realloc((posBalle), ((posball) *sizeof(SDL_Rect)));
     }
     
