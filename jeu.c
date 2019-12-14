@@ -99,6 +99,8 @@ int main(void)
   int temps_fin = 0; 
   int temps_debut_balle = 0 ;
   int temps_fin_balle = 0; 
+  int temps_debut_collision = 0 ;
+  int temps_fin_collision = 0; 
   int mode = 0 ;
   int num = 0 ; // numero dans le menu
   int numero = 0 ;  // numero de niveau
@@ -134,6 +136,7 @@ int main(void)
   {
     temps_debut = SDL_GetTicks();
     temps_debut_balle = SDL_GetTicks();
+    temps_debut_collision = SDL_GetTicks();
     SDL_GetWindowSize(fenetre, &w, &h);
   
     SDL_RenderClear(ecran);
@@ -153,10 +156,16 @@ int main(void)
       affichage_balle(ecran,balle,dep_balle,cmp_balle);
       affichage_balle(ecran,missile,dep_missile,cmp_missile);
       personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,map1);
-
-      if(collision_balle(affichage_position_x,positionY,map1,cmp_balle,dep_balle ,h,w)){
+//
+      if(temps_debut_collision - temps_fin_collision  > 500){
+      if( collision_balle(affichage_position_x,positionY,map1,cmp_balle,dep_balle ,h,w) || collision_missile(affichage_position_x, positionY,map1,cmp_missile, dep_missile,h, w)){
         nb_vie--;
+        temps_fin_collision = temps_debut_collision;
+
       }
+
+      }
+
       nb_vie_perso(positionX,positionY,map1,&nb_vie,&posX,&posY);
       vie_du_personnage(ecran,vie,nb_vie);
    

@@ -147,6 +147,29 @@ void collision_tete(int positionX, int positionY, Carte map1,int* vitesse){
    
 }
 
+bool collision_missile(int positionX,int positionY,Carte map1,int taille, SDL_Rect* pos_tab,int h,int w){
+    bool condition1 ;
+    bool condition2 ;
+    bool condition3 ;
+    bool condition4 ;
+
+    positionY = positionY * hauteur_une_case(h,map1);
+    positionX = positionX * largeur_une_case(w);
+    for (int i = 0 ; i < taille ; i++){
+        condition1 = positionX  == pos_tab[i].x; 
+        
+        condition2 = positionY  == pos_tab[i].y ; 
+        condition3 = (positionY + 1* hauteur_une_case(h,map1)) == pos_tab[i].y ; 
+        condition4 = (positionY + 2* hauteur_une_case(h,map1)) == pos_tab[i].y ; 
+        
+        if(condition1 && (condition2 || condition3 || condition4)){
+            
+            return true;
+        }
+    }
+    return (condition1 && condition2);
+}
+
 bool collision_balle(int positionX,int positionY,Carte map1,int taille, SDL_Rect* pos_tab,int h,int w){
 /* position.x = affichage_position_x * largeur_une_case(w);*/
 
@@ -169,9 +192,8 @@ bool collision_balle(int positionX,int positionY,Carte map1,int taille, SDL_Rect
         }
     }
     return (condition1 &&(condition2 || condition3 || condition4) );
-
-
 }
+
 bool perte_de_vie(int positionX,int positionY,Carte map1){
     //si le personnage touche des pics avec les pieds
     bool condition =  map1.carteJeu[((positionX) + (positionY + 3)*map1.largeur)]== 'p';

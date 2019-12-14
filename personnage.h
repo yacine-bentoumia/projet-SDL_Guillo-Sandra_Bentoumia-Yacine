@@ -27,6 +27,8 @@ bool collision_pied(int positionX, int positionY, Carte map1);
 
 void collision_tete(int positionX, int positionY, Carte map1, int* vitesse);
 
+bool collision_missile(int positionX,int positionY,Carte map1,int taille, SDL_Rect* pos_tab,int h,int w);
+
 bool collision_balle(int positionX,int positionY,Carte map1,int taille, SDL_Rect* pos_tab,int h,int w);
 
 bool perte_de_vie(int positionX,int positionY,Carte map1);

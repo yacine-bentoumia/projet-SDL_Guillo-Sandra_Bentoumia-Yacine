@@ -8,6 +8,20 @@ void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_T
 SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debutX,SDL_Texture* gain, Carte map1,SDL_Texture*pics,SDL_Rect* posBalle,int taillePosBalle,SDL_Rect* posMissile,int taillePosMissile){
     int cmp = 0 ;
     int compteur = 0 ;
+    for(int q = 0 ; q < taillePosMissile ; q++){
+                        
+        posMissile[q].x = 0;
+        posMissile[q].y = 0;
+        posMissile[q].h = 0;
+        posMissile[q].w = 0;        
+    }
+    for(int q = 0 ; q < taillePosBalle ; q++){
+                           
+        posBalle[q].x = 0;
+        posBalle[q].y = 0;
+        posBalle[q].h = 0;
+        posBalle[q].w = 0;        
+    }
     dest.x = 0 ;
     dest.y = 0 ;
 
@@ -53,16 +67,7 @@ SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debu
                 case '5':
                     SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
                     SDL_RenderCopy(ecran, tour5, &dest, &pos);
-                    if(cmp == 0){
-                         
-                        for(int q = 0 ; q < taillePosBalle ; q++){
-                           
-                            posBalle[q].x = 0;
-                            posBalle[q].y = 0;
-                            posBalle[q].h = 0;
-                            posBalle[q].w = 0;        
-                        }
-                    }
+ 
                     
                     posBalle[cmp] = pos ;
                     posBalle[cmp].h = 10;
@@ -80,16 +85,6 @@ SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debu
                 case '8':
                     SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
                     SDL_RenderCopy(ecran, tour8, &dest, &pos);
-                    if(compteur == 0){
-                         
-                        for(int q = 0 ; q < taillePosMissile ; q++){
-                           
-                            posMissile[q].x = 0;
-                            posMissile[q].y = 0;
-                            posMissile[q].h = 0;
-                            posMissile[q].w = 0;        
-                        }
-                    }
                     
                     posMissile[compteur] = pos ;
                     posMissile[compteur].h = 100;
