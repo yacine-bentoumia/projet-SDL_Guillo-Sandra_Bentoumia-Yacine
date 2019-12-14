@@ -18,16 +18,3 @@ OBSTACLES :
 NIVEAU :
     - plusieurs niveaux sont à disposition 
 
-DEPLACEMENT :
-    - position fixe du personnage --> image de fond qui se deplace 
-    - peut se déplacer vers la droite uniquement 
-    
-
-GESTION DE TOUCHE 
-    - fleche de droite --> deplacement vers la droite 
-    - fleche du haut --> sauter 
-    
-
-
-
-    

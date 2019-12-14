@@ -132,11 +132,11 @@ void collision_tete(int positionX, int positionY, Carte map1,int* vitesse){
     
     bool collision  ;
     bool condition ;
-    bool condition2;
+    bool condition2 ;
 
     int i;
     
-        for (i = 1 ; i < (*vitesse) && (!collision) && (!condition) && (!condition2); i++){ // && (!collision)
+        for (i = 1 ; i < (*vitesse) && (!collision) && (!condition) && (!condition2); i++){ 
             collision = map1.carteJeu[(positionX) + (positionY - i)*map1.largeur] == '2';   
             condition = map1.carteJeu[(positionX) + (positionY - i) * map1.largeur] == '8' ;  
             condition2 =  map1.carteJeu[(positionX) + (positionY - i) * map1.largeur] == '4' ;  
@@ -145,6 +145,32 @@ void collision_tete(int positionX, int positionY, Carte map1,int* vitesse){
         *vitesse = i - 2;
         
    
+}
+
+bool collision_balle(int positionX,int positionY,Carte map1,int taille, SDL_Rect* pos_tab,int h,int w){
+/* position.x = affichage_position_x * largeur_une_case(w);*/
+
+    bool condition1 ;
+    
+    bool condition2 ;
+    bool condition3 ;
+    bool condition4 ;
+    positionY = positionY * hauteur_une_case(h,map1);
+    positionX = positionX * largeur_une_case(w);
+    for (int i = 0 ; i < taille ; i++){
+        condition1 = positionX  == pos_tab[i].x; 
+        
+        condition4 = positionY  == pos_tab[i].y; 
+        condition2 = (positionY + 1* hauteur_une_case(h,map1)) == pos_tab[i].y ; 
+        condition3 = (positionY + 2* hauteur_une_case(h,map1)) == pos_tab[i].y ; 
+
+        if(condition1 && (condition2 || condition3 || condition4)){
+            return true;
+        }
+    }
+    return (condition1 &&(condition2 || condition3 || condition4) );
+
+
 }
 bool perte_de_vie(int positionX,int positionY,Carte map1){
     //si le personnage touche des pics avec les pieds
@@ -178,15 +204,11 @@ void vie_du_personnage(SDL_Renderer *ecran,SDL_Texture *vie,int vie_perso){
     //taille
     pos.h = 50 ;
     pos.w = 50 ;
-
-   
         for (int i = 0 ; i < vie_perso ; i++){
             SDL_RenderCopy(ecran,vie, NULL, &pos);
-                //printf("%d \n",pos.x);
                 pos.x += 50 ;
         }
-            
-            
+          
 }
 
 void nb_vie_perso(int positionX,int positionY,Carte map1,int* nb_vie,int *posX,int *posY){

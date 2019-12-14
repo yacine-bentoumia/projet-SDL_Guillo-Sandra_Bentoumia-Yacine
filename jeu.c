@@ -110,8 +110,7 @@ int main(void)
   //besoin d'un tableau pour le deplacement des balles
   SDL_Rect * dep_balle = NULL ;
   dep_balle = malloc(posball*sizeof(SDL_Rect));
- //int hauteur = 0;
- //int largeur = 0;
+
 
   //int direction = 0;
   int nb_vie = 3 ;
@@ -119,47 +118,12 @@ int main(void)
   int posX = 0; 
   int posY = 0;
 
-  // nécessaires pour les animations
-  /*int temps_debut_animation = 0;
-  int temps_fin_animation = 0;*/
-
-  
-/*
-  element balle1, balle2, balle3;  
- 
-
-  balle1 = creer_balle1(balle1, 0, balle_image, w, h, map1);
-  balle2 = creer_balle2(balle2, 0, balle_image, w, h, map1);
-  balle3 = creer_balle3(balle3, 0, balle_image, w, h, map1);
-*/
-
  // Boucle principale
   while (!terminer)
   {
-
     temps_debut = SDL_GetTicks();
     temps_debut_balle = SDL_GetTicks();
     SDL_GetWindowSize(fenetre, &w, &h);
-    /*
-    if (w != largeur || h != hauteur){
-
-      balle1 = definir_sprite_balle(balle1, w, h, map1);
-      balle1 = definir_position_balle1(balle1, w, h, map1);
-      
-      balle2 = definir_sprite_balle(balle2, w, h, map1);
-      balle2 = definir_position_balle2(balle2, w, h, map1);
-      
-      balle3 = definir_sprite_balle(balle3, w, h, map1);
-      balle3 = definir_position_balle3(balle3, w, h, map1);
-
-      largeur = w;
-      hauteur = h;
-
-      }
-   
-
-    positionY -= collision_element(balle1, positionY, w, h, map1);
-    positionY -= collision_element(balle2,positionY, w, h, map1);*/
   
     SDL_RenderClear(ecran);
     if(mode == 0){ 
@@ -168,31 +132,26 @@ int main(void)
     else if (mode == 1){
       
       carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, tour6, tour7, tour8, w, h, debutX, gain,map1,pics,posBalle,posball); // affiche la map   
-      if(temps_debut_balle - temps_fin_balle  > 1000){
+      if(temps_debut_balle - temps_fin_balle  > 1500){
         copie_de_position(posBalle,dep_balle,posball);
         temps_fin_balle = temps_debut_balle;
       }
-      
-      
       deplacer_balle(dep_balle, w,posball);
-      
       affichage_balle(ecran,balle,dep_balle,posball);
 
       personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,map1);
+
+      if(collision_balle(affichage_position_x,positionY,map1,posball,dep_balle ,h,w)){
+        //printf("collision \n");
+        nb_vie--;
+      }
       nb_vie_perso(positionX,positionY,map1,&nb_vie,&posX,&posY);
       vie_du_personnage(ecran,vie,nb_vie);
-      
-      /*afficher_element(balle1, ecran);
-      afficher_element(balle2, ecran);*/
+   
       if (nb_vie == 0){
         gameOver("gameOver.bmp", ecran);
          terminer = true ;
-         //mode = 0;
       }
-                  
-      /*if (positionX > 10){
-        afficher_element(balle3, ecran);
-      }*/
 
       if (!collision_pied(positionX, positionY, map1)){
         if (!trou(positionX, positionY, map1)){
@@ -207,76 +166,43 @@ int main(void)
       if (gagner(positionX, positionY,map1)){
         win("winner.bmp", ecran);
         terminer = true ;
-
-      }
-      
-    
+      } 
 
     }else if(mode == 2){
       choix_option( ecran,commande);
-    }else if(mode == 3){
-      
+    }else if(mode == 3){      
       choix_niveau(ecran, tab_niv[numero]);
       switch (numero){
         case 0 :
           lire_fichier("map.txt",&map1);
-
           break;
-        case 1 :
-          
+        case 1 :          
           lire_fichier("map1.txt",&map1);
           break;
         case 2 :
           lire_fichier("map2.txt",&map1);
           break ;
         case 3 :
-          lire_fichier("map1.txt",&map1);
-          
+          lire_fichier("map1.txt",&map1);          
           break;
         case 4:
-          lire_fichier("map3.txt",&map1);
-         
+          lire_fichier("map3.txt",&map1);         
           break;
         case 5:
-          lire_fichier("map2.txt",&map1);
-          
+          lire_fichier("map2.txt",&map1);          
           break;
         default :
           lire_fichier("map.txt",&map1);
-        
           break;
         }
         posball = nb_de_balle(map1);
         posBalle = (SDL_Rect*)realloc((posBalle), ((posball) *sizeof(SDL_Rect)));
     }
     
-    /*if (temps_debut_animation - temps_fin_animation > VITESSE_JEU)
-    {
-    
-      balle1 = animer_balle(balle1,w);
-      balle2 = animer_balle(balle2,w);
-      
-      if (positionX > 10){
-
-        balle3 = animer_balle(balle3, w);
-      }
-
-      temps_fin_animation = temps_debut_animation;
-    }*/
-
     SDL_RenderPresent(ecran);
     if (SDL_PollEvent(&evenements))
     {
       gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x ,&mode,&num,&numero,map1,&vitesse);
-
-      //balle1 = correction_position_element(balle1, evenements, positionX, positionY, direction, w, map1);
-      //balle2 = correction_position_element(balle2, evenements, positionX, positionY, direction, w, map1);
-
-     /* if (positionX > 10){
-        balle3 = correction_position_element(balle3, evenements, positionX, positionY, direction, w, map1);
-      }*/
-      
-
     }
     temps_fin = SDL_GetTicks();
     if(temps_fin - temps_debut < 30){
@@ -314,7 +240,7 @@ int main(void)
   SDL_DestroyTexture(niv5);
   SDL_DestroyTexture(niv6);
 
-  //SDL_DestroyTexture(balle_image);
+  SDL_DestroyTexture(balle);
   //SDL_DestroyTexture(scientifique);
   //SDL_DestroyTexture(laser_image);
   //SDL_DestroyTexture(missile_image);
