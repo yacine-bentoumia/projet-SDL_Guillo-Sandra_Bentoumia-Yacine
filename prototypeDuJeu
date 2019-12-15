@@ -1,6 +1,5 @@
 prototype
 
-
  jeu de plateforme en 2D 
 
 CONTEXTE : 
@@ -12,9 +11,14 @@ OBSTACLES :
     -> le personnage de notre jeu doit sauter pour éviter des trous, des pics et des balles .
     -> si le joueur tombe dans un trou, le joueur perd automatiquement.
     -> si il touche ou passe sur des pics , celui ci perd une vie .
-    -> si le sujet se fais toucher par une balle , le personnage perd également une vie
+    -> si le sujet se fais toucher par une balle , il perd également une vie
+    -> si le sujet touche un missile , une vie lui est encore enlevé
 
 
 NIVEAU :
     - plusieurs niveaux sont à disposition 
+    - les niveaux peuvent être choisis dans le menu niveaux 
+    - si le jeu est lancé directement, c'est un niveau aleatoire qui se charge
+    - lorsqu'on gagne une partie , on passe a un nouveau niveau aléatoires
+    - si on perd le niveau , le joueur est ramener à la page du menu
 
