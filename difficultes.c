@@ -49,7 +49,7 @@ void deplacer_missile(SDL_Rect* pos_tab,int h,int taille,Carte map1,SDL_Rect* ta
         pos_tab[i].h = tab[i].h ;
         pos_tab[i].w = tab[i].w ;
         
-        pos_tab[i].y += hauteur ;
+        pos_tab[i].y += 10;
     }
 
 
