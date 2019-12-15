@@ -30,23 +30,23 @@ int main(void)
   SDL_Renderer *ecran = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED);
 
   //  Sprites des composants de la map
-  SDL_Texture *sol = charger_image("sol.bmp", ecran);
-  SDL_Texture *ciel = charger_image("ciel.bmp", ecran);
-  SDL_Texture *troux = charger_image("trou.bmp", ecran);
-  SDL_Texture *obstacle = charger_image("obstacle.bmp", ecran);
-  SDL_Texture *pics = charger_image_transparente("pics.bmp",ecran,255,0,0);
-  SDL_Texture *vie = charger_image_transparente("vie.bmp" ,ecran ,255,255,255);
+  SDL_Texture *sol = charger_image("sprites/sol.bmp", ecran);
+  SDL_Texture *ciel = charger_image("sprites/ciel.bmp", ecran);
+  SDL_Texture *troux = charger_image("sprites/trou.bmp", ecran);
+  SDL_Texture *obstacle = charger_image("sprites/obstacle.bmp", ecran);
+  SDL_Texture *pics = charger_image_transparente("sprites/pics.bmp",ecran,255,0,0);
+  SDL_Texture *vie = charger_image_transparente("sprites/vie.bmp" ,ecran ,255,255,255);
 
-  SDL_Texture *gain = charger_image("win.bmp", ecran); //image du win
+  SDL_Texture *gain = charger_image("sprites/win.bmp", ecran); //image du win
 
   //Sprite du personnage
-  SDL_Texture* perso = charger_image_transparente("mario.bmp", ecran, 0, 115, 0); // image du perso
+  SDL_Texture* perso = charger_image_transparente("sprites/mario.bmp", ecran, 0, 115, 0); // image du perso
 
   //image pour le menu
-  SDL_Texture *jouer = charger_image("raccoon_jouer.bmp", ecran);
-  SDL_Texture *option = charger_image("raccoon_option.bmp", ecran);
-  SDL_Texture *niveau = charger_image("raccoon_niveau.bmp", ecran);
-  SDL_Texture *quitter = charger_image("raccoon_quitter.bmp", ecran);
+  SDL_Texture *jouer = charger_image("sprites/raccoon_jouer.bmp", ecran);
+  SDL_Texture *option = charger_image("sprites/raccoon_option.bmp", ecran);
+  SDL_Texture *niveau = charger_image("sprites/raccoon_niveau.bmp", ecran);
+  SDL_Texture *quitter = charger_image("sprites/raccoon_quitter.bmp", ecran);
 
   //tableau de texture pour le menu
   SDL_Texture *tableau[4] ;
@@ -56,16 +56,16 @@ int main(void)
   tableau[3] = quitter ;
 
   //menu des options
-  SDL_Texture *commande = charger_image("options.bmp", ecran);
-  SDL_Texture *fleche = charger_image("fleche.bmp", ecran);
+  SDL_Texture *commande = charger_image("sprites/options.bmp", ecran);
+  SDL_Texture *fleche = charger_image("sprites/fleche.bmp", ecran);
 
   //niveau differents
-  SDL_Texture *niv1 = charger_image("niveau_un.bmp", ecran);
-  SDL_Texture *niv2 = charger_image("niveau_deux.bmp", ecran);
-  SDL_Texture *niv3 = charger_image("niveau_trois.bmp", ecran);
-  SDL_Texture *niv4 = charger_image("niveau_quatre.bmp", ecran);
-  SDL_Texture *niv5 = charger_image("niveau_cinq.bmp", ecran);
-  SDL_Texture *niv6 = charger_image("niveau_six.bmp", ecran);
+  SDL_Texture *niv1 = charger_image("sprites/niveau_un.bmp", ecran);
+  SDL_Texture *niv2 = charger_image("sprites/niveau_deux.bmp", ecran);
+  SDL_Texture *niv3 = charger_image("sprites/niveau_trois.bmp", ecran);
+  SDL_Texture *niv4 = charger_image("sprites/niveau_quatre.bmp", ecran);
+  SDL_Texture *niv5 = charger_image("sprites/niveau_cinq.bmp", ecran);
+  SDL_Texture *niv6 = charger_image("sprites/niveau_six.bmp", ecran);
 
   //tableau de texture de niveau 
   SDL_Texture *tab_niv[6] ;
@@ -78,18 +78,18 @@ int main(void)
   
   // Sprites des différents ennemis
 
-  SDL_Texture *balle = charger_image_transparente("balle1.bmp", ecran, 0, 128, 255);
-  SDL_Texture *tour4 = charger_image_transparente("tour4.bmp", ecran,54,157,211);
-  SDL_Texture *tour5 = charger_image_transparente("tour5.bmp", ecran,54,157,211);
-  SDL_Texture *tour6 = charger_image_transparente("tour6.bmp", ecran,54,157,211);
-  SDL_Texture *tour7 = charger_image_transparente("tour7.bmp", ecran,54,157,211);
-  SDL_Texture *tour8 = charger_image_transparente("tour8.bmp", ecran,54,157,211);
+  SDL_Texture *balle = charger_image_transparente("sprites/balle1.bmp", ecran, 0, 128, 255);
+  SDL_Texture *tour4 = charger_image_transparente("sprites/tour4.bmp", ecran,54,157,211);
+  SDL_Texture *tour5 = charger_image_transparente("sprites/tour5.bmp", ecran,54,157,211);
+  SDL_Texture *tour6 = charger_image_transparente("sprites/tour6.bmp", ecran,54,157,211);
+  SDL_Texture *tour7 = charger_image_transparente("sprites/tour7.bmp", ecran,54,157,211);
+  SDL_Texture *tour8 = charger_image_transparente("sprites/tour8.bmp", ecran,54,157,211);
 
-  SDL_Texture *missile = charger_image_transparente("missile.bmp", ecran, 246, 246, 246);
+  SDL_Texture *missile = charger_image_transparente("sprites/missile.bmp", ecran, 246, 246, 246);
 
   //chargement des images de fin de jeu
-  SDL_Texture* perdu = charger_image ("gameOver.bmp", ecran) ;
-  SDL_Texture* winner = charger_image ("winner.bmp", ecran) ;
+  SDL_Texture* perdu = charger_image ("sprites/gameOver.bmp", ecran) ;
+  SDL_Texture* winner = charger_image ("sprites/winner.bmp", ecran) ;
 
   //initialisation des valeurs
   
