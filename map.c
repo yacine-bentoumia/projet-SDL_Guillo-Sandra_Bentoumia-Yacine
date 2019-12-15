@@ -1,7 +1,7 @@
 #include "map.h"
 
 
-
+//fonction qui gere tout l'affichage global
 SDL_Rect dest , pos ;
 
 void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, 

@@ -1,5 +1,5 @@
 #include "personnage.h"
-
+//definition du personnage
 void personnage_jeu(SDL_Renderer *ecran, int h, int w, int positionY, SDL_Texture *perso, int numSprite, SDL_Rect *sprite, int affichage_position_x, Carte map1)
 {
 
@@ -34,17 +34,15 @@ SDL_Rect *sprite_personnage()
         sprite[i].x = (i % NB_CASE_LARGEUR) * (sprite[i].w);
         if ((i % NB_CASE_LARGEUR == 0) && (i != 0))
         {
-
             j++;
         }
-
         //coordonnee y du sprite a afficher
         sprite[i].y = j * (sprite[i].h);
     }
 
     return sprite;
 }
-
+//deplacement du personnage
 void deplacement_sur_map(int *debutX, int direction, int *positionX, int *affichage_position_x, Carte map1)
 {
 
@@ -86,7 +84,7 @@ void gravite( int direction, int *positionY, Carte map1){
        }
 }
 
-
+//collision a droite et a gauche
 bool collision(int direction, int positionX, int positionY, Carte map1)
 {
 
@@ -110,7 +108,7 @@ bool collision(int direction, int positionX, int positionY, Carte map1)
 
     return condition1 || condition2 || condition3  || condition4 || condition5 || condition6 || condition7 || condition8 || condition9 ;
 }
-
+//collision sous le personnage
 bool collision_pied(int positionX, int positionY, Carte map1){
    
 
@@ -203,7 +201,7 @@ bool gagner(int positionX, int positionY, Carte map1){
     return map1.carteJeu[positionX + (positionY + 3) * map1.largeur] == '9' ;
 }
 
-
+//gestion de la vie du personnage
 void vie_du_personnage(SDL_Renderer *ecran,SDL_Texture *vie,int vie_perso){
     
     SDL_Rect  pos ;

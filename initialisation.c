@@ -1,5 +1,6 @@
 #include "initialisation.h"
 
+//Fonction qui permet d'initialiser toutes les valeurs dont on a besoin pour le jeu
 void initialisation_jeu(int* debutX, int *numSprite, int *positionX, int* positionY, int* affichage_position_x,int *temps_debut,int* temps_debut_balle,
 int * temps_fin,int *temps_fin_balle,int *temps_debut_collision,int *temps_fin_collision, int *cmp_missile,int *cmp_balle,int * nb_vie){
 
@@ -22,6 +23,7 @@ int * temps_fin,int *temps_fin_balle,int *temps_debut_collision,int *temps_fin_c
 
 }
 
+//fonction qui permet de charger les niveaux aleatoirement
 void niveau_alea(Carte *map1){
   
   srand(time(NULL)); // initialisation de rand
@@ -52,5 +54,4 @@ void niveau_alea(Carte *map1){
           lire_fichier("map.txt",map1);
           break;
         }
-
 }

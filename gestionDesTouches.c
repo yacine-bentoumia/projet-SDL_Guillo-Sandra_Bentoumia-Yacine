@@ -15,7 +15,6 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                 case SDLK_q:
                     *terminer = true; 
                     break;
-            //test de l'affichage du game over avec la touche entrer
                 case SDLK_RETURN  : //touche entrer
                     if(*mode == 0 ){
                         if(*num == 0){
@@ -102,13 +101,8 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     }
 
                     break ;
-                
-         
-                
-                
-        }
+                }
         case SDL_MOUSEBUTTONUP:
-                 
                     switch(evenements.button.button){
                         case SDL_BUTTON_LEFT : //clique gauche souris 
 
@@ -120,11 +114,6 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                         }
                         break ;
                     }
-                    
                     break;
-
-        }
-
-    
-    
+    }
 }

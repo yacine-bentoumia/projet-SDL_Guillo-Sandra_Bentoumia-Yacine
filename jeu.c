@@ -11,8 +11,6 @@
 #include "initialisation.h"
 
 
-
-
 int main(void)
 {
   Carte map1 ;  //initialisation de la structure carte
@@ -36,7 +34,6 @@ int main(void)
   SDL_Texture *obstacle = charger_image("sprites/obstacle.bmp", ecran);
   SDL_Texture *pics = charger_image_transparente("sprites/pics.bmp",ecran,255,0,0);
   SDL_Texture *vie = charger_image_transparente("sprites/vie.bmp" ,ecran ,255,255,255);
-
   SDL_Texture *gain = charger_image("sprites/win.bmp", ecran); //image du win
 
   //Sprite du personnage
@@ -84,7 +81,6 @@ int main(void)
   SDL_Texture *tour6 = charger_image_transparente("sprites/tour6.bmp", ecran,54,157,211);
   SDL_Texture *tour7 = charger_image_transparente("sprites/tour7.bmp", ecran,54,157,211);
   SDL_Texture *tour8 = charger_image_transparente("sprites/tour8.bmp", ecran,54,157,211);
-
   SDL_Texture *missile = charger_image_transparente("sprites/missile.bmp", ecran, 246, 246, 246);
 
   //chargement des images de fin de jeu
@@ -270,7 +266,7 @@ int main(void)
     }
     
   }
-  // Quitter SDL
+  // Liberation de mémoire
   free(sprite);
   free(posBalle);
   free(posMissile) ;
@@ -299,8 +295,6 @@ int main(void)
   SDL_DestroyTexture(winner);
   SDL_DestroyTexture(perdu);
 
-  
-
   SDL_DestroyTexture(niv1);
   SDL_DestroyTexture(niv2);
   SDL_DestroyTexture(niv3);
@@ -309,9 +303,8 @@ int main(void)
   SDL_DestroyTexture(niv6);
 
   SDL_DestroyTexture(balle);
-  //SDL_DestroyTexture(scientifique);
   SDL_DestroyTexture(missile);
-  //SDL_DestroyTexture(missile_image);
+
   free(map1.carteJeu);
   
   SDL_DestroyRenderer(ecran);

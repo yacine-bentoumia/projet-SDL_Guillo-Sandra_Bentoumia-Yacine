@@ -1,7 +1,6 @@
 #include "menu.h"
-
+//fonction des differents affichages du menu
 void choix_menu(SDL_Renderer* ecran, SDL_Texture *tableau){
-    
     SDL_RenderCopy(ecran, tableau, NULL, NULL);
 }
 
