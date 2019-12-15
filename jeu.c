@@ -272,13 +272,13 @@ int main(void)
           lire_fichier("map2.txt",&map1);
           break ;
         case 3 :
-          lire_fichier("map1.txt",&map1);          
+          lire_fichier("map3.txt",&map1);          
           break;
         case 4:
-          lire_fichier("map3.txt",&map1);         
+          lire_fichier("map4.txt",&map1);         
           break;
         case 5:
-          lire_fichier("map2.txt",&map1);          
+          lire_fichier("map5.txt",&map1);          
           break;
         default :
           lire_fichier("map.txt",&map1);
