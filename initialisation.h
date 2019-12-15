@@ -20,4 +20,6 @@ int * temps_fin,int *temps_fin_balle,int *temps_debut_collision,int *temps_fin_c
 
 void niveau_alea(Carte *map1);
 
+
+
 #endif

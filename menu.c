@@ -7,7 +7,6 @@ void choix_menu(SDL_Renderer* ecran, SDL_Texture *tableau){
 
 
 void choix_option(SDL_Renderer* ecran,SDL_Texture* commande,SDL_Texture* fleche,SDL_Rect dest, int h, int w){
-    //SDL_Rect dest ;
     dest.x = w -100 ;
     dest.y = h - 100 ;
     dest.h = 80 ;

@@ -11,44 +11,30 @@ void taille_fichier(const char* nomFichier, int* largeur, int*hauteur, int*taill
 
     if (fichier != NULL)
     {
-        
         // Boucle de lecture des caractères un à un
         int t = 0 ;
         int h = 0 ;
         do
         {
             caractere_actuel = fgetc(fichier); // On lit le caractère
-            
-            
             if(caractere_actuel != '\n'&& caractere_actuel != EOF){
                 t++ ;
             }else{
               
                 h++ ;
-            }
-
-           
+            }  
         } while (caractere_actuel != EOF); 
         
         *taille = t ;
         *hauteur = h ;
         int l = t/h ;
         *largeur = l ;
-        
-        
-        
+
         fclose(fichier);
     }
-    
-    
-
-
-
 }
 
-void lire_fichier(const char *nomFichier, Carte *tab)
-{
-    
+void lire_fichier(const char *nomFichier, Carte *tab){ 
     int hauteur = 0,taille=0,largeur=0;
     
     FILE* fichier = NULL; 
@@ -84,13 +70,9 @@ void lire_fichier(const char *nomFichier, Carte *tab)
                 tab->carteJeu[i] = caractere_actuel;
            
                 i++;
-            }
-
-           
+            }  
         } while (caractere_actuel != EOF); // On continue tant que fgetc n'a pas retourné EOF (fin de fichier)
       
         fclose(fichier);
     }
-    
-
 }

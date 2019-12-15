@@ -1,7 +1,7 @@
 #include "gestionDesTouches.h"
 
 void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,  int *numSprite , int* positionX , int* positionY,int * affichage_position_x, 
-                                                     int* mode, int* num, int* numero, Carte map1,int * vitesse, int h , int w){
+                                                     int* mode, int* num, int* numero, Carte map1,int * vitesse, int h , int w,SDL_Texture* perdu){
         SDL_Rect position ;
         switch(evenements.type)
         {
@@ -38,13 +38,10 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     }
                     break;
                 case SDLK_RIGHT : // touche fleche droite
-                    //if (perte_de_vie(*positionX,*positionY,map1, 1)){
-                        if (!collision(1 ,*positionX, *positionY,map1)){
-                            deplacement_sur_map (debutX, 1 , positionX ,  affichage_position_x,map1);
+                    if (!collision(1 ,*positionX, *positionY,map1)){
+                        deplacement_sur_map (debutX, 1 , positionX ,  affichage_position_x,map1);
                     
                     }
-                    //}
-
 
                     if ((*numSprite < 11)&&(*numSprite > 8)) {
                         *numSprite += 1 ;
@@ -57,8 +54,6 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     if (!collision(-1 ,*positionX, *positionY,map1)){
                         deplacement_sur_map (debutX, (-1), positionX ,affichage_position_x,map1);
                     }
-
-                   
                     if ((*numSprite < 23) && (*numSprite > 20)){
                         *numSprite += 1 ;
                     }
@@ -84,10 +79,8 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     collision_tete(*positionX, *positionY,map1,vitesse); 
                     saut(-1 ,*vitesse, positionY, map1);
                      
-                    
                     if(trou(*positionX, *positionY,map1)){
-                    
-                        gameOver("gameOver.bmp", ecran);
+                        gameOver(ecran,perdu);
                         *terminer = true ;
                     }
                     break ;
@@ -117,7 +110,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
         case SDL_MOUSEBUTTONUP:
                  
                     switch(evenements.button.button){
-                        case SDL_BUTTON_LEFT : //clique souris 
+                        case SDL_BUTTON_LEFT : //clique gauche souris 
 
                         position.x = evenements.button.x ;
                         position.y = evenements.button.y ;

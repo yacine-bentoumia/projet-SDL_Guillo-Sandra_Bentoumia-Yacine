@@ -5,18 +5,16 @@
 SDL_Rect dest , pos ;
 
 void carteDuJeu (SDL_Renderer* ecran, SDL_Texture* sol,SDL_Texture* ciel , SDL_Texture* obstacle ,SDL_Texture* trou, SDL_Texture* tour4, SDL_Texture* tour5, 
-SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debutX,SDL_Texture* gain, Carte map1,SDL_Texture*pics,SDL_Rect* posBalle,int taillePosBalle,SDL_Rect* posMissile,int taillePosMissile){
+SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debutX,SDL_Texture* win, Carte map1,SDL_Texture*pics,SDL_Rect* posBalle,int taillePosBalle,SDL_Rect* posMissile,int taillePosMissile){
     int cmp = 0 ;
     int compteur = 0 ;
-    for(int q = 0 ; q < taillePosMissile ; q++){
-                        
+    for(int q = 0 ; q < taillePosMissile ; q++){           
         posMissile[q].x = 0;
         posMissile[q].y = 0;
         posMissile[q].h = 0;
         posMissile[q].w = 0;        
     }
-    for(int q = 0 ; q < taillePosBalle ; q++){
-                           
+    for(int q = 0 ; q < taillePosBalle ; q++){              
         posBalle[q].x = 0;
         posBalle[q].y = 0;
         posBalle[q].h = 0;
@@ -25,18 +23,13 @@ SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debu
     dest.x = 0 ;
     dest.y = 0 ;
 
-
     //hauteur d'une case
     int hauteur_case = hauteur_une_case(h,map1) ;
     //largeur d'une case
     int largeur_case = largeur_une_case(w) ;
 
-    
     pos.h = hauteur_case ;
     pos.w = largeur_case ;
-    
-    
- 
     for (int i = 0 ; i < LARGEUR_MAP ; i++){ 
        
         for (int j = 0 ; j < map1.hauteur ; j++) {
@@ -92,7 +85,7 @@ SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debu
                     compteur ++ ;
                     break;
                 case '9' :
-                    SDL_RenderCopy(ecran, gain, &dest, &pos);
+                    SDL_RenderCopy(ecran, win, &dest, &pos);
                     break;
                 case 'p' :
                     SDL_RenderCopy(ecran, ciel, &dest, &pos) ;
@@ -106,14 +99,10 @@ SDL_Texture* tour6, SDL_Texture* tour7, SDL_Texture* tour8,int w, int h,int debu
             }
         }
     }
-
-
-
 }
 
 
-int hauteur_une_case(int h, Carte map1){
-    
+int hauteur_une_case(int h, Carte map1){  
 
     //hauteur d'une case
     if(h % map1.hauteur==0){
@@ -136,4 +125,3 @@ int largeur_une_case(int w){
     }
     return dest.w ;
 }
- 

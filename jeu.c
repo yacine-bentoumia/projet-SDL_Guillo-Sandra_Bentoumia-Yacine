@@ -15,12 +15,10 @@
 
 int main(void)
 {
-
-  Carte map1 ;
+  Carte map1 ;  //initialisation de la structure carte
   map1.carteJeu = NULL;
   niveau_alea(&map1);
 
-  //lire_fichier("map.txt",&map1);
   SDL_Window *fenetre;  // Déclaration de la fenêtre
   SDL_Event evenements; // Événements liés à la fenêtre
   bool terminer = false;
@@ -88,6 +86,10 @@ int main(void)
   SDL_Texture *tour8 = charger_image_transparente("tour8.bmp", ecran,54,157,211);
 
   SDL_Texture *missile = charger_image_transparente("missile.bmp", ecran, 246, 246, 246);
+
+  //chargement des images de fin de jeu
+  SDL_Texture* perdu = charger_image ("gameOver.bmp", ecran) ;
+  SDL_Texture* winner = charger_image ("winner.bmp", ecran) ;
 
   //initialisation des valeurs
   
@@ -166,7 +168,7 @@ int main(void)
     }
     else if (mode == 1){
       
-      carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, tour6, tour7, tour8, w, h, debutX, gain,map1,pics,posBalle,cmp_balle,posMissile,cmp_missile); // affiche la map   
+      carteDuJeu(ecran, sol, ciel, troux, obstacle, tour4, tour5, tour6, tour7, tour8, w, h, debutX,gain, map1,pics,posBalle,cmp_balle,posMissile,cmp_missile); // affiche la map   
       if(temps_debut_balle - temps_fin_balle  > 1500){
         copie_de_position(posBalle,dep_balle,cmp_balle);
         copie_de_position(posMissile,dep_missile,cmp_missile);
@@ -189,7 +191,7 @@ int main(void)
       vie_du_personnage(ecran,vie,nb_vie);
    
       if (nb_vie == 0){
-        gameOver("gameOver.bmp", ecran);
+        gameOver(ecran,perdu);
          mode = 0;
       }
 
@@ -198,13 +200,13 @@ int main(void)
           gravite(1 , &positionY,map1);
         }
         else {
-         gameOver("gameOver.bmp", ecran);
+         gameOver(ecran,perdu);
           mode = 0;
         }
      
       }
       if (gagner(positionX, positionY,map1)){
-        win("winner.bmp", ecran);
+        win(ecran,winner);
         niveau_alea(&map1);
         initialisation_jeu(&debutX, &numSprite, &positionX, &positionY, &affichage_position_x,&temps_debut,&temps_debut_balle,
         &temps_fin,&temps_fin_balle,&temps_debut_collision,&temps_fin_collision, &cmp_missile,&cmp_balle,&nb_vie);
@@ -260,7 +262,7 @@ int main(void)
     SDL_RenderPresent(ecran);
     if (SDL_PollEvent(&evenements))
     {
-      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x ,&mode,&num,&numero,map1,&vitesse,h,w);
+      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x ,&mode,&num,&numero,map1,&vitesse,h,w,perdu);
     }
     temps_fin = SDL_GetTicks();
     if(temps_fin - temps_debut < 30){
@@ -293,6 +295,11 @@ int main(void)
   SDL_DestroyTexture(quitter);
   SDL_DestroyTexture(pics);
   SDL_DestroyTexture(vie);
+
+  SDL_DestroyTexture(winner);
+  SDL_DestroyTexture(perdu);
+
+  
 
   SDL_DestroyTexture(niv1);
   SDL_DestroyTexture(niv2);

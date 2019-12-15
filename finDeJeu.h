@@ -1,7 +1,7 @@
 #include "fenetreDuJeu.h"
 #include "constante.h"
 
-void gameOver(const char* nomfichier, SDL_Renderer* renderer) ;
+void gameOver(SDL_Renderer* renderer, SDL_Texture* gameOver) ;
 
-void win(const char* nomfichier, SDL_Renderer* renderer) ;
+void win(SDL_Renderer* renderer,SDL_Texture* win) ;
 
