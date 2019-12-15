@@ -164,9 +164,7 @@ int main(void)
   int cmp_missile = 0 ;
   int cmp_balle = 0 ;
 
- /* initialisation_jeu(&w, &h, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x,&temps_debut,&temps_debut_balle,
-  &temps_fin,&temps_fin_balle,&temps_debut_collision,&temps_fin_collision,&mode,&num, &numero,&vitesse, &cmp_missile,&cmp_balle);*/
-  //gestion des differente difficulté
+
   SDL_Rect* posBalle = NULL;
   SDL_Rect* posMissile = NULL;
   //recupere la position des tours pour pouvoir faire partir les balles
@@ -253,7 +251,11 @@ int main(void)
       }
       if (gagner(positionX, positionY,map1)){
         win("winner.bmp", ecran);
-        terminer = true ;
+        //terminer = true ;
+        niveau_alea(&map1);
+      initialisation_jeu(&debutX, &numSprite, &positionX, &positionY, &affichage_position_x,&temps_debut,&temps_debut_balle,
+&temps_fin,&temps_fin_balle,&temps_debut_collision,&temps_fin_collision, &cmp_missile,&cmp_balle,&nb_vie);
+      nb_de_balle(map1,&cmp_balle,&cmp_missile);
       } 
 
     }else if(mode == 2){
