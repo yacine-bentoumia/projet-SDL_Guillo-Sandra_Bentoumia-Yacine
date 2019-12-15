@@ -121,8 +121,6 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
 
                         position.x = evenements.button.x ;
                         position.y = evenements.button.y ;
-                        printf("%d %d \n",position.x,position.y);
-                        printf("%d %d \n",(w-100),(h-100));
                         if((position.x > (w-100) && position.x < (w-20))&&(position.y > (h-100) && position.y < (h-20))){
                        
                          *mode = 0 ;

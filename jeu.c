@@ -205,6 +205,16 @@ int main(void)
       initialisation_jeu(&debutX, &numSprite, &positionX, &positionY, &affichage_position_x,&temps_debut,&temps_debut_balle,
 &temps_fin,&temps_fin_balle,&temps_debut_collision,&temps_fin_collision, &cmp_missile,&cmp_balle,&nb_vie);
       nb_de_balle(map1,&cmp_balle,&cmp_missile);
+       nb_de_balle(map1,&cmp_balle,&cmp_missile);
+        if(cmp_balle != 0){
+          posBalle = (SDL_Rect*)realloc((posBalle), ((cmp_balle) *sizeof(SDL_Rect)));
+          dep_balle = (SDL_Rect*)realloc((dep_balle), ((cmp_balle) *sizeof(SDL_Rect)));
+        }
+
+        if(cmp_missile != 0){
+          posMissile = (SDL_Rect*)realloc((posMissile), ((cmp_missile) *sizeof(SDL_Rect)));
+          dep_missile = (SDL_Rect*)realloc((dep_missile), ((cmp_missile) *sizeof(SDL_Rect)));
+          }
       choix_menu(ecran,tableau[num]) ;
     }
     else if (mode == 1){
@@ -315,7 +325,8 @@ int main(void)
   free(sprite);
   free(posBalle);
   free(posMissile) ;
-
+  free(dep_balle);
+  free(dep_missile);
   SDL_DestroyTexture(ciel);
   SDL_DestroyTexture(sol);
   SDL_DestroyTexture(troux);
@@ -347,9 +358,11 @@ int main(void)
   //SDL_DestroyTexture(scientifique);
   SDL_DestroyTexture(missile);
   //SDL_DestroyTexture(missile_image);
-  
+  free(map1.carteJeu);
   
   SDL_DestroyRenderer(ecran);
+  SDL_DestroyWindow(fenetre);
+
   SDL_Quit();
   return 0;
 }
