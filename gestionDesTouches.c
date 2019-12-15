@@ -45,14 +45,6 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     }
                     //}
 
-                    
-                //SDL_Delay(1000);
-                
-                    if(trou(*positionX, *positionY, map1)){
-                    
-                        gameOver("gameOver.bmp", ecran);
-                        *terminer = true ;
-                    }   
 
                     if ((*numSprite < 11)&&(*numSprite > 8)) {
                         *numSprite += 1 ;
@@ -65,11 +57,7 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
                     if (!collision(-1 ,*positionX, *positionY,map1)){
                         deplacement_sur_map (debutX, (-1), positionX ,affichage_position_x,map1);
                     }
-                    if(trou(*positionX, *positionY,map1)){
-                    
-                        gameOver("gameOver.bmp", ecran);
-                        *terminer = true ;
-                    }
+
                    
                     if ((*numSprite < 23) && (*numSprite > 20)){
                         *numSprite += 1 ;

@@ -10,38 +10,68 @@
 #include "difficultes.h"
 
 
+void initialisation_jeu(int* debutX, int *numSprite, int *positionX, int* positionY, int* affichage_position_x,int *temps_debut,int* temps_debut_balle,
+int * temps_fin,int *temps_fin_balle,int *temps_debut_collision,int *temps_fin_collision, int *cmp_missile,int *cmp_balle,int * nb_vie){
 
+   
+  *debutX = 0; // colonne a partir de laquelle on affiche la map
+ 
+  *numSprite = 10;
+  *positionX = *debutX + 1; // position sur l'axe des abscisses du perso 
+  *positionY = 0; //recupere la position sur l'axe des ordonnees  du perso
+  *affichage_position_x = 1; //position d'affichage du personnage
+  *temps_debut = 0 ;
+  *temps_fin = 0; 
+  *temps_debut_balle = 0 ;
+  *temps_fin_balle = 0; 
+  *temps_debut_collision = 0 ;
+  *temps_fin_collision = 0; 
+  *cmp_missile = 0 ;
+  *cmp_balle = 0 ;
+  *nb_vie = 3 ;
+
+}
+
+void niveau_alea(Carte *map1){
+  
+  srand(time(NULL)); // initialisation de rand
+  int fichier = rand()%6;
+ // printf("%d \n",fichier);
+ 
+      switch (fichier){
+        
+        case 0 :
+          lire_fichier("map.txt",map1);
+          break;
+        case 1 :          
+          lire_fichier("map1.txt",map1);
+          break;
+        case 2 :
+          lire_fichier("map2.txt",map1);
+          break ;
+        case 3 :
+          lire_fichier("map1.txt",map1);          
+          break;
+        case 4:
+          lire_fichier("map3.txt",map1);         
+          break;
+        case 5:
+          lire_fichier("map2.txt",map1);          
+          break;
+        default :
+          lire_fichier("map.txt",map1);
+          break;
+        }
+
+}
 
 int main(void)
 {
-  srand(time(NULL)); // initialisation de rand
+
   Carte map1 ;
   map1.carteJeu = NULL;
-  int fichier = rand()%6;
-  printf("%d \n",fichier);
-      switch (fichier){
-        case 0 :
-          lire_fichier("map.txt",&map1);
-          break;
-        case 1 :          
-          lire_fichier("map1.txt",&map1);
-          break;
-        case 2 :
-          lire_fichier("map2.txt",&map1);
-          break ;
-        case 3 :
-          lire_fichier("map1.txt",&map1);          
-          break;
-        case 4:
-          lire_fichier("map3.txt",&map1);         
-          break;
-        case 5:
-          lire_fichier("map2.txt",&map1);          
-          break;
-        default :
-          lire_fichier("map.txt",&map1);
-          break;
-        }  
+  niveau_alea(&map1);
+
   //lire_fichier("map.txt",&map1);
   SDL_Window *fenetre;  // Déclaration de la fenêtre
   SDL_Event evenements; // Événements liés à la fenêtre
@@ -111,7 +141,7 @@ int main(void)
   SDL_Texture *missile = charger_image_transparente("missile.bmp", ecran, 246, 246, 246);
 
   //initialisation des valeurs
-
+  
   int w = 0; // permet de recuperer la largeur de la carte
   int h = 0; // permet de recuperer la hauteur de la carte 
   int debutX = 0; // colonne a partir de laquelle on affiche la map
@@ -134,11 +164,15 @@ int main(void)
   int cmp_missile = 0 ;
   int cmp_balle = 0 ;
 
+ /* initialisation_jeu(&w, &h, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x,&temps_debut,&temps_debut_balle,
+  &temps_fin,&temps_fin_balle,&temps_debut_collision,&temps_fin_collision,&mode,&num, &numero,&vitesse, &cmp_missile,&cmp_balle);*/
   //gestion des differente difficulté
   SDL_Rect* posBalle = NULL;
   SDL_Rect* posMissile = NULL;
   //recupere la position des tours pour pouvoir faire partir les balles
+ 
   nb_de_balle(map1,&cmp_balle,&cmp_missile); 
+   
   posBalle = malloc(cmp_balle*sizeof(SDL_Rect));
   posMissile = malloc(cmp_missile*sizeof(SDL_Rect));
   //besoin d'un tableau pour le deplacement des balles
@@ -160,6 +194,7 @@ int main(void)
  // Boucle principale
   while (!terminer)
   {
+     
     temps_debut = SDL_GetTicks();
     temps_debut_balle = SDL_GetTicks();
     temps_debut_collision = SDL_GetTicks();
@@ -167,6 +202,10 @@ int main(void)
   
     SDL_RenderClear(ecran);
     if(mode == 0){ 
+      niveau_alea(&map1);
+      initialisation_jeu(&debutX, &numSprite, &positionX, &positionY, &affichage_position_x,&temps_debut,&temps_debut_balle,
+&temps_fin,&temps_fin_balle,&temps_debut_collision,&temps_fin_collision, &cmp_missile,&cmp_balle,&nb_vie);
+      nb_de_balle(map1,&cmp_balle,&cmp_missile);
       choix_menu(ecran,tableau[num]) ;
     }
     else if (mode == 1){
@@ -197,7 +236,8 @@ int main(void)
    
       if (nb_vie == 0){
         gameOver("gameOver.bmp", ecran);
-         terminer = true ;
+         //terminer = true ;
+         mode = 0;
       }
 
       if (!collision_pied(positionX, positionY, map1)){
@@ -206,7 +246,8 @@ int main(void)
         }
         else {
          gameOver("gameOver.bmp", ecran);
-         terminer = true ;
+          mode = 0;
+         //terminer = true ;
         }
      
       }
@@ -218,6 +259,7 @@ int main(void)
     }else if(mode == 2){
       choix_option( ecran,commande);
     }else if(mode == 3){      
+      
       choix_niveau(ecran, tab_niv[numero]);
       switch (numero){
         case 0 :
@@ -242,11 +284,20 @@ int main(void)
           lire_fichier("map.txt",&map1);
           break;
         }
+        
         nb_de_balle(map1,&cmp_balle,&cmp_missile);
-        posBalle = (SDL_Rect*)realloc((posBalle), ((cmp_balle) *sizeof(SDL_Rect)));
-        posMissile = (SDL_Rect*)realloc((posMissile), ((cmp_missile) *sizeof(SDL_Rect)));
-        dep_balle = (SDL_Rect*)realloc((dep_balle), ((cmp_balle) *sizeof(SDL_Rect)));
-        dep_missile = (SDL_Rect*)realloc((dep_missile), ((cmp_missile) *sizeof(SDL_Rect)));
+        if(cmp_balle != 0){
+          posBalle = (SDL_Rect*)realloc((posBalle), ((cmp_balle) *sizeof(SDL_Rect)));
+          dep_balle = (SDL_Rect*)realloc((dep_balle), ((cmp_balle) *sizeof(SDL_Rect)));
+        }
+
+        if(cmp_missile != 0){
+          posMissile = (SDL_Rect*)realloc((posMissile), ((cmp_missile) *sizeof(SDL_Rect)));
+          dep_missile = (SDL_Rect*)realloc((dep_missile), ((cmp_missile) *sizeof(SDL_Rect)));
+          }
+        
+        
+        
     }
     
     SDL_RenderPresent(ecran);
