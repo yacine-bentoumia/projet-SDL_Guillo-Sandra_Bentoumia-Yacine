@@ -42,8 +42,8 @@ void deplacer_balle(SDL_Rect* pos_tab,int w,int taille){
 
 
 }
-void deplacer_missile(SDL_Rect* pos_tab,int h,int taille,Carte map1,SDL_Rect* tab){
-    int hauteur= hauteur_une_case(h,map1) ;
+void deplacer_missile(SDL_Rect* pos_tab,int taille,SDL_Rect* tab){
+
     for (int i = 0; i < taille ; i++){
         pos_tab[i].x = tab[i].x ;
         pos_tab[i].h = tab[i].h ;

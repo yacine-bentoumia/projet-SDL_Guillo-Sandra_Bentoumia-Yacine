@@ -111,6 +111,7 @@ int main(void)
 
   //menu des options
   SDL_Texture *commande = charger_image("options.bmp", ecran);
+  SDL_Texture *fleche = charger_image("fleche.bmp", ecran);
 
   //niveau differents
   SDL_Texture *niv1 = charger_image("niveau_un.bmp", ecran);
@@ -163,7 +164,7 @@ int main(void)
   int vitesse = 10 ;
   int cmp_missile = 0 ;
   int cmp_balle = 0 ;
-
+  SDL_Rect dest;
 
   SDL_Rect* posBalle = NULL;
   SDL_Rect* posMissile = NULL;
@@ -215,18 +216,16 @@ int main(void)
         temps_fin_balle = temps_debut_balle;
       }
       deplacer_balle(dep_balle, w,cmp_balle);
-      deplacer_missile(dep_missile, h,cmp_missile,map1,posMissile);
+      deplacer_missile(dep_missile,cmp_missile,posMissile);
       affichage_balle(ecran,balle,dep_balle,cmp_balle);
       affichage_balle(ecran,missile,dep_missile,cmp_missile);
       personnage_jeu(ecran, h, w, positionY, perso, numSprite, sprite, affichage_position_x,map1);
 //
       if(temps_debut_collision - temps_fin_collision  > 500){
-      if( collision_balle(affichage_position_x,positionY,map1,cmp_balle,dep_balle ,h,w) || collision_missile(affichage_position_x, positionY,map1,cmp_missile, dep_missile,h, w)){
-        nb_vie--;
-        temps_fin_collision = temps_debut_collision;
-
-      }
-
+        if( collision_balle(affichage_position_x,positionY,map1,cmp_balle,dep_balle ,h,w) || collision_missile(affichage_position_x, positionY,map1,cmp_missile, dep_missile,h, w)){
+          nb_vie--;
+          temps_fin_collision = temps_debut_collision;
+        }
       }
 
       nb_vie_perso(positionX,positionY,map1,&nb_vie,&posX,&posY);
@@ -234,7 +233,6 @@ int main(void)
    
       if (nb_vie == 0){
         gameOver("gameOver.bmp", ecran);
-         //terminer = true ;
          mode = 0;
       }
 
@@ -245,21 +243,21 @@ int main(void)
         else {
          gameOver("gameOver.bmp", ecran);
           mode = 0;
-         //terminer = true ;
         }
      
       }
       if (gagner(positionX, positionY,map1)){
         win("winner.bmp", ecran);
-        //terminer = true ;
         niveau_alea(&map1);
-      initialisation_jeu(&debutX, &numSprite, &positionX, &positionY, &affichage_position_x,&temps_debut,&temps_debut_balle,
-&temps_fin,&temps_fin_balle,&temps_debut_collision,&temps_fin_collision, &cmp_missile,&cmp_balle,&nb_vie);
-      nb_de_balle(map1,&cmp_balle,&cmp_missile);
+        initialisation_jeu(&debutX, &numSprite, &positionX, &positionY, &affichage_position_x,&temps_debut,&temps_debut_balle,
+        &temps_fin,&temps_fin_balle,&temps_debut_collision,&temps_fin_collision, &cmp_missile,&cmp_balle,&nb_vie);
+        nb_de_balle(map1,&cmp_balle,&cmp_missile);
       } 
 
     }else if(mode == 2){
-      choix_option( ecran,commande);
+      
+      choix_option( ecran,commande,fleche,dest,h,w);
+      
     }else if(mode == 3){      
       
       choix_niveau(ecran, tab_niv[numero]);
@@ -305,7 +303,7 @@ int main(void)
     SDL_RenderPresent(ecran);
     if (SDL_PollEvent(&evenements))
     {
-      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x ,&mode,&num,&numero,map1,&vitesse);
+      gestionTouche(evenements, ecran, &terminer, &debutX, &numSprite, &positionX, &positionY, &affichage_position_x ,&mode,&num,&numero,map1,&vitesse,h,w);
     }
     temps_fin = SDL_GetTicks();
     if(temps_fin - temps_debut < 30){
@@ -332,6 +330,7 @@ int main(void)
   SDL_DestroyTexture(tour8);
   SDL_DestroyTexture(jouer);
   SDL_DestroyTexture(option);
+  SDL_DestroyTexture(fleche);
   SDL_DestroyTexture(niveau);
   SDL_DestroyTexture(quitter);
   SDL_DestroyTexture(pics);

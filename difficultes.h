@@ -17,7 +17,7 @@ void copie_de_position(SDL_Rect*posBalle,SDL_Rect*dep_balle,int taille);
 
 void deplacer_balle(SDL_Rect*pos_tab,int w,int taille);
 
-void deplacer_missile(SDL_Rect* pos_tab,int h,int taille,Carte map1,SDL_Rect*tab);
+void deplacer_missile(SDL_Rect* pos_tab,int taille,SDL_Rect*tab);
 
 
 #endif

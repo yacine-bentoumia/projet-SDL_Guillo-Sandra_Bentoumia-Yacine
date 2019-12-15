@@ -1,7 +1,7 @@
 #include "gestionDesTouches.h"
 
 void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,int *debutX,  int *numSprite , int* positionX , int* positionY,int * affichage_position_x, 
-                                                     int* mode, int* num, int* numero, Carte map1,int * vitesse){
+                                                     int* mode, int* num, int* numero, Carte map1,int * vitesse, int h , int w){
         SDL_Rect position ;
         switch(evenements.type)
         {
@@ -121,8 +121,9 @@ void gestionTouche(SDL_Event evenements, SDL_Renderer * ecran, bool* terminer,in
 
                         position.x = evenements.button.x ;
                         position.y = evenements.button.y ;
-                        
-                        if((position.x > 1225 && position.x < 1260)&&(position.y < 870 && position.y > 820)){
+                        printf("%d %d \n",position.x,position.y);
+                        printf("%d %d \n",(w-100),(h-100));
+                        if((position.x > (w-100) && position.x < (w-20))&&(position.y > (h-100) && position.y < (h-20))){
                        
                          *mode = 0 ;
                         }
